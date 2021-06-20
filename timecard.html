@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timecard</title>
+    <style>
+        * {
+            font-size: xx-large;
+        }
+        body {
+            margin: 20px;
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+        }
+    </style>
+    <script>
+    function uuidv4() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+
+    function stringifyFormData(data) {
+        return Object.entries(data).reduce((accumulator, currentValue) => {
+            if(typeof accumulator === 'object') {
+                return `${accumulator.join('=')}&${currentValue.join('=')}`;
+            } else {
+                return `${accumulator}&${currentValue.join('=')}`;
+            }
+        });
+    }
+
+    function post(url, data) {
+        return fetch(url, {
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                body: stringifyFormData(data),
+                method: 'POST',
+                mode: 'no-cors'
+            }).then(() => {
+                console.log('Event Logged');
+            });
+    }
+
+    function submitForm(event, date, time) {
+        if(event == "" || event == null) return;
+        if(date == "" || date == null) return;
+        if(time == "" || time == null) return;
+
+        var data = {
+            'entry.1767489953': uuidv4(),
+            'entry.173797170': event,
+            'entry.1820923996': date,
+            'entry.1826000596': time,
+        };
+
+        post(formURL, data);
+    }
+
+    const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const event = document.querySelector('#event');
+        const date = document.querySelector('input[type=date]');
+        const time = document.querySelector('input[type=time]');
+        
+        document.querySelector('#submit').addEventListener('click', function() {
+            submitForm(event.value, date.value, time.value);
+        });
+    });
+    </script>
+</head>
+<body>
+    <select name="event" id="event">
+        <option value="Clock-In">Clock-In</option>
+        <option value="Clock-Out">Clock-Out</option>
+    </select>
+    <input type="date">
+    <input type="time">
+    <button id="submit">Submit</button>
+</body>
+</html>
