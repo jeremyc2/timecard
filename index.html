@@ -9,11 +9,28 @@
         * {
             font-size: xx-large;
         }
+
         body {
+            margin: 0;
+            background: #FF512F;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #DD2476, #FF512F);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #DD2476, #FF512F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        body > div {
             margin: 20px;
             display: flex;
             gap: 20px;
             flex-direction: column;
+            width: fit-content;
+            margin: 20px auto;
+        }
+
+        body > div > * {
+            border: solid rgba(255, 255, 255, 0%) 20px;
+            border-radius: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, .75);
         }
     </style>
     <script>
@@ -75,12 +92,14 @@
     </script>
 </head>
 <body>
-    <select name="event" id="event">
-        <option value="Clock-In">Clock-In</option>
-        <option value="Clock-Out">Clock-Out</option>
-    </select>
-    <input type="date">
-    <input type="time">
-    <button id="submit">Submit</button>
+    <div>
+        <select name="event" id="event">
+            <option value="Clock-In">Clock-In</option>
+            <option value="Clock-Out">Clock-Out</option>
+        </select>
+        <input type="date">
+        <input type="time">
+        <button id="submit">Submit</button>
+    </div>
 </body>
 </html>
