@@ -90,7 +90,8 @@
     const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse';
 
     document.addEventListener('DOMContentLoaded', () => {
-        const event = document.querySelector('#event');
+        const event = [...document.querySelectorAll('input[name=event]')]
+            .find(radio => radio.checked);
         const date = document.querySelector('input[type=date]');
         const time = document.querySelector('input[type=time]');
         
@@ -102,10 +103,12 @@
 </head>
 <body>
     <div>
-        <select name="event" id="event">
-            <option value="Clock-In">Clock-In</option>
-            <option value="Clock-Out">Clock-Out</option>
-        </select>
+        <div>
+            <input type="radio" id="in" name="event" value="Clock-In" checked>
+            <label for="in">Clock-In</label><br>
+            <input type="radio" id="out" name="event" value="Clock-Out">
+            <label for="out">Clock-Out</label><br>
+        </div>
         <input type="date">
         <input type="time">
         <button id="submit">Submit</button>
