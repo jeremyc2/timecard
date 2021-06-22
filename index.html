@@ -94,10 +94,28 @@
 
         const date = document.querySelector('input[type=date]');
         const time = document.querySelector('input[type=time]');
+
+        const now = new Date();
+
+        date.value = `${
+                now.getFullYear()
+            }-${
+                (now.getMonth() + 1).toString().padStart(2, 0)
+            }-${
+                now.getDate().toString().padStart(2, 0)
+            }`;
+
+        time.value = `${
+                now.getHours().toString().padStart(2, 0)
+            }:${
+                now.getMinutes().toString().padStart(2, 0)
+            }`;
         
         document.querySelector('#submit').addEventListener('click', function() {
             const event = [...document.querySelectorAll('input[name=event]')]
                 .find(radio => radio.checked);
+
+            if(event == null) return;
 
             submitForm(event.value, date.value, time.value);
         });
