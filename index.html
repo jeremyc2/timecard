@@ -59,7 +59,6 @@
     }
 
     function post(url, data) {
-        console.log(stringifyFormData(data)); return;
         return fetch(url, {
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded'
