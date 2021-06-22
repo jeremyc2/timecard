@@ -59,6 +59,7 @@
     }
 
     function post(url, data) {
+        console.log(stringifyFormData(data)); return;
         return fetch(url, {
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded'
@@ -90,12 +91,14 @@
     const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse';
 
     document.addEventListener('DOMContentLoaded', () => {
-        const event = [...document.querySelectorAll('input[name=event]')]
-            .find(radio => radio.checked);
+
         const date = document.querySelector('input[type=date]');
         const time = document.querySelector('input[type=time]');
         
         document.querySelector('#submit').addEventListener('click', function() {
+            const event = [...document.querySelectorAll('input[name=event]')]
+                .find(radio => radio.checked);
+
             submitForm(event.value, date.value, time.value);
         });
     });
@@ -104,7 +107,7 @@
 <body>
     <div>
         <div>
-            <input type="radio" id="in" name="event" value="Clock-In" checked>
+            <input type="radio" id="in" name="event" value="Clock-In">
             <label for="in">Clock-In</label><br>
             <input type="radio" id="out" name="event" value="Clock-Out">
             <label for="out">Clock-Out</label><br>
