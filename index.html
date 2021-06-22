@@ -58,7 +58,7 @@
         });
     }
 
-    function post(url, data) {
+    function sendToGoogleSheets(url, data) {
         return fetch(url, {
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded'
@@ -84,7 +84,7 @@
             'entry.1826000596': time,
         };
 
-        post(formURL, data);
+        sendToGoogleSheets(formURL, data);
     }
 
     const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse';
