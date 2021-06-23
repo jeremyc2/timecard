@@ -36,7 +36,7 @@ function submitForm(event, date, time) {
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
-    db.collection("Timecard").doc(id).set({event, date, time})
+    db.collection("timecard").doc(id).set({event, date, time})
     .then(() => {
         console.log("Document successfully written!");
     })
