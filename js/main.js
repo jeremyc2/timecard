@@ -33,15 +33,26 @@ function submitForm(event, date, time) {
     if(date == "" || date == null) return;
     if(time == "" || time == null) return;
 
-    var data = {
-        'entry.1767489953': uuidv4(),
-        'entry.173797170': event,
-        'entry.1820923996': date,
-        'entry.1826000596': time,
-    };
+    const id = uuidv4();
+
+    // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
+    db.collection("Timecard").doc(id).set({event, date, time})
+    .then(() => {
+        console.log("Document successfully written!");
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+
+    // var data = {
+    //     'entry.1767489953': id,
+    //     'entry.173797170': event,
+    //     'entry.1820923996': date,
+    //     'entry.1826000596': time,
+    // };
 
     // TODO: Send to Firestore. Use Google Sheets as a backup.
-    sendToGoogleSheets(formURL, data);
+    // sendToGoogleSheets(formURL, data);
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
