@@ -60,13 +60,47 @@ function submitForm(event, date, time) {
 
 // TODO
 class Timesheet {
+
+    table;
+    currentRow;
+
     constructor() {
-        this.table = document.createElement('table');
-        // TODO Table header
+        table = document.createElement('table');
+
+        appendRow(true);
+
+        // TODO FIXME
+        // thDate.innerText = 'Date';
+        // thClockIn.innerText = 'Clock-In';
+        // thClockOut.innerText = 'Clock-Out';
+        // thDuration.innerText = 'Duration';
+        // thWages.innerText = 'Wages';
+    }
+
+    appendRow(isHeader) {
+        currentRow = document.createElement('tr');
+
+        var cellType;
+        if(isHeader) {
+            cellType = 'th';
+        } else {
+            cellType = 'td'
+        }
+            
+        const date = document.createElement(cellType),
+            clockIn = document.createElement(cellType),
+            clockOut = document.createElement(cellType),
+            duration = document.createElement(cellType),
+            wages = document.createElement(cellType);
+
+        currentRow.append(date, clockIn, clockOut, duration, wages);
+        table.appendChild(currentRow);
+
+        return currentRow;
     }
 
     clockIn(id, date, time) {
-
+        appendRow();
     }
 
     clockOut(id, date, time) {
