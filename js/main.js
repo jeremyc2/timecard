@@ -69,16 +69,15 @@ class Timesheet {
 
         appendRow(true);
 
-        // TODO FIXME
-        // thDate.innerText = 'Date';
-        // thClockIn.innerText = 'Clock-In';
-        // thClockOut.innerText = 'Clock-Out';
-        // thDuration.innerText = 'Duration';
-        // thWages.innerText = 'Wages';
+        currentRow.date.innerText = 'Date';
+        currentRow.clockIn.innerText = 'Clock-In';
+        currentRow.clockOut.innerText = 'Clock-Out';
+        currentRow.duration.innerText = 'Duration';
+        currentRow.wages.innerText = 'Wages';
     }
 
     appendRow(isHeader) {
-        currentRow = document.createElement('tr');
+        const tr = document.createElement('tr');
 
         var cellType;
         if(isHeader) {
@@ -93,14 +92,15 @@ class Timesheet {
             duration = document.createElement(cellType),
             wages = document.createElement(cellType);
 
-        currentRow.append(date, clockIn, clockOut, duration, wages);
-        table.appendChild(currentRow);
+        tr.append(date, clockIn, clockOut, duration, wages);
+        table.appendChild(tr);
 
-        return currentRow;
+        currentRow = {date, clockIn, clockOut, duration, wages};
     }
 
     clockIn(id, date, time) {
         appendRow();
+        
     }
 
     clockOut(id, date, time) {
