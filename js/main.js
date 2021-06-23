@@ -61,33 +61,44 @@ function submitForm(event, date, time) {
 function logTimesheet() {
     var clockedIn = false;
     db.collection("timecard").get().then(querySnapshot => {
+        var deleteMe = "";
+        console.log(querySnapshot.docs.map(doc => doc.data()));
         querySnapshot.forEach(entry => {
             const id = entry.id,
                 data = entry.data();
 
             // TODO
             if(clockedIn) {
-                if(x.event == "Clock-In") {
+                if(data.event == "Clock-In") {
                     // Input empty clock-out
                     // New row
                     // Input clock-in
+                    deleteMe += `out: `;
+                    deleteMe += `\n`;
+                    deleteMe += `in: ${data.date}${data.time}`;
                     clockedIn = true;
-                } else if(x.event == "Clock-Out") {
+                } else if(data.event == "Clock-Out") {
                     // Input clock-out
+                    deleteMe += `out: ${data.date}${data.time}`;
                     clockedIn = false;
                 }
             } else {
                 // New row
-                if(x.event == "Clock-In") {
+                deleteMe += `\n`;
+                if(data.event == "Clock-In") {
                     // Input clock-in
+                    deleteMe += `in: ${data.date}${data.time}`;
                     clockedIn = true;
-                } else if(x.event == "Clock-Out") {
+                } else if(data.event == "Clock-Out") {
                     // Input empty clock-in
                     // Input clock-out
+                    deleteMe += `in: `;
+                    deleteMe += `out: ${data.date}${data.time}`;
                     clockedIn = false;
                 }
             }
         });
+        console.log(deleteMe);
     });
 }
 
