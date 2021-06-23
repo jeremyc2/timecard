@@ -8,6 +8,12 @@
     <title>Timecard</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js" defer></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js" defer></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js" defer></script>
+    <script src="firebase.js" defer></script>
 </head>
 <body>
     <div>
@@ -22,27 +28,4 @@
         <button id="submit">Submit</button>
     </div>
 </body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
-    apiKey: "AIzaSyBJg2I8xb16QiLu4S-twXm5o1L3cWf2oVQ",
-    authDomain: "timecard-95463.firebaseapp.com",
-    projectId: "timecard-95463",
-    storageBucket: "timecard-95463.appspot.com",
-    messagingSenderId: "560667499267",
-    appId: "1:560667499267:web:af89e3449c4a51ecca2736",
-    measurementId: "G-1FZ61815QR"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
 </html>
