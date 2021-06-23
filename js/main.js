@@ -58,7 +58,6 @@ function submitForm(event, date, time) {
     });
 }
 
-// TODO
 class Timesheet {
 
     table;
@@ -100,11 +99,17 @@ class Timesheet {
 
     clockIn(id, date, time) {
         this.appendRow();
-
+        this.currentRow.clockIn.setAttribute('data-id', id);
+        this.currentRow.clockIn.setAttribute('data-date', date);
+        this.currentRow.date.innerText = date;
+        this.currentRow.clockIn.innerText = time;
     }
 
     clockOut(id, date, time) {
-
+        this.currentRow.clockOut.setAttribute('data-id', id);
+        this.currentRow.clockOut.setAttribute('data-date', date);
+        this.currentRow.clockOut.innerText = time;
+        // TODO calculate duration and wages
     }
 
     export() {
@@ -121,38 +126,33 @@ function logTimesheet() {
             const id = entry.id,
                 data = entry.data();
 
-            // TODO
             if(clockedIn) {
                 if(data.event == "Clock-In") {
                     // Input empty clock-out
-                    // New row
+                    timesheet.clockOut();
                     // Input clock-in
-                    deleteMe += `out: `;
-                    deleteMe += `\n`;
-                    deleteMe += `in: ${data.date}${data.time}`;
+                    timesheet.clockIn(id, data.date, data.time);
                     clockedIn = true;
                 } else if(data.event == "Clock-Out") {
                     // Input clock-out
-                    deleteMe += `out: ${data.date}${data.time}`;
+                    timesheet.clockOut(id, data.date, data.time);
                     clockedIn = false;
                 }
             } else {
-                // New row
-                deleteMe += `\n`;
                 if(data.event == "Clock-In") {
                     // Input clock-in
-                    deleteMe += `in: ${data.date}${data.time}`;
+                    timesheet.clockIn(id, data.date, data.time);
                     clockedIn = true;
                 } else if(data.event == "Clock-Out") {
                     // Input empty clock-in
+                    timesheet.clockIn();
                     // Input clock-out
-                    deleteMe += `in: `;
-                    deleteMe += `out: ${data.date}${data.time}`;
+                    timesheet.clockOut(id, data.date, data.time);
                     clockedIn = false;
                 }
             }
         });
-        console.log(deleteMe);
+        console.log(timesheet.export());
     });
 }
 
