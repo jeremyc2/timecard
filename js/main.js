@@ -99,6 +99,9 @@ class Timesheet {
 
     clockIn(id, date, time) {
         this.appendRow();
+
+        if(id == null || date == null || time == null) return;
+
         this.currentRow.clockIn.setAttribute('data-id', id);
         this.currentRow.clockIn.setAttribute('data-date', date);
         this.currentRow.date.innerText = date;
@@ -106,9 +109,11 @@ class Timesheet {
     }
 
     clockOut(id, date, time) {
-        this.currentRow.clockOut.setAttribute('data-id', id);
-        this.currentRow.clockOut.setAttribute('data-date', date);
-        this.currentRow.clockOut.innerText = time;
+        if(id != null && date != null && time != null) {
+            this.currentRow.clockOut.setAttribute('data-id', id);
+            this.currentRow.clockOut.setAttribute('data-date', date);
+            this.currentRow.clockOut.innerText = time;
+        }
         // TODO calculate duration and wages
     }
 
