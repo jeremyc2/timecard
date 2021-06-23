@@ -23,8 +23,8 @@ function sendToGoogleSheets(url, data) {
             method: 'POST',
             mode: 'no-cors'
         }).then(() => {
-            console.log('Event Logged');
-            alert('Submitted');
+            console.log("Document successfully written!");
+            alert('Timecard Updated');
         });
 }
 
@@ -39,20 +39,23 @@ function submitForm(event, date, time) {
     db.collection("timecard").doc(id).set({event, date, time})
     .then(() => {
         console.log("Document successfully written!");
+        alert('Timecard Updated');
     })
     .catch((error) => {
+        
         console.error("Error writing document: ", error);
+
+        // TODO: Use Google Sheets as a backup.
+
+        // var data = {
+        //     'entry.1767489953': id,
+        //     'entry.173797170': event,
+        //     'entry.1820923996': date,
+        //     'entry.1826000596': time,
+        // };
+
+        // sendToGoogleSheets(formURL, data);
     });
-
-    // var data = {
-    //     'entry.1767489953': id,
-    //     'entry.173797170': event,
-    //     'entry.1820923996': date,
-    //     'entry.1826000596': time,
-    // };
-
-    // TODO: Send to Firestore. Use Google Sheets as a backup.
-    // sendToGoogleSheets(formURL, data);
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
