@@ -58,10 +58,30 @@ function submitForm(event, date, time) {
     });
 }
 
+// TODO
+class Timesheet {
+    constructor() {
+        this.table = document.createElement('table');
+        // TODO Table header
+    }
+
+    clockIn(id, date, time) {
+
+    }
+
+    clockOut(id, date, time) {
+
+    }
+
+    export() {
+        return this.table;
+    }
+}
+
 function logTimesheet() {
     var clockedIn = false;
     db.collection("timecard").get().then(querySnapshot => {
-        var deleteMe = "";
+        var timesheet = new Timesheet();
         console.log(querySnapshot.docs.map(doc => doc.data()));
         querySnapshot.forEach(entry => {
             const id = entry.id,
