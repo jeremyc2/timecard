@@ -59,11 +59,35 @@ function submitForm(event, date, time) {
 }
 
 function logTimesheet() {
+    var clockedIn = false;
     db.collection("timecard").get().then(querySnapshot => {
-        var docs = querySnapshot.docs.map(doc => {
-            return {id: doc.id, ...doc.data()};
+        querySnapshot.forEach(entry => {
+            const id = entry.id,
+                data = entry.data();
+
+            // TODO
+            if(clockedIn) {
+                if(x.event == "Clock-In") {
+                    // Input empty clock-out
+                    // New row
+                    // Input clock-in
+                    clockedIn = true;
+                } else if(x.event == "Clock-Out") {
+                    // Input clock-out
+                    clockedIn = false;
+                }
+            } else {
+                // New row
+                if(x.event == "Clock-In") {
+                    // Input clock-in
+                    clockedIn = true;
+                } else if(x.event == "Clock-Out") {
+                    // Input empty clock-in
+                    // Input clock-out
+                    clockedIn = false;
+                }
+            }
         });
-        console.log(docs);
     });
 }
 
