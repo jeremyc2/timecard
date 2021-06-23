@@ -65,15 +65,15 @@ class Timesheet {
     currentRow;
 
     constructor() {
-        table = document.createElement('table');
+        this.table = document.createElement('table');
 
-        appendRow(true);
+        this.appendRow(true);
 
-        currentRow.date.innerText = 'Date';
-        currentRow.clockIn.innerText = 'Clock-In';
-        currentRow.clockOut.innerText = 'Clock-Out';
-        currentRow.duration.innerText = 'Duration';
-        currentRow.wages.innerText = 'Wages';
+        this.currentRow.date.innerText = 'Date';
+        this.currentRow.clockIn.innerText = 'Clock-In';
+        this.currentRow.clockOut.innerText = 'Clock-Out';
+        this.currentRow.duration.innerText = 'Duration';
+        this.currentRow.wages.innerText = 'Wages';
     }
 
     appendRow(isHeader) {
@@ -93,14 +93,14 @@ class Timesheet {
             wages = document.createElement(cellType);
 
         tr.append(date, clockIn, clockOut, duration, wages);
-        table.appendChild(tr);
+        this.table.appendChild(tr);
 
-        currentRow = {date, clockIn, clockOut, duration, wages};
+        this.currentRow = {date, clockIn, clockOut, duration, wages};
     }
 
     clockIn(id, date, time) {
-        appendRow();
-        
+        this.appendRow();
+
     }
 
     clockOut(id, date, time) {
