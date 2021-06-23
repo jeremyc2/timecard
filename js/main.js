@@ -42,7 +42,7 @@ function submitForm(event, date, time) {
         alert('Timecard Updated');
     })
     .catch((error) => {
-        
+
         console.error("Error writing document: ", error);
 
         // TODO: Use Google Sheets as a backup.
@@ -55,6 +55,15 @@ function submitForm(event, date, time) {
         // };
 
         // sendToGoogleSheets(formURL, data);
+    });
+}
+
+function logTimesheet() {
+    db.collection("timecard").get().then(querySnapshot => {
+        var docs = querySnapshot.docs.map(doc => {
+            return {id: doc.id, ...doc.data()};
+        });
+        console.log(docs);
     });
 }
 
