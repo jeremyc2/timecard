@@ -117,14 +117,15 @@ class Timesheet {
         this.currentRow.clockOut.innerText = time;
         
         if(this.currentRow.clockIn.innerText == '' || this.currentRow.clockOut.innerText == '') return;
-        
+
         // TODO calculate duration and wages
-        var date = this.currentRow.date.innerText.split('-').map(x => parseInt(x)),
-            clockIn = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
-            clockOut = this.currentRow.clockOut.innerText.split(':').map(x => parseInt(x));
+        var clockInDate = this.currentRow.clockIn.getAttribute('data-date').split('-').map(x => parseInt(x)),
+            clockOutDate = this.currentRow.clockOut.getAttribute('data-date').split('-').map(x => parseInt(x)),
+            clockInTime = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
+            clockOutTime = this.currentRow.clockOut.innerText.split(':').map(x => parseInt(x));
         
-        clockIn = new Date(date[0], date[1] - 1, date[2], clockIn[0], clockIn[1]);
-        clockOut = new Date(date[0], date[1] - 1, date[2], clockOut[0], clockOut[1]);
+        var clockIn = new Date(clockInDate[0], clockInDate[1] - 1, clockInDate[2], clockInTime[0], clockInTime[1]),
+            clockOut = new Date(clockOutDate[0], clockOutDate[1] - 1, clockOutDate[2], clockOutTime[0], clockOutTime[1]);
         
         // Duration in minutes TODO change to hours and minutes
         this.currentRow.duration.innerText = (clockOut - clockIn)/60000;
