@@ -115,6 +115,9 @@ class Timesheet {
         this.currentRow.clockOut.setAttribute('data-id', id);
         this.currentRow.clockOut.setAttribute('data-date', date);
         this.currentRow.clockOut.innerText = time;
+        
+        if(this.currentRow.clockIn.innerText == '' || this.currentRow.clockOut.innerText == '') return;
+        
         // TODO calculate duration and wages
         var date = this.currentRow.date.innerText.split('-').map(x => parseInt(x)),
             clockIn = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
@@ -123,7 +126,8 @@ class Timesheet {
         clockIn = new Date(date[0], date[1] - 1, date[2], clockIn[0], clockIn[1]);
         clockOut = new Date(date[0], date[1] - 1, date[2], clockOut[0], clockOut[1]);
         
-        console.log(clockIn, clockOut);
+        // Duration in minutes TODO change to hours and minutes
+        this.currentRow.duration.innerText = (clockOut - clockIn)/60000;
     }
 
     export() {
