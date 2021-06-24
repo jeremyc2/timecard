@@ -97,10 +97,8 @@ class Timesheet {
         this.currentRow = {date, clockIn, clockOut, duration, wages};
     }
 
-    clockIn(id, date, time) {
+    clockIn(id = '', date = '', time = '') {
         this.appendRow();
-
-        if(id == null || date == null || time == null) return;
 
         this.currentRow.clockIn.setAttribute('data-id', id);
         this.currentRow.clockIn.setAttribute('data-date', date);
@@ -108,12 +106,10 @@ class Timesheet {
         this.currentRow.clockIn.innerText = time;
     }
 
-    clockOut(id, date, time) {
-        if(id != null && date != null && time != null) {
-            this.currentRow.clockOut.setAttribute('data-id', id);
-            this.currentRow.clockOut.setAttribute('data-date', date);
-            this.currentRow.clockOut.innerText = time;
-        }
+    clockOut(id = '', date = '', time = '') {
+        this.currentRow.clockOut.setAttribute('data-id', id);
+        this.currentRow.clockOut.setAttribute('data-date', date);
+        this.currentRow.clockOut.innerText = time;
         // TODO calculate duration and wages
     }
 
@@ -127,7 +123,6 @@ function showTimesheet() {
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
         var timesheet = new Timesheet();
         querySnapshot.forEach(entry => {
-            console.log(entry);
             const id = entry.id,
                 data = entry.data();
 
@@ -150,7 +145,7 @@ function showTimesheet() {
                     clockedIn = true;
                 } else if(data.event == "Clock-Out") {
                     // Input empty clock-in
-                    timesheet.clockIn();
+                    timesheet.clockIn(null, data.date, null);
                     // Input clock-out
                     timesheet.clockOut(id, data.date, data.time);
                     clockedIn = false;
