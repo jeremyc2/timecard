@@ -37,17 +37,6 @@ body.display-table > .table {
     padding: 10px;
 }
 
-table {
-    border-collapse: collapse;
-    margin: 0 auto;
-}
-
-td, th {
-    border: 1px solid black;
-    padding: 5px;
-    text-align: center;
-}
-
 body > .form > * {
     border: solid rgba(255, 255, 255, 0%) 20px;
     border-radius: 20px;
