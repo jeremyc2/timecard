@@ -124,10 +124,10 @@ class Timesheet {
 
 function showTimesheet() {
     var clockedIn = false;
-    db.collection("timecard").get().then(querySnapshot => {
+    db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
         var timesheet = new Timesheet();
-        console.log(querySnapshot.docs.map(doc => doc.data()));
         querySnapshot.forEach(entry => {
+            console.log(entry);
             const id = entry.id,
                 data = entry.data();
 
