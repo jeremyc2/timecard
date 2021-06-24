@@ -117,7 +117,10 @@ class Timesheet {
         this.currentRow.clockOut.innerText = time;
         // TODO calculate duration and wages
         var date = this.currentRow.date.innerText.split('-').map(x => parseInt(x)),
-            time = this.currentRow.date.innerText.split(':').map(x => parseInt(x));
+            clockIn = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
+            clockOut = this.currentRow.clockOut.innerText.split(':').map(x => parseInt(x));
+        
+        console.log(date, clockIn, clockOut);
     }
 
     export() {
