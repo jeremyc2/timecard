@@ -129,7 +129,7 @@ function showTimesheet() {
             if(clockedIn) {
                 if(data.event == "Clock-In") {
                     // Input empty clock-out
-                    timesheet.clockOut();
+                    timesheet.clockOut(null, data.date, null);
                     // Input clock-in
                     timesheet.clockIn(id, data.date, data.time);
                     clockedIn = true;
