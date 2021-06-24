@@ -157,14 +157,21 @@ function showTimesheet() {
                 }
             }
         });
-        document.querySelector('body > .table').appendChild(timesheet.export());
+        table.innerHTML = '';
+        table.appendChild(timesheet.export());
         document.body.classList.add('display-table');
     });
+}
+
+function hideTimesheet() {
+    table.innerHTML = '';
+    document.body.classList.remove('display-table');
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
+    table = document.querySelector('body > .table'),
     now = new Date();
 
 date.value = `${
