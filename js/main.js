@@ -157,7 +157,8 @@ function logTimesheet() {
                 }
             }
         });
-        console.log(timesheet.export());
+        document.querySelector('body > .table').appendChild(timesheet.export());
+        document.body.classList.add('display-table');
     });
 }
 
