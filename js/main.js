@@ -120,7 +120,10 @@ class Timesheet {
             clockIn = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
             clockOut = this.currentRow.clockOut.innerText.split(':').map(x => parseInt(x));
         
-        console.log(date, clockIn, clockOut);
+        clockIn = new Date(date[0], date[1] - 1, date[2], clockIn[0], clockIn[1]);
+        clockOut = new Date(date[0], date[1] - 1, date[2], clockOut[0], clockOut[1]);
+        
+        console.log(clockIn, clockOut);
     }
 
     export() {
