@@ -122,7 +122,7 @@ class Timesheet {
     }
 }
 
-function logTimesheet() {
+function showTimesheet() {
     var clockedIn = false;
     db.collection("timecard").get().then(querySnapshot => {
         var timesheet = new Timesheet();
