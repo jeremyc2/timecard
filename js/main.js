@@ -107,6 +107,11 @@ class Timesheet {
     }
 
     clockOut(id = '', date = '', time = '') {
+
+        if(this.currentRow.date.innerText == '') {
+            this.currentRow.date.innerText = date;
+        }
+
         this.currentRow.clockOut.setAttribute('data-id', id);
         this.currentRow.clockOut.setAttribute('data-date', date);
         this.currentRow.clockOut.innerText = time;
@@ -145,7 +150,7 @@ function showTimesheet() {
                     clockedIn = true;
                 } else if(data.event == "Clock-Out") {
                     // Input empty clock-in
-                    timesheet.clockIn(null, data.date, null);
+                    timesheet.clockIn();
                     // Input clock-out
                     timesheet.clockOut(id, data.date, data.time);
                     clockedIn = false;
