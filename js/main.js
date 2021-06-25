@@ -172,7 +172,7 @@ class Timesheet {
                 durationMinutes.toString().padStart(2, '0')
             }`;
 
-        this.currentRow.wages.innerText = `$${(duration / 60) * this.hourlyRate}`;
+        this.currentRow.wages.innerText = `$${((duration / 60) * this.hourlyRate).toFixed(2)}`;
     }
 
     export() {
