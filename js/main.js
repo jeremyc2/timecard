@@ -45,16 +45,14 @@ function submitForm(event, date, time) {
 
         console.error("Error writing document: ", error);
 
-        // TODO: Use Google Sheets as a backup.
+        var data = {
+            'entry.1767489953': id,
+            'entry.173797170': event,
+            'entry.1820923996': date,
+            'entry.1826000596': time,
+        };
 
-        // var data = {
-        //     'entry.1767489953': id,
-        //     'entry.173797170': event,
-        //     'entry.1820923996': date,
-        //     'entry.1826000596': time,
-        // };
-
-        // sendToGoogleSheets(formURL, data);
+        sendToGoogleSheets(formURL, data);
     });
 }
 
@@ -164,7 +162,6 @@ class Timesheet {
                 durationMinutes.toString().padStart(2, '0')
             }`;
 
-        // TODO calculate wages
         this.currentRow.wages.innerText = `$${(duration / 60) * this.hourlyRate}`;
     }
 
