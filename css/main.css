@@ -50,11 +50,12 @@ body.display-table > .form {
 
 body.display-table > .table {
     display: block;
-    background: white;
+    background: rgba(255, 255, 255, .75);
     width: 90%;
     border-radius: 20px;
     margin: 20px auto;
-    padding: 10px;
+    padding: 40px 10px;
+    overflow: scroll;
 }
 
 body > .form > * {
