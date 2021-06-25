@@ -18,6 +18,10 @@
     <script src="js/firebase.js" defer></script>
 </head>
 <body>
+    <header>
+        <div id="mainTab" class="selected" onclick="hideTimesheet()">Time Entry</div>
+        <div id="timesheetTab" onclick="showTimesheet()">Timecard</div>
+    </header>
     <div class="form">
         <div>
             <input type="radio" id="in" name="event" value="Clock-In">

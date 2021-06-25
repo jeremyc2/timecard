@@ -181,6 +181,10 @@ class Timesheet {
 }
 
 function showTimesheet() {
+
+    mainTab.classList.remove('selected');
+    timesheetTab.classList.add('selected');
+
     var clockedIn = false;
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
         var timesheet = new Timesheet(15);
@@ -221,6 +225,10 @@ function showTimesheet() {
 }
 
 function hideTimesheet() {
+
+    timesheetTab.classList.remove('selected');
+    mainTab.classList.add('selected');
+
     table.innerHTML = '';
     document.body.classList.remove('display-table');
 }
@@ -229,6 +237,8 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
     table = document.querySelector('body > .table'),
+    mainTab = document.querySelector('#mainTab'),
+    timesheetTab = document.querySelector('#timesheetTab'),
     now = new Date();
 
 date.value = `${
