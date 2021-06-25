@@ -78,10 +78,11 @@ class Timesheet {
     }
 
     convertDate(date) {
-        // TODO
         if(date == null || date == '') return date;
 
-        date = new Date();
+        var dateArray = date.split('-').map(x => parseInt(x));
+
+        date = new Date(dateArray[0], dateArray[1], dateArray[2]);
 
         return date.toDateString().substring(0, 10);
     }
