@@ -77,6 +77,15 @@ class Timesheet {
         this.currentRow.wages.innerText = 'Wages';
     }
 
+    convertDate(date) {
+        // TODO
+        if(date == null || date == '') return date;
+
+        date = new Date();
+
+        return date.toDateString().substring(0, 10);
+    }
+
     convertTo12HourTime(time) {
 
         if(time == null || time == '') return time;
@@ -126,7 +135,7 @@ class Timesheet {
         this.currentRow.clockIn.setAttribute('data-id', id);
         this.currentRow.clockIn.setAttribute('data-date', date);
         this.currentRow.clockIn.setAttribute('data-time', time);
-        this.currentRow.date.innerText = date;
+        this.currentRow.date.innerText = this.convertDate(date);
 
         this.currentRow.clockIn.innerText = this.convertTo12HourTime(time);
     }
@@ -134,7 +143,7 @@ class Timesheet {
     clockOut(id = '', date = '', time = '') {
 
         if(this.currentRow.date.innerText == '') {
-            this.currentRow.date.innerText = date;
+            this.currentRow.date.innerText = this.convertDate(date);
         }
 
         this.currentRow.clockOut.setAttribute('data-id', id);
