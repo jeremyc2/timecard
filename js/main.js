@@ -118,7 +118,6 @@ class Timesheet {
         
         if(this.currentRow.clockIn.innerText == '' || this.currentRow.clockOut.innerText == '') return;
 
-        // TODO calculate duration and wages
         var clockInDate = this.currentRow.clockIn.getAttribute('data-date').split('-').map(x => parseInt(x)),
             clockOutDate = this.currentRow.clockOut.getAttribute('data-date').split('-').map(x => parseInt(x)),
             clockInTime = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
@@ -127,8 +126,17 @@ class Timesheet {
         var clockIn = new Date(clockInDate[0], clockInDate[1] - 1, clockInDate[2], clockInTime[0], clockInTime[1]),
             clockOut = new Date(clockOutDate[0], clockOutDate[1] - 1, clockOutDate[2], clockOutTime[0], clockOutTime[1]);
         
-        // Duration in minutes TODO change to hours and minutes
-        this.currentRow.duration.innerText = (clockOut - clockIn)/60000;
+        var duration = (clockOut - clockIn)/60000,
+            durationMinutes = duration % 60,
+            durationHours = Math.floor(duration / 60);
+
+        this.currentRow.duration.innerText = `${
+                durationHours.toString().padStart(2, '0')
+            }:${
+                durationMinutes.toString().padStart(2, '0')
+            }`;
+
+        // TODO calculate wages
     }
 
     export() {
