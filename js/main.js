@@ -60,10 +60,14 @@ function submitForm(event, date, time) {
 
 class Timesheet {
 
+    hourlyRate;
     table;
     currentRow;
 
-    constructor() {
+    constructor(hourlyRate) {
+
+        this.hourlyRate = hourlyRate;
+
         this.table = document.createElement('table');
 
         this.appendRow(true);
@@ -73,6 +77,27 @@ class Timesheet {
         this.currentRow.clockOut.innerText = 'Clock-Out';
         this.currentRow.duration.innerText = 'Duration';
         this.currentRow.wages.innerText = 'Wages';
+    }
+
+    convertTo12HourTime(time) {
+
+        if(time == null || time == '') return time;
+
+        var timeArray = time.split(':').map(t => parseInt(t)),
+            meridiem = 'AM';
+
+        if(timeArray[0] > 12) {
+            timeArray[0] -= 12;
+            meridiem = 'PM';
+        }
+
+        return `${
+                timeArray[0].toString().padStart(2, '0')
+            }:${
+                timeArray[1].toString().padStart(2, '0')
+            } ${
+                meridiem
+            }`;
     }
 
     appendRow(isHeader) {
@@ -102,8 +127,10 @@ class Timesheet {
 
         this.currentRow.clockIn.setAttribute('data-id', id);
         this.currentRow.clockIn.setAttribute('data-date', date);
+        this.currentRow.clockIn.setAttribute('data-time', time);
         this.currentRow.date.innerText = date;
-        this.currentRow.clockIn.innerText = time;
+
+        this.currentRow.clockIn.innerText = this.convertTo12HourTime(time);
     }
 
     clockOut(id = '', date = '', time = '') {
@@ -114,7 +141,8 @@ class Timesheet {
 
         this.currentRow.clockOut.setAttribute('data-id', id);
         this.currentRow.clockOut.setAttribute('data-date', date);
-        this.currentRow.clockOut.innerText = time;
+        this.currentRow.clockOut.setAttribute('data-time', time);
+        this.currentRow.clockOut.innerText = this.convertTo12HourTime(time);
         
         if(this.currentRow.clockIn.innerText == '' || this.currentRow.clockOut.innerText == '') return;
 
@@ -137,6 +165,7 @@ class Timesheet {
             }`;
 
         // TODO calculate wages
+        this.currentRow.wages.innerText = `$${(duration / 60) * this.hourlyRate}`;
     }
 
     export() {
@@ -147,7 +176,7 @@ class Timesheet {
 function showTimesheet() {
     var clockedIn = false;
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
-        var timesheet = new Timesheet();
+        var timesheet = new Timesheet(15);
         querySnapshot.forEach(entry => {
             const id = entry.id,
                 data = entry.data();
