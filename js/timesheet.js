@@ -36,7 +36,7 @@ class Timesheet {
 
         date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
 
-        return date.toDateString().substring(0, 10);
+        return date.toDateString().substring(0, 15);
     }
 
     convertToDateString(date) {

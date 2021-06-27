@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+
 table {
     border-collapse: collapse;
 }
@@ -5,6 +7,11 @@ table {
 td, th {
   border: 1px solid #ddd;
   padding: 8px;
+}
+
+td {
+  font-family: 'Oxygen Mono', monospace;
+  font-size: 1rem;
 }
 
 tr:nth-child(even){background-color: #f2f2f2;}
