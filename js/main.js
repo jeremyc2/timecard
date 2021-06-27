@@ -1,3 +1,7 @@
+// TODO Make pay table work better with event table
+// i.e. Click on a row to reveal check-in and
+// check-out for that week
+
 function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
