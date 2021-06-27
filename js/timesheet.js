@@ -9,7 +9,7 @@ class Timesheet {
 
     constructor(hourlyRate) {
 
-        this.payMap = {};
+        this.payMap = new Map();
         this.eventTable = document.createElement('table');
         this.payTable = document.createElement('table');
         this.hourlyRate = hourlyRate;
@@ -133,16 +133,15 @@ class Timesheet {
                 durationMinutes.toString().padStart(2, '0')
             }`;
 
-        // TODO: Add wages to seperate table
         const weekStart = new Date(clockIn.getTime() - (clockIn.getDay() * 86400000)),
               weekEnd = new Date(weekStart.getTime() + (518400000));
 
         const week = `${this.convertToDateString(weekStart)} - ${this.convertToDateString(weekEnd)}`;
 
-        if(typeof this.payMap[week] === 'undefined') {
-            this.payMap[week] = duration;
+        if(this.payMap.has(week)) {
+            this.payMap.set(week, this.payMap.get(week) + duration);
         } else {
-            this.payMap[week] += duration;
+            this.payMap.set(week, duration);
         }
     }
 
@@ -151,11 +150,11 @@ class Timesheet {
     }
 
     getPayTable() {
-        Object.entries(this.payMap).forEach(week => {
+        for (let [week, duration] of this.payMap) {
             this.appendRow(false, this.payTable, this.currentPayRow);
-            this.currentPayRow.week.innerText = week[0];
-            this.currentPayRow.pay.innerText = this.convertHoursToPay(week[1]);
-        });
+            this.currentPayRow.week.innerText = week;
+            this.currentPayRow.pay.innerText = this.convertHoursToPay(duration);        
+        }
 
         return this.payTable;
     }
