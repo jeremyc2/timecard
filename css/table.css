@@ -1,6 +1,9 @@
 table {
     border-collapse: collapse;
-    margin: 0 auto;
+}
+
+table:first-child {
+  margin-bottom: 10px;
 }
 
 td, th {

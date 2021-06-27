@@ -65,7 +65,8 @@ function showTimesheet() {
             }
         });
         table.innerHTML = '';
-        table.appendChild(timesheet.export());
+        table.appendChild(timesheet.getPayTable());
+        table.appendChild(timesheet.getEventTable());
         document.body.classList.add('display-table');
     });
 }
@@ -79,6 +80,16 @@ function hideTimesheet() {
     document.body.classList.remove('display-table');
 }
 
+function convertToDateString(date) {
+    return `${
+            date.getFullYear()
+        }-${
+            (date.getMonth() + 1).toString().padStart(2, 0)
+        }-${
+            date.getDate().toString().padStart(2, 0)
+        }`;
+}
+
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
@@ -89,13 +100,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
 
 var timesheet;
 
-date.value = `${
-        now.getFullYear()
-    }-${
-        (now.getMonth() + 1).toString().padStart(2, 0)
-    }-${
-        now.getDate().toString().padStart(2, 0)
-    }`;
+date.value = convertToDateString(now);
 
 time.value = `${
         now.getHours().toString().padStart(2, 0)
