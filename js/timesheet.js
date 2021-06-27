@@ -5,6 +5,7 @@ class Timesheet {
     eventTable;
     payTable;
     currentEventRow;
+    currentPayRow;
 
     constructor(hourlyRate) {
 
@@ -36,6 +37,14 @@ class Timesheet {
         date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
 
         return date.toDateString().substring(0, 10);
+    }
+
+    convertToDateString(date) {
+        return `${
+                (date.getMonth() + 1).toString().padStart(2, 0)
+            }/${
+                date.getDate().toString().padStart(2, 0)
+            }`;
     }
 
     convertTo12HourTime(time) {
@@ -128,7 +137,7 @@ class Timesheet {
         const weekStart = new Date(clockIn.getTime() - (clockIn.getDay() * 86400000)),
               weekEnd = new Date(weekStart.getTime() + (518400000));
 
-        const week = `${convertToDateString(weekStart)} - ${convertToDateString(weekEnd)}`;
+        const week = `${this.convertToDateString(weekStart)} - ${this.convertToDateString(weekEnd)}`;
 
         if(typeof this.payMap[week] === 'undefined') {
             this.payMap[week] = duration;
