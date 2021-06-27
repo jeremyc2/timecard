@@ -2,10 +2,6 @@ table {
     border-collapse: collapse;
 }
 
-table:first-child {
-  margin-bottom: 10px;
-}
-
 td, th {
   border: 1px solid #ddd;
   padding: 8px;
