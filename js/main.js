@@ -1,33 +1,3 @@
-function uuidv4() {
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
-}
-
-function stringifyFormData(data) {
-    return Object.entries(data).reduce((accumulator, currentValue) => {
-        if(typeof accumulator === 'object') {
-            return `${accumulator.join('=')}&${currentValue.join('=')}`;
-        } else {
-            return `${accumulator}&${currentValue.join('=')}`;
-        }
-    });
-}
-
-function sendToGoogleSheets(url, data) {
-    return fetch(url, {
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
-            body: stringifyFormData(data),
-            method: 'POST',
-            mode: 'no-cors'
-        }).then(() => {
-            console.log("Document successfully written!");
-            alert('Timecard Updated');
-        });
-}
-
 function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
@@ -56,130 +26,6 @@ function submitForm(event, date, time) {
     });
 }
 
-class Timesheet {
-
-    hourlyRate;
-    table;
-    currentRow;
-
-    constructor(hourlyRate) {
-
-        this.hourlyRate = hourlyRate;
-
-        this.table = document.createElement('table');
-
-        this.appendRow(true);
-
-        this.currentRow.date.innerText = 'Date';
-        this.currentRow.clockIn.innerText = 'Clock-In';
-        this.currentRow.clockOut.innerText = 'Clock-Out';
-        this.currentRow.duration.innerText = 'Duration';
-        this.currentRow.wages.innerText = 'Wages';
-    }
-
-    convertDate(date) {
-        if(date == null || date == '') return date;
-
-        var dateArray = date.split('-').map(x => parseInt(x));
-
-        date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
-
-        return date.toDateString().substring(0, 10);
-    }
-
-    convertTo12HourTime(time) {
-
-        if(time == null || time == '') return time;
-
-        var timeArray = time.split(':').map(t => parseInt(t)),
-            meridiem = 'AM';
-
-        if(timeArray[0] > 12) {
-            timeArray[0] -= 12;
-            meridiem = 'PM';
-        }
-
-        return `${
-                timeArray[0].toString().padStart(2, '0')
-            }:${
-                timeArray[1].toString().padStart(2, '0')
-            } ${
-                meridiem
-            }`;
-    }
-
-    appendRow(isHeader) {
-        const tr = document.createElement('tr');
-
-        var cellType;
-        if(isHeader) {
-            cellType = 'th';
-        } else {
-            cellType = 'td'
-        }
-            
-        const date = document.createElement(cellType),
-            clockIn = document.createElement(cellType),
-            clockOut = document.createElement(cellType),
-            duration = document.createElement(cellType),
-            wages = document.createElement(cellType);
-
-        tr.append(date, clockIn, clockOut, duration, wages);
-        this.table.appendChild(tr);
-
-        this.currentRow = {date, clockIn, clockOut, duration, wages};
-    }
-
-    clockIn(id = '', date = '', time = '') {
-        this.appendRow();
-
-        this.currentRow.clockIn.setAttribute('data-id', id);
-        this.currentRow.clockIn.setAttribute('data-date', date);
-        this.currentRow.clockIn.setAttribute('data-time', time);
-        this.currentRow.date.innerText = this.convertDate(date);
-
-        this.currentRow.clockIn.innerText = this.convertTo12HourTime(time);
-    }
-
-    clockOut(id = '', date = '', time = '') {
-
-        if(this.currentRow.date.innerText == '') {
-            this.currentRow.date.innerText = this.convertDate(date);
-        }
-
-        this.currentRow.clockOut.setAttribute('data-id', id);
-        this.currentRow.clockOut.setAttribute('data-date', date);
-        this.currentRow.clockOut.setAttribute('data-time', time);
-        this.currentRow.clockOut.innerText = this.convertTo12HourTime(time);
-        
-        if(this.currentRow.clockIn.innerText == '' || this.currentRow.clockOut.innerText == '') return;
-
-        var clockInDate = this.currentRow.clockIn.getAttribute('data-date').split('-').map(x => parseInt(x)),
-            clockOutDate = this.currentRow.clockOut.getAttribute('data-date').split('-').map(x => parseInt(x)),
-            clockInTime = this.currentRow.clockIn.innerText.split(':').map(x => parseInt(x)),
-            clockOutTime = this.currentRow.clockOut.innerText.split(':').map(x => parseInt(x));
-        
-        var clockIn = new Date(clockInDate[0], clockInDate[1] - 1, clockInDate[2], clockInTime[0], clockInTime[1]),
-            clockOut = new Date(clockOutDate[0], clockOutDate[1] - 1, clockOutDate[2], clockOutTime[0], clockOutTime[1]);
-        
-        var duration = (clockOut - clockIn)/60000,
-            durationMinutes = duration % 60,
-            durationHours = Math.floor(duration / 60);
-
-        this.currentRow.duration.innerText = `${
-                durationHours.toString().padStart(2, '0')
-            }:${
-                durationMinutes.toString().padStart(2, '0')
-            }`;
-
-        this.currentRow.wages.innerText = `$${((duration / 60) * this.hourlyRate).toFixed(2)}`;
-    }
-
-    export() {
-        return this.table;
-    }
-}
-
 function showTimesheet() {
 
     mainTab.classList.remove('selected');
@@ -187,7 +33,7 @@ function showTimesheet() {
 
     var clockedIn = false;
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
-        var timesheet = new Timesheet(15);
+        timesheet = new Timesheet(15);
         querySnapshot.forEach(entry => {
             const id = entry.id,
                 data = entry.data();
@@ -240,6 +86,8 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),
     now = new Date();
+
+var timesheet;
 
 date.value = `${
         now.getFullYear()
