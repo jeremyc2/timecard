@@ -39,7 +39,7 @@ body .form {
     gap: 20px;
     flex-direction: column;
     width: fit-content;
-    margin: 20px auto;
+    margin: 0 auto;
     justify-content: center;
     padding: 20px;
     background: rgb(255 255 255 / 40%);
@@ -62,7 +62,7 @@ body.display-table .table {
     gap: 10px;
     background: rgba(255, 255, 255, .40);
     border-radius: 20px;
-    margin: 20px auto;
+    margin: 0 auto;
     padding: 40px 10px;
 }
 
