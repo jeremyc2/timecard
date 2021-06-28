@@ -26,10 +26,11 @@ body {
     min-width: max-content;
     margin: 0;
     padding: 0 10px;
-    background: #FF512F;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #DD2476, #FF512F);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #DD2476, #FF512F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: #000455;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23000455' cx='50' cy='0' r='50'/%3E%3Cg fill='%230b065e' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23160766' cx='50' cy='100' r='50'/%3E%3Cg fill='%2320096f' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23290b78' cx='50' cy='200' r='50'/%3E%3Cg fill='%23320d80' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%233c0f89' cx='50' cy='300' r='50'/%3E%3Cg fill='%23451092' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%234e119a' cx='50' cy='400' r='50'/%3E%3Cg fill='%235812a3' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%236213ac' cx='50' cy='500' r='50'/%3E%3Cg fill='%236c14b4' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%237614bd' cx='50' cy='600' r='50'/%3E%3Cg fill='%238015c5' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%238b14ce' cx='50' cy='700' r='50'/%3E%3Cg fill='%239513d6' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a012df' cx='50' cy='800' r='50'/%3E%3Cg fill='%23ab10e7' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23b70cef' cx='50' cy='900' r='50'/%3E%3Cg fill='%23c207f7' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ce00ff' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
     background-attachment: fixed;
+    background-size: contain;
+    background-repeat: round;
 }
 
 body > .form {
@@ -55,7 +56,7 @@ body.display-table > .table {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    background: rgba(255, 255, 255, .75);
+    background: rgba(255, 255, 255, .5);
     border-radius: 20px;
     margin: 20px auto;
     padding: 40px 10px;
@@ -65,7 +66,7 @@ body > .form > * {
     border: solid rgba(255, 255, 255, 0%) 20px;
     border-radius: 20px;
     padding: 10px;
-    background-color: rgba(255, 255, 255, .75);
+    background-color: rgba(255, 255, 255, .5);
 }
 
 #submit {
