@@ -22,19 +22,19 @@
         <div id="mainTab" class="selected" onclick="hideTimesheet()">Time Entry</div>
         <div id="timesheetTab" onclick="showTimesheet()">Timecard</div>
     </header>
-    <div class="form">
-        <div>
-            <input type="radio" id="in" name="event" value="Clock-In">
-            <label for="in">Clock-In</label><br>
-            <input type="radio" id="out" name="event" value="Clock-Out">
-            <label for="out">Clock-Out</label><br>
+    <div class="app">
+        <div class="form">
+            <div>
+                <input type="radio" id="in" name="event" value="Clock-In">
+                <label for="in">Clock-In</label><br>
+                <input type="radio" id="out" name="event" value="Clock-Out">
+                <label for="out">Clock-Out</label><br>
+            </div>
+            <input type="date">
+            <input type="time">
+            <button id="submit">Submit</button>
         </div>
-        <input type="date">
-        <input type="time">
-        <button id="submit">Submit</button>
-    </div>
-    <div class="table">
-
+        <div class="table"></div>
     </div>
 </body>
 </html>

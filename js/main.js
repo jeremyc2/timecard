@@ -97,7 +97,7 @@ function convertToDateString(date) {
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
-    table = document.querySelector('body > .table'),
+    table = document.querySelector('body .table'),
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),
     now = new Date();
