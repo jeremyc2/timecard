@@ -7,6 +7,7 @@ function submitForm(event, date, time) {
     if(date == "" || date == null) return;
     if(time == "" || time == null) return;
 
+    // TODO add timestamp for fixing user error
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
