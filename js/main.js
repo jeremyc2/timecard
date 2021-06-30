@@ -1,17 +1,24 @@
 // TODO Make pay table work better with event table
-// i.e. Click on a row to reveal check-in and
-// check-out for that week
+// i.e. Click on a week's row to reveal check-in and
+// check-out times for that week
+
+// TODO Seperate view from model in Timecard
+// TODO Divide event table by weeks
 
 function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
     if(time == "" || time == null) return;
 
-    // TODO add timestamp for fixing user error
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
-    db.collection("timecard").doc(id).set({event, date, time})
+    db.collection("timecard").doc(id).set({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        event,
+        date, 
+        time
+    })
     .then(() => {
         console.log("Document successfully written!");
         alert('Timecard Updated');
