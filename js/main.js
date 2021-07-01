@@ -9,6 +9,11 @@ function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
     if(time == "" || time == null) return;
+    
+    if(JSON.stringify(lastEventThisSession) === JSON.stringify({date, time})) {
+        var proceed = confirm('Error. You already logged a timecard event for this date and time. Are you sure you want to proceed?');
+        if(!proceed) return;
+    };
 
     const id = uuidv4();
 
@@ -21,6 +26,7 @@ function submitForm(event, date, time) {
     })
     .then(() => {
         console.log("Document successfully written!");
+        lastEventThisSession = {date, time};
         alert('Timecard Updated');
     })
     .catch((error) => {
@@ -110,7 +116,8 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     timesheetTab = document.querySelector('#timesheetTab'),
     now = new Date();
 
-var timesheet;
+var timesheet,
+    lastEventThisSession;
 
 date.value = convertToDateString(now);
 
