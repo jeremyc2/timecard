@@ -11,7 +11,7 @@ function submitForm(event, date, time) {
     if(time == "" || time == null) return;
     
     if(JSON.stringify(lastEventThisSession) === JSON.stringify({date, time})) {
-        var proceed = confirm('Error. You already logged a timecard event for this date and time. Are you sure you want to proceed?');
+        var proceed = confirm(`Are you sure you want to ${event} for ${date} at ${time}`);
         if(!proceed) return;
     };
 
