@@ -11,7 +11,13 @@ function submitForm(event, date, time) {
     if(time == "" || time == null) return;
     
     if(JSON.stringify(lastEventThisSession) === JSON.stringify({date, time})) {
-        var proceed = confirm(`Are you sure you want to ${event} for ${date} at ${time}`);
+        var proceed = confirm(`Are you sure you want to ${
+                                    event
+                                  } for ${
+                                    timesheet.convertDate(date)
+                                  } at ${
+                                    timesheet.convertTo12HourTime(time)
+                                  }`);
         if(!proceed) return;
     };
 
@@ -51,7 +57,7 @@ function showTimesheet() {
 
     var clockedIn = false;
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
-        timesheet = new Timesheet(15);
+        timesheet = new Timesheet(wage);
         querySnapshot.forEach(entry => {
             const id = entry.id,
                 data = entry.data();
@@ -114,9 +120,10 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     table = document.querySelector('body .table'),
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),
-    now = new Date();
+    now = new Date(),
+    wage = 15;
 
-var timesheet,
+var timesheet = new Timesheet(wage),
     lastEventThisSession;
 
 date.value = convertToDateString(now);
