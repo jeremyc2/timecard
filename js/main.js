@@ -13,11 +13,11 @@ function submitForm(event, date, time) {
     if(JSON.stringify(lastEventThisSession) === JSON.stringify({date, time})) {
         var proceed = confirm(`Are you sure you want to ${
                                     event
-                                  } for ${
+                                  } on ${
                                     timesheet.convertDate(date)
                                   } at ${
                                     timesheet.convertTo12HourTime(time)
-                                  }`);
+                                  }?`);
         if(!proceed) return;
     };
 
