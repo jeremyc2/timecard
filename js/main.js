@@ -1,10 +1,3 @@
-// TODO Make pay table work better with event table
-// i.e. Click on a week's row to reveal check-in and
-// check-out times for that week
-
-// TODO Seperate view from model in Timecard
-// TODO Divide event table by weeks
-
 function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
@@ -114,7 +107,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
 var timesheet = new Timesheet(wage),
     lastEventThisSession;
 
-date.value = convertToDateString(now);
+date.value = convertToDateString(now, true);
 
 time.value = `${
         now.getHours().toString().padStart(2, 0)

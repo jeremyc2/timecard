@@ -12,11 +12,12 @@ class Timesheet {
         return `$${((duration / 60) * this.hourlyRate).toFixed(2)}`;
     }
 
+    // TODO Handle empty events
     #clockEvent(id, event, date, time) {
         const parsedDate = date.split('-').map(x => parseInt(x)),
             clockIn = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]),
             weekStart = new Date(clockIn.getTime() - (clockIn.getDay() * 86400000)),
-            weekEnd = new Date(weekStart.getTime() + (518400000)),
+            weekEnd = new Date(weekStart.getTime() + 518400000),
             week = `${convertToDateString(weekStart)} - ${convertToDateString(weekEnd)}`,
             day = convertToDateString(clockIn);
 
