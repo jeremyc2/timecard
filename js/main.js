@@ -14,9 +14,9 @@ function submitForm(event, date, time) {
         var proceed = confirm(`Are you sure you want to ${
                                     event
                                   } on ${
-                                    timesheet.convertDate(date)
+                                    expandDatestring(date)
                                   } at ${
-                                    timesheet.convertTo12HourTime(time)
+                                    convertTo12HourTime(time)
                                   }?`);
         if(!proceed) return;
     };
@@ -89,8 +89,6 @@ function showTimesheet() {
             }
         });
         table.innerHTML = '';
-        table.appendChild(timesheet.getPayTable());
-        table.appendChild(timesheet.getEventTable());
         document.body.classList.add('display-table');
     });
 }
@@ -102,16 +100,6 @@ function hideTimesheet() {
 
     table.innerHTML = '';
     document.body.classList.remove('display-table');
-}
-
-function convertToDateString(date) {
-    return `${
-            date.getFullYear()
-        }-${
-            (date.getMonth() + 1).toString().padStart(2, 0)
-        }-${
-            date.getDate().toString().padStart(2, 0)
-        }`;
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
