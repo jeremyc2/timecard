@@ -8,8 +8,8 @@ class Timesheet {
         this.weeks = new Map();
     }
 
-    #convertHoursToPay(duration) {
-        return `$${((duration / 60) * this.hourlyRate).toFixed(2)}`;
+    #convertHoursToPay(hours) {
+        return `$${(hours * this.hourlyRate).toFixed(2)}`;
     }
 
     // TODO Handle empty events
