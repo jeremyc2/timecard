@@ -61,7 +61,7 @@ body.display-table .table {
     max-width: fit-content;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 35px;
     background: rgba(255, 255, 255, .40);
     border-radius: 20px;
     margin: 0 auto;
