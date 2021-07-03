@@ -52,7 +52,7 @@ class Timesheet {
             weekStart = new Date(clockIn.getTime() - (clockIn.getDay() * 86400000)),
             weekEnd = new Date(weekStart.getTime() + 518400000),
             week = `${convertToDateString(weekStart)} - ${convertToDateString(weekEnd)}`,
-            day = convertToDateString(clockIn);
+            day = convertToDateString(clockIn, true);
 
         if(this.weeks.has(week)) {
             var days = this.weeks.get(week);

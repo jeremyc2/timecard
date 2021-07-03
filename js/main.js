@@ -70,6 +70,19 @@ function buildTables() {
         weekTable.append(headerRow);
         timecard.append(weekTable);
 
+        for(let [day, data] of days) {
+            const row = document.createElement('tr'),
+                tdDay = document.createElement('td'),
+                tdClockIn = document.createElement('td'),
+                tdClockOut = document.createElement('td'),
+                tdDuration = document.createElement('td');
+
+            tdDay.innerHTML = expandDatestring(day, true);
+
+            row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
+            weekTable.append(row);
+        }
+
     }
 }
 
