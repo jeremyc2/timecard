@@ -59,7 +59,7 @@ body.display-table .form {
 body.display-table .table {
     display: flex;
     max-width: fit-content;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     gap: 10px;
     background: rgba(255, 255, 255, .40);

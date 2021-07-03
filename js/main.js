@@ -43,9 +43,34 @@ function submitForm(event, date, time) {
     });
 }
 
-// TODO
+// TODO build tables
 function buildTables() {
-    timesheet.weeks
+    for (let [week, days] of timesheet.weeks) {
+        const weekTable = document.createElement('table'),
+            titleRow = document.createElement('tr'),
+            tableTitle = document.createElement('th'),
+            headerRow = document.createElement('tr'),
+            headerDay = document.createElement('th'),
+            headerClockIn = document.createElement('th'),
+            headerClockOut = document.createElement('th'),
+            headerDuration = document.createElement('th');
+
+        tableTitle.setAttribute('colspan', 4);
+        tableTitle.innerText = week;
+
+        headerDay.innerText = 'Day';
+        headerClockIn.innerText = 'Clock-In';
+        headerClockOut.innerText = 'Clock-Out';
+        headerDuration.innerText = 'Duration';
+
+        titleRow.append(tableTitle);
+        weekTable.append(titleRow);
+
+        headerRow.append(headerDay, headerClockIn, headerClockOut, headerDuration);
+        weekTable.append(headerRow);
+        timecard.append(weekTable);
+
+    }
 }
 
 function showTimesheet() {
@@ -58,7 +83,7 @@ function showTimesheet() {
             return {id: entry.id, ...entry.data()};
         });
         timesheet = new Timesheet(wage, events);
-        table.innerHTML = '';
+        timecard.innerHTML = '';
         buildTables();
         document.body.classList.add('display-table');
     });
@@ -69,14 +94,14 @@ function hideTimesheet() {
     timesheetTab.classList.remove('selected');
     mainTab.classList.add('selected');
 
-    table.innerHTML = '';
+    timecard.innerHTML = '';
     document.body.classList.remove('display-table');
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
-    table = document.querySelector('body .table'),
+    timecard = document.querySelector('body .table'),
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),
     now = new Date(),
