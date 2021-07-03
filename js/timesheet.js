@@ -3,16 +3,49 @@ class Timesheet {
     hourlyRate;
     weeks;
 
-    constructor(hourlyRate) {
+    constructor(hourlyRate, events) {
         this.hourlyRate = hourlyRate;
         this.weeks = new Map();
+
+        if(events == null) return;
+
+        var clockedIn = false;
+
+        events.forEach(({id, event, date, time}, index) => {
+            if(clockedIn) {
+                if(event == "Clock-In") {
+                    // Input empty clock-out
+                    var lastEvent = events[index - 1];
+                    this.clockOut(null, lastEvent.date, null);
+                    // Input clock-in
+                    this.clockIn(id, date, time);
+                    clockedIn = true;
+                } else if(event == "Clock-Out") {
+                    // Input clock-out
+                    this.clockOut(id, date, time);
+                    clockedIn = false;
+                }
+            } else {
+                if(event == "Clock-In") {
+                    // Input clock-in
+                    this.clockIn(id, date, time);
+                    clockedIn = true;
+                } else if(event == "Clock-Out") {
+                    // Input empty clock-in
+                    var lastEvent = events[index - 1];
+                    this.clockIn(null, lastEvent.date, null);
+                    // Input clock-out
+                    this.clockOut(id, date, time);
+                    clockedIn = false;
+                }
+            }
+        });
     }
 
     #convertHoursToPay(hours) {
         return `$${(hours * this.hourlyRate).toFixed(2)}`;
     }
 
-    // TODO Handle empty events
     #clockEvent(id, event, date, time) {
         const parsedDate = date.split('-').map(x => parseInt(x)),
             clockIn = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]),

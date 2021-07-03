@@ -43,45 +43,23 @@ function submitForm(event, date, time) {
     });
 }
 
+// TODO
+function buildTables() {
+    timesheet.weeks
+}
+
 function showTimesheet() {
 
     mainTab.classList.remove('selected');
     timesheetTab.classList.add('selected');
 
-    var clockedIn = false;
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
-        timesheet = new Timesheet(wage);
-        querySnapshot.forEach(entry => {
-            const id = entry.id,
-                data = entry.data();
-
-            if(clockedIn) {
-                if(data.event == "Clock-In") {
-                    // Input empty clock-out
-                    timesheet.clockOut();
-                    // Input clock-in
-                    timesheet.clockIn(id, data.date, data.time);
-                    clockedIn = true;
-                } else if(data.event == "Clock-Out") {
-                    // Input clock-out
-                    timesheet.clockOut(id, data.date, data.time);
-                    clockedIn = false;
-                }
-            } else {
-                if(data.event == "Clock-In") {
-                    // Input clock-in
-                    timesheet.clockIn(id, data.date, data.time);
-                    clockedIn = true;
-                } else if(data.event == "Clock-Out") {
-                    // Input empty clock-in
-                    timesheet.clockIn();
-                    // Input clock-out
-                    timesheet.clockOut(id, data.date, data.time);
-                    clockedIn = false;
-                }
-            }
+        let events = querySnapshot.docs.map(entry => {
+            return {id: entry.id, ...entry.data()};
         });
+        timesheet = new Timesheet(wage, events);
         table.innerHTML = '';
+        buildTables();
         document.body.classList.add('display-table');
     });
 }
@@ -104,7 +82,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     now = new Date(),
     wage = 15;
 
-var timesheet = new Timesheet(wage),
+var timesheet,
     lastEventThisSession;
 
 date.value = convertToDateString(now, true);
