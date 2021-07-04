@@ -43,7 +43,6 @@ function submitForm(event, date, time) {
     });
 }
 
-// TODO build tables
 function buildTables() {
     for (let [week, days] of timesheet.weeks) {
         const weekTable = document.createElement('table'),
@@ -78,6 +77,20 @@ function buildTables() {
                 tdDuration = document.createElement('td');
 
             tdDay.innerHTML = expandDatestring(day, true);
+
+            data.forEach(({id, event, time}) => {
+                if(event == "Clock-In") {
+                    tdClockIn.setAttribute('data-id', id);
+                    tdClockIn.innerText = convertTo12HourTime(time);
+                } else if(event == "Clock-Out") {
+                    tdClockOut.setAttribute('data-id', id);
+                    tdClockOut.innerText = convertTo12HourTime(time);
+                }
+            });
+
+            if(tdClockIn.innerText != '' && tdClockOut.innerText != '') {
+                
+            }
 
             row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
             weekTable.append(row);

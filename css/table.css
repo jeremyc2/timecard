@@ -9,9 +9,13 @@ td, th {
   padding: 8px;
 }
 
-td {
+td, td * {
   font-family: 'Oxygen Mono', monospace;
   font-size: 1rem;
+}
+
+td sup {
+  font-size: .75rem;
 }
 
 tr:nth-child(even){background-color: #f2f2f2;}

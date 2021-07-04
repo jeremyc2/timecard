@@ -39,6 +39,16 @@ function convertToDateString(date, isSortable) {
     }
 }
 
+function nth(d) {
+    if (d > 3 && d < 21) return `${d}<sup>th</sup>`;
+    switch (d % 10) {
+        case 1:  return `${d}<sup>st</sup>`;
+        case 2:  return `${d}<sup>nd</sup>`;
+        case 3:  return `${d}<sup>rd</sup>`;
+        default: return `${d}<sup>th</sup>`;
+    }
+}
+
 function getFullDayOfWeek(day) {
     switch (day) {
         case 0:
@@ -58,6 +68,35 @@ function getFullDayOfWeek(day) {
     }
 }
 
+function getMonthName(month) {
+    switch (month) {
+        case 0:
+            return 'Jan';
+        case 1:
+            return 'Feb';
+        case 2:
+            return 'Mar';
+        case 3:
+            return 'Apr';
+        case 4:
+            return 'May';
+        case 5:
+            return 'June';
+        case 6:
+            return 'July';
+        case 7:
+            return 'Aug';
+        case 8:
+            return 'Sept';
+        case 9:
+            return 'Oct';
+        case 10:
+            return 'Nov';
+        case 11:
+            return 'Dec';
+    }
+}
+
 function expandDatestring(date, isCompact) {
     if(date == null || date == '') return date;
 
@@ -66,9 +105,10 @@ function expandDatestring(date, isCompact) {
     date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
 
     if(isCompact) {
-        var dayOfWeek = getFullDayOfWeek(date.getDay()).padEnd(9, '~').replaceAll('~', '&nbsp;'),
-            dateString = date.getDate().toString().padStart(2, '~').replaceAll('~', '&nbsp;');
-        return `${dayOfWeek} ${dateString}`;
+        var dayOfWeek = getFullDayOfWeek(date.getDay()),
+            month = getMonthName(date.getMonth()),
+            dateString = nth(date.getDate());
+        return `${dayOfWeek} ${month} ${dateString}`;
     }
 
     return date.toDateString().substring(0, 15);
