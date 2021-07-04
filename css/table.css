@@ -24,11 +24,18 @@ tr:nth-child(odd){background-color: white;}
 
 tr:hover {background-color: #ddd;}
 
-th {
-  position: sticky;
-  top: 50px;
+tr:first-of-type th {
   padding-top: 12px;
   padding-bottom: 12px;
+  background-color: #04AA6D;
+  color: white;
+}
+
+tr:last-of-type th {
+  background-color: #404040;
+}
+
+th {
   background-color: #04AA6D;
   color: white;
 }

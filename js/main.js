@@ -44,7 +44,7 @@ function submitForm(event, date, time) {
 }
 
 function convertHoursToPay(hours) {
-    return `$${(hours * this.hourlyRate).toFixed(2)}`;
+    return `$${(hours * wage).toFixed(2)}`;
 }
 
 function buildTables() {
@@ -57,6 +57,8 @@ function buildTables() {
             headerClockIn = document.createElement('th'),
             headerClockOut = document.createElement('th'),
             headerDuration = document.createElement('th');
+
+        var totalDuration = 0;
 
         tableTitle.setAttribute('colspan', 4);
         tableTitle.innerText = week;
@@ -117,11 +119,22 @@ function buildTables() {
                     }:${
                         durationMinutes.toString().padStart(2, '0')
                     }`;
+
+                totalDuration += duration;
             }
 
             row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
             weekTable.append(row);
         }
+
+        const footerRow = document.createElement('tr'),
+            tableFooter = document.createElement('th');
+
+        tableFooter.setAttribute('colspan', 4);
+        tableFooter.innerText = convertHoursToPay(totalDuration / 60);
+
+        footerRow.append(tableFooter);
+        weekTable.append(footerRow);
 
     }
 }
@@ -135,7 +148,7 @@ function showTimesheet() {
         let events = querySnapshot.docs.map(entry => {
             return {id: entry.id, ...entry.data()};
         });
-        timesheet = new Timesheet(wage, events);
+        timesheet = new Timesheet(events);
         timecard.innerHTML = '';
         buildTables();
         document.body.classList.add('display-table');

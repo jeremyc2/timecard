@@ -1,10 +1,8 @@
 class Timesheet {
 
-    hourlyRate;
     weeks;
 
-    constructor(hourlyRate, events) {
-        this.hourlyRate = hourlyRate;
+    constructor(events) {
         this.weeks = new Map();
 
         if(events == null) return;
