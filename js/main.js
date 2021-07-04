@@ -106,6 +106,11 @@ function buildTables() {
                     }
                 } else if(event == "Clock-Out") {
                     if(time != null) {
+
+                        if(typeof clockIn === 'undefined') {
+                            tdDay.innerHTML = expandDatestring(day, true);
+                        }
+
                         var clockOutDay = day.split('-').map(x => parseInt(x)),
                             clockOutTime = time.split(':').map(x => parseInt(x));
 

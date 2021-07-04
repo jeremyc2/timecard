@@ -27,7 +27,6 @@ tr:hover {background-color: #ddd;}
 tr:first-of-type th {
   padding-top: 12px;
   padding-bottom: 12px;
-  background-color: #04AA6D;
   color: white;
 }
 
@@ -36,6 +35,6 @@ tr:last-of-type th {
 }
 
 th {
-  background-color: #04AA6D;
+  background-color: #43aa8b;
   color: white;
 }
