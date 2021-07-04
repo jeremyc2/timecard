@@ -3,14 +3,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-header {
+body > header {
     position: sticky;
     top: 0;
     z-index: 5;
     background-color: #aa3333;
 }
 
-header > div {
+body > header > div {
     display: inline-block;
     padding: 10px;
     margin: 0 10px 10px 10px;
@@ -20,11 +20,11 @@ header > div {
     color: white;
 }
 
-header > div.selected {
+body > header > div.selected {
     background-color: rgba(0, 0, 0, 0.65);
 }
 
-header > div.selected:hover {
+body > header > div.selected:hover {
     background-color: black;
 }
 

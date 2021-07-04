@@ -1,11 +1,15 @@
 // TODO Change confirm and alert messages to be
 // more brief and with a custom style
 function confirm(message) {
-
+    const main = document.querySelector('#modal-1 main');
+    main.innerText = message;
+    MicroModal.show('modal-1');
 }
 
 function alert(message) {
-
+    const main = document.querySelector('#modal-1 main');
+    main.innerText = message;
+    MicroModal.show('modal-1');
 }
 
 function submitForm(event, date, time) {
