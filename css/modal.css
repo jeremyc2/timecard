@@ -20,7 +20,7 @@
 }
 
 .modal-container {
-    background-color: rgb(255 255 255 / 75%);
+    background-color: white;
     padding: 30px;
     max-width: 500px;
     max-height: 100vh;
