@@ -1,12 +1,5 @@
-// TODO Change confirm and alert messages to be
-// more brief and with a custom style
+// TODO Confirm modal custom style
 function confirm(message) {
-    const modalContent = document.querySelector('#modal-1-content');
-    modalContent.innerText = message;
-    MicroModal.show('modal-1');
-}
-
-function alert(message) {
     const modalContent = document.querySelector('#modal-1-content');
     modalContent.innerText = message;
     MicroModal.show('modal-1');
@@ -41,7 +34,6 @@ function submitForm(event, date, time) {
     .then(() => {
         console.log("Document successfully written!");
         lastEventThisSession = {date, time};
-        alert('Timecard Updated');
     })
     .catch((error) => {
 

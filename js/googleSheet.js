@@ -24,6 +24,5 @@ function sendToGoogleSheets(url, data) {
             mode: 'no-cors'
         }).then(() => {
             console.log("Document successfully written!");
-            alert('Timecard Updated');
         });
 }
