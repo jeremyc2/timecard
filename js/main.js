@@ -5,7 +5,7 @@ function confirm(message) {
 }
 
 function alert(message) {
-    
+
 }
 
 function submitForm(event, date, time) {
@@ -113,6 +113,8 @@ function buildTables() {
                         tdClockIn.innerText = convertTo12HourTime(time);
 
                         isRowIncomplete = true;
+                    } else {
+                        clockIn = undefined;
                     }
                 } else if(event == "Clock-Out") {
                     if(time != null) {
