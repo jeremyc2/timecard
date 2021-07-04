@@ -138,7 +138,7 @@ var timesheet,
 
 date.value = convertToDateString(now, true);
 
-time.value = convertDateToDuration(now);
+time.value = convertDateTo24HourTime(now);
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]

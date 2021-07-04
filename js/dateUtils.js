@@ -1,4 +1,4 @@
-function convertDateToDuration(date) {
+function convertDateTo24HourTime(date) {
     return `${
         date.getHours().toString().padStart(2, 0)
     }:${
