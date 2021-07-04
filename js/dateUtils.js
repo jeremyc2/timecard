@@ -1,3 +1,11 @@
+function convertDateToDuration(date) {
+    return `${
+        date.getHours().toString().padStart(2, 0)
+    }:${
+        date.getMinutes().toString().padStart(2, 0)
+    }`;
+}
+
 function convertTo12HourTime(time) {
 
     if(time == null || time == '') return time;

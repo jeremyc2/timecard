@@ -138,11 +138,7 @@ var timesheet,
 
 date.value = convertToDateString(now, true);
 
-time.value = `${
-        now.getHours().toString().padStart(2, 0)
-    }:${
-        now.getMinutes().toString().padStart(2, 0)
-    }`;
+time.value = convertDateToDuration(now);
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]
