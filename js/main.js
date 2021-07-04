@@ -18,6 +18,7 @@ function submitForm(event, date, time) {
     if(time == "" || time == null) return;
     
     if(JSON.stringify(lastEventThisSession) === JSON.stringify({date, time})) {
+        // TODO Shorten message
         var proceed = confirm(`Are you sure you want to ${
                                     event
                                   } on ${
