@@ -75,56 +75,72 @@ function buildTables() {
         weekTable.append(headerRow);
         timecard.append(weekTable);
 
+        var row, tdDay, tdClockIn, tdClockOut, tdDuration, clockIn, clockOut;
+
+        var isRowIncomplete = false;
+
         for(let [day, data] of days) {
-            const row = document.createElement('tr'),
-                tdDay = document.createElement('td'),
-                tdClockIn = document.createElement('td'),
-                tdClockOut = document.createElement('td'),
-                tdDuration = document.createElement('td');
-
-            tdDay.innerHTML = expandDatestring(day, true);
-
-            var clockIn,
-                clockOut;
-
             data.forEach(({id, event, time}) => {
                 if(event == "Clock-In") {
-                    var clockInDay = day.split('-').map(x => parseInt(x)),
-                        clockInTime = time.split(':').map(x => parseInt(x));
+                    row = document.createElement('tr');
+                    tdDay = document.createElement('td');
+                    tdClockIn = document.createElement('td');
+                    tdClockOut = document.createElement('td');
+                    tdDuration = document.createElement('td');
+    
+                    tdDay.innerHTML = expandDatestring(day, true);
 
-                    clockIn = new Date(clockInDay[0], clockInDay[1] - 1, 
-                        clockInDay[2], clockInTime[0], clockInTime[1]);
+                    if(time != null) {
+                        var clockInDay = day.split('-').map(x => parseInt(x)),
+                            clockInTime = time.split(':').map(x => parseInt(x));
 
-                    tdClockIn.setAttribute('data-id', id);
-                    tdClockIn.innerText = convertTo12HourTime(time);
+                        clockIn = new Date(clockInDay[0], clockInDay[1] - 1, 
+                            clockInDay[2], clockInTime[0], clockInTime[1]);
+
+                        clockOut = undefined;
+
+                        tdClockIn.setAttribute('data-id', id);
+                        tdClockIn.innerText = convertTo12HourTime(time);
+
+                        isRowIncomplete = true;
+                    }
                 } else if(event == "Clock-Out") {
-                    var clockOutDay = day.split('-').map(x => parseInt(x)),
-                        clockOutTime = time.split(':').map(x => parseInt(x));
+                    if(time != null) {
+                        var clockOutDay = day.split('-').map(x => parseInt(x)),
+                            clockOutTime = time.split(':').map(x => parseInt(x));
 
-                    clockOut = new Date(clockOutDay[0], clockOutDay[1] - 1, 
-                        clockOutDay[2], clockOutTime[0], clockOutTime[1]);
-                        
-                    tdClockOut.setAttribute('data-id', id);
-                    tdClockOut.innerText = convertTo12HourTime(time);
+                        clockOut = new Date(clockOutDay[0], clockOutDay[1] - 1, 
+                            clockOutDay[2], clockOutTime[0], clockOutTime[1]);
+                            
+                        tdClockOut.setAttribute('data-id', id);
+                        tdClockOut.innerText = convertTo12HourTime(time);
+                    }
+
+                    row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
+                    weekTable.append(row);
+
+                    isRowIncomplete = false;
+                }
+
+                if(typeof clockIn !== 'undefined' && typeof clockOut !== 'undefined') {
+                    var duration = (clockOut - clockIn)/60000,
+                        durationMinutes = duration % 60,
+                        durationHours = Math.floor(duration / 60);
+    
+                    tdDuration.innerText = `${
+                            durationHours.toString().padStart(2, '0')
+                        }:${
+                            durationMinutes.toString().padStart(2, '0')
+                        }`;
+    
+                    totalDuration += duration;
                 }
             });
 
-            if(clockIn != null && clockOut != null) {
-                var duration = (clockOut - clockIn)/60000,
-                    durationMinutes = duration % 60,
-                    durationHours = Math.floor(duration / 60);
-
-                tdDuration.innerText = `${
-                        durationHours.toString().padStart(2, '0')
-                    }:${
-                        durationMinutes.toString().padStart(2, '0')
-                    }`;
-
-                totalDuration += duration;
+            if(isRowIncomplete) {
+                row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
+                weekTable.append(row);
             }
-
-            row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
-            weekTable.append(row);
         }
 
         const footerRow = document.createElement('tr'),
