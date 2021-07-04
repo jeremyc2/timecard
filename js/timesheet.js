@@ -42,10 +42,6 @@ class Timesheet {
         });
     }
 
-    #convertHoursToPay(hours) {
-        return `$${(hours * this.hourlyRate).toFixed(2)}`;
-    }
-
     #clockEvent(id, event, date, time) {
         const parsedDate = date.split('-').map(x => parseInt(x)),
             clockIn = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]),

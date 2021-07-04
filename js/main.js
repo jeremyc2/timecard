@@ -43,6 +43,10 @@ function submitForm(event, date, time) {
     });
 }
 
+function convertHoursToPay(hours) {
+    return `$${(hours * this.hourlyRate).toFixed(2)}`;
+}
+
 function buildTables() {
     for (let [week, days] of timesheet.weeks) {
         const weekTable = document.createElement('table'),
@@ -57,7 +61,7 @@ function buildTables() {
         tableTitle.setAttribute('colspan', 4);
         tableTitle.innerText = week;
 
-        headerDay.innerText = 'Day';
+        headerDay.innerText = 'Date';
         headerClockIn.innerText = 'Clock-In';
         headerClockOut.innerText = 'Clock-Out';
         headerDuration.innerText = 'Duration';
@@ -78,18 +82,41 @@ function buildTables() {
 
             tdDay.innerHTML = expandDatestring(day, true);
 
+            var clockIn,
+                clockOut;
+
             data.forEach(({id, event, time}) => {
                 if(event == "Clock-In") {
+                    var clockInDay = day.split('-').map(x => parseInt(x)),
+                        clockInTime = time.split(':').map(x => parseInt(x));
+
+                    clockIn = new Date(clockInDay[0], clockInDay[1] - 1, 
+                        clockInDay[2], clockInTime[0], clockInTime[1]);
+
                     tdClockIn.setAttribute('data-id', id);
                     tdClockIn.innerText = convertTo12HourTime(time);
                 } else if(event == "Clock-Out") {
+                    var clockOutDay = day.split('-').map(x => parseInt(x)),
+                        clockOutTime = time.split(':').map(x => parseInt(x));
+
+                    clockOut = new Date(clockOutDay[0], clockOutDay[1] - 1, 
+                        clockOutDay[2], clockOutTime[0], clockOutTime[1]);
+                        
                     tdClockOut.setAttribute('data-id', id);
                     tdClockOut.innerText = convertTo12HourTime(time);
                 }
             });
 
-            if(tdClockIn.innerText != '' && tdClockOut.innerText != '') {
-                
+            if(clockIn != null && clockOut != null) {
+                var duration = (clockOut - clockIn)/60000,
+                    durationMinutes = duration % 60,
+                    durationHours = Math.floor(duration / 60);
+
+                tdDuration.innerText = `${
+                        durationHours.toString().padStart(2, '0')
+                    }:${
+                        durationMinutes.toString().padStart(2, '0')
+                    }`;
             }
 
             row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
