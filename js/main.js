@@ -1,3 +1,13 @@
+// TODO Change confirm and alert messages to be
+// more brief and with a custom style
+function confirm(message) {
+
+}
+
+function alert(message) {
+    
+}
+
 function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
