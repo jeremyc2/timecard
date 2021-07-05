@@ -83,6 +83,9 @@ function buildTables() {
         for(let [day, data] of days) {
             data.forEach(({id, event, time}) => {
                 if(event == "Clock-In") {
+
+                    clockOut = undefined;
+
                     row = document.createElement('tr');
                     tdDay = document.createElement('td');
                     tdClockIn = document.createElement('td');
@@ -100,8 +103,6 @@ function buildTables() {
 
                         clockIn = new Date(clockInDay[0], clockInDay[1] - 1, 
                             clockInDay[2], clockInTime[0], clockInTime[1]);
-
-                        clockOut = undefined;
 
                         tdClockIn.setAttribute('data-id', id);
                         tdClockIn.innerText = convertTo12HourTime(time);
