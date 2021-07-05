@@ -1,4 +1,4 @@
-// TODO Confirm modal custom style
+// TODO Make async and return proceed
 async function confirm(message) {
     const modalContent = document.querySelector('#modal-1-content');
 
@@ -12,7 +12,6 @@ async function submitForm(event, date, time) {
     if(date == "" || date == null) return;
     if(time == "" || time == null) return;
     
-    // TODO Shorten message
     var proceed = await confirm(`${
             event == 'Clock-In'? 'Clock in': 'Clock out'
         } ${
