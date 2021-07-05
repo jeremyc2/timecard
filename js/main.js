@@ -1,10 +1,35 @@
 // TODO Make async and return proceed
 async function confirm(message) {
-    const modalContent = document.querySelector('#modal-1-content');
+    const modalContent = document.querySelector('#modal-1-content'),
+        continueButton = document.querySelector('#modal-1-continue-btn');
 
     modalContent.innerHTML = message;
 
-    MicroModal.show('modal-1');
+    var proceed;
+
+    MicroModal.show('modal-1', {onClose: modal => {
+            if(typeof proceed === 'undefined') {
+                proceed = false;
+            }
+        }
+    });
+
+    continueButton.addEventListener('click', () => {
+        proceed = true;
+        MicroModal.close('modal-1');
+    });
+
+    return new Promise((resolve) => {
+        var interval = setInterval(() => {
+            if(proceed) {
+                resolve(true);
+                clearInterval(interval);
+            } else if(proceed === false) {
+                resolve(false);
+                clearInterval(interval);
+            }
+        }, 10);
+    });
 }
 
 async function submitForm(event, date, time) {
