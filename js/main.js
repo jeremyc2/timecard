@@ -1,4 +1,3 @@
-// TODO Make async and return proceed
 async function confirm(message) {
     const modalContent = document.querySelector('#modal-1-content'),
         continueButton = document.querySelector('#modal-1-continue-btn');
@@ -78,6 +77,7 @@ function convertHoursToPay(hours) {
     return `$${(hours * wage).toFixed(2)}`;
 }
 
+// TODO Collapsable Week Table
 function buildTables() {
     for (let [week, days] of [...timesheet.weeks].reverse()) {
         const weekTable = document.createElement('table'),
