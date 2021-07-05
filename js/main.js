@@ -1,26 +1,23 @@
 // TODO Confirm modal custom style
-function confirm(message) {
+async function confirm(message) {
     const modalContent = document.querySelector('#modal-1-content');
     modalContent.innerText = message;
     MicroModal.show('modal-1');
 }
 
-function submitForm(event, date, time) {
+async function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;
     if(time == "" || time == null) return;
     
-    if(JSON.stringify(lastEventThisSession) === JSON.stringify({date, time})) {
-        // TODO Shorten message
-        var proceed = confirm(`Are you sure you want to ${
-                                    event
-                                  } on ${
-                                    expandDatestring(date)
-                                  } at ${
-                                    convertTo12HourTime(time)
-                                  }?`);
-        if(!proceed) return;
-    };
+    // TODO Shorten message
+    var proceed = await confirm(`${event} on ${
+        expandDatestring(date)
+        } at ${
+        convertTo12HourTime(time)
+        }?`);
+
+    if(!proceed) return;
 
     const id = uuidv4();
 
@@ -33,7 +30,6 @@ function submitForm(event, date, time) {
     })
     .then(() => {
         console.log("Document successfully written!");
-        lastEventThisSession = {date, time};
     })
     .catch((error) => {
 
@@ -84,8 +80,6 @@ function buildTables() {
 
         var row, tdDay, tdClockIn, tdClockOut, tdDuration, clockIn, clockOut;
 
-        var isRowIncomplete = false;
-
         for(let [day, data] of days) {
             data.forEach(({id, event, time}) => {
                 if(event == "Clock-In") {
@@ -94,6 +88,9 @@ function buildTables() {
                     tdClockIn = document.createElement('td');
                     tdClockOut = document.createElement('td');
                     tdDuration = document.createElement('td');
+
+                    row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
+                    weekTable.append(row);
     
                     tdDay.innerHTML = expandDatestring(day, true);
 
@@ -109,7 +106,6 @@ function buildTables() {
                         tdClockIn.setAttribute('data-id', id);
                         tdClockIn.innerText = convertTo12HourTime(time);
 
-                        isRowIncomplete = true;
                     } else {
                         clockIn = undefined;
                     }
@@ -129,11 +125,6 @@ function buildTables() {
                         tdClockOut.setAttribute('data-id', id);
                         tdClockOut.innerText = convertTo12HourTime(time);
                     }
-
-                    row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
-                    weekTable.append(row);
-
-                    isRowIncomplete = false;
                 }
 
                 if(typeof clockIn !== 'undefined' && typeof clockOut !== 'undefined') {
@@ -150,11 +141,6 @@ function buildTables() {
                     totalDuration += duration;
                 }
             });
-
-            if(isRowIncomplete) {
-                row.append(tdDay, tdClockIn, tdClockOut, tdDuration);
-                weekTable.append(row);
-            }
         }
 
         const footerRow = document.createElement('tr'),
@@ -203,8 +189,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     now = new Date(),
     wage = 15;
 
-var timesheet,
-    lastEventThisSession;
+var timesheet;
 
 date.value = convertToDateString(now, true);
 
