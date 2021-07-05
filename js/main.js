@@ -79,6 +79,7 @@ function convertHoursToPay(hours) {
 
 // TODO Collapsable Week Table
 function buildTables() {
+    var isFirst = true;
     for (let [week, days] of [...timesheet.weeks].reverse()) {
         const weekTable = document.createElement('table'),
             titleRow = document.createElement('tr'),
@@ -87,7 +88,8 @@ function buildTables() {
             headerDay = document.createElement('th'),
             headerClockIn = document.createElement('th'),
             headerClockOut = document.createElement('th'),
-            headerDuration = document.createElement('th');
+            headerDuration = document.createElement('th'),
+            expandToggle = document.createElement('div');
 
         var totalDuration = 0;
 
@@ -99,7 +101,26 @@ function buildTables() {
         headerClockOut.innerText = 'Clock-Out';
         headerDuration.innerText = 'Duration';
 
-        titleRow.append(tableTitle);
+        if(isFirst) {
+            weekTable.classList.add('table-expanded');
+            isFirst = false;
+        } else {
+            weekTable.classList.add('table-collapsed');
+        }
+
+        expandToggle.classList.add('toggle-expand');
+
+        expandToggle.addEventListener('click', () => {
+            if(weekTable.classList.contains('table-collapsed')) {
+                weekTable.classList.remove('table-collapsed');
+                weekTable.classList.add('table-expanded');
+            } else {
+                weekTable.classList.remove('table-expanded');
+                weekTable.classList.add('table-collapsed');  
+            }
+        });
+
+        titleRow.append(tableTitle, expandToggle);
         weekTable.append(titleRow);
 
         headerRow.append(headerDay, headerClockIn, headerClockOut, headerDuration);
@@ -197,6 +218,7 @@ function showTimesheet() {
         timecard.innerHTML = '';
         buildTables();
         document.body.classList.add('display-table');
+        timecard.style.minWidth = `${timecard.getBoundingClientRect().width}px`;
     });
 }
 

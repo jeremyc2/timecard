@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
 
 table {
+    position: relative;
     border-collapse: collapse;
 }
 
@@ -25,8 +26,7 @@ tr:nth-child(odd){background-color: white;}
 tr:hover {background-color: #ddd;}
 
 tr:first-of-type th {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  height: 40px;
   color: white;
 }
 
@@ -37,4 +37,28 @@ tr:last-of-type th {
 th {
   background-color: #43aa8b;
   color: white;
+}
+
+.toggle-expand {
+  position: absolute;
+  width: 57px;
+  height: 57px;
+  right: 0;
+  background-image: url(../images/unfold_less_white_24dp.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  cursor: pointer;
+}
+
+.table-expanded .toggle-expand {
+  background-image: url(../images/unfold_more_white_24dp.svg);
+}
+
+.table-collapsed .toggle-expand {
+  background-image: url(../images/unfold_less_white_24dp.svg);
+}
+
+.table-collapsed tr:not(tr:first-of-type, tr:last-of-type) {
+  display: none;
 }
