@@ -52,11 +52,11 @@ th {
 }
 
 .table-expanded .toggle-expand {
-  background-image: url(../images/unfold_more_white_24dp.svg);
+  background-image: url(../images/unfold_less_white_24dp.svg);
 }
 
 .table-collapsed .toggle-expand {
-  background-image: url(../images/unfold_less_white_24dp.svg);
+  background-image: url(../images/unfold_more_white_24dp.svg);
 }
 
 .table-collapsed tr:not(tr:first-of-type, tr:last-of-type) {
