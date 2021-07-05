@@ -30,8 +30,7 @@ class Timesheet {
                     clockedIn = true;
                 } else if(event == "Clock-Out") {
                     // Input empty clock-in
-                    var lastEvent = events[index - 1];
-                    this.clockIn(null, lastEvent.date, null);
+                    this.clockIn(null, date, null);
                     // Input clock-out
                     this.clockOut(id, date, time);
                     clockedIn = false;
