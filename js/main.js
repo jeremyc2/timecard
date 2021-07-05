@@ -55,7 +55,7 @@ function convertHoursToPay(hours) {
 }
 
 function buildTables() {
-    for (let [week, days] of timesheet.weeks) {
+    for (let [week, days] of [...timesheet.weeks].reverse()) {
         const weekTable = document.createElement('table'),
             titleRow = document.createElement('tr'),
             tableTitle = document.createElement('th'),
