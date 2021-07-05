@@ -6,7 +6,7 @@ function convertDateTo24HourTime(date) {
     }`;
 }
 
-function convertTo12HourTime(time) {
+function convertTo12HourTime(time, padStart = true) {
 
     if(time == null || time == '') return time;
 
@@ -18,8 +18,18 @@ function convertTo12HourTime(time) {
         meridiem = 'PM';
     }
 
+    var hours;
+
+    if(timeArray[0] == 0) {
+        hours = '12'
+    } else if(padStart) {
+        hours = timeArray[0].toString().padStart(2, '0');
+    } else {
+        hours = timeArray[0];
+    }
+
     return `${
-            timeArray[0].toString().padStart(2, '0')
+            hours
         }:${
             timeArray[1].toString().padStart(2, '0')
         } ${

@@ -1,7 +1,9 @@
 // TODO Confirm modal custom style
 async function confirm(message) {
     const modalContent = document.querySelector('#modal-1-content');
-    modalContent.innerText = message;
+
+    modalContent.innerHTML = message;
+
     MicroModal.show('modal-1');
 }
 
@@ -11,10 +13,12 @@ async function submitForm(event, date, time) {
     if(time == "" || time == null) return;
     
     // TODO Shorten message
-    var proceed = await confirm(`${event} on ${
-        expandDatestring(date)
-        } at ${
-        convertTo12HourTime(time)
+    var proceed = await confirm(`${
+            event == 'Clock-In'? 'Clock in': 'Clock out'
+        } ${
+            convertTo12HourTime(time, false)
+        }<br />${
+            expandDatestring(date)
         }?`);
 
     if(!proceed) return;
