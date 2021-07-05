@@ -38,9 +38,9 @@ async function submitForm(event, date, time) {
     
     var proceed = await confirm(`${
             event == 'Clock-In'? 'Clock in': 'Clock out'
-        } ${
+        } <b>${
             convertTo12HourTime(time, false)
-        }<br />${
+        }</b><br />${
             expandDatestring(date)
         }`);
 
