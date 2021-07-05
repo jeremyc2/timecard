@@ -110,7 +110,7 @@ function buildTables() {
 
         expandToggle.classList.add('toggle-expand');
 
-        expandToggle.addEventListener('click', () => {
+        titleRow.addEventListener('click', () => {
             if(weekTable.classList.contains('table-collapsed')) {
                 weekTable.classList.remove('table-collapsed');
                 weekTable.classList.add('table-expanded');

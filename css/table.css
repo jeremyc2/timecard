@@ -28,6 +28,7 @@ tr:hover {background-color: #ddd;}
 tr:first-of-type th {
   height: 40px;
   color: white;
+  cursor: pointer;
 }
 
 tr:last-of-type th {
