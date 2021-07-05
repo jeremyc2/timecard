@@ -77,7 +77,6 @@ function convertHoursToPay(hours) {
     return `$${(hours * wage).toFixed(2)}`;
 }
 
-// TODO Collapsable Week Table
 function buildTables() {
     var isFirst = true;
     for (let [week, days] of [...timesheet.weeks].reverse()) {
