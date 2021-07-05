@@ -42,7 +42,7 @@ async function submitForm(event, date, time) {
             convertTo12HourTime(time, false)
         }<br />${
             expandDatestring(date)
-        }?`);
+        }`);
 
     if(!proceed) return;
 
