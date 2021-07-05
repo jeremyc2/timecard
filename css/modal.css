@@ -69,6 +69,8 @@
 
 .modal-footer {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .micromodal-slide[aria-hidden="false"] .modal-overlay {
