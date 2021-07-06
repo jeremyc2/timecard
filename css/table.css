@@ -65,10 +65,16 @@ th {
 }
 
 @media (max-width: 500px) {
+  table {
+    width: min-content;
+    min-width: 100%;
+  }
+
   .toggle-expand {
     width: 27px;
     height: 27px;
   }
+
   td, th {
     padding: 2px;
   }

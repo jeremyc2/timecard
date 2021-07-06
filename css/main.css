@@ -96,7 +96,6 @@ body .form > * {
     }
 
     body.display-table .table {
-        padding: 20px 5px;
         gap: 10px;
     }
 
