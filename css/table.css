@@ -66,18 +66,22 @@ th {
 
 @media (max-width: 500px) {
   .toggle-expand {
-    width: 47px;
-    height: 47px;
+    width: 27px;
+    height: 27px;
   }
   td, th {
-    padding: 3px;
+    padding: 2px;
   }
 
   td, td * {
-    font-size: .8rem;
+    font-size: .75rem;
   }
 
   td sup {
     font-size: .65rem;
+  }
+
+  tr:first-of-type th {
+    height: 20px;
   }
 }
