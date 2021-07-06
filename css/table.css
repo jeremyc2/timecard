@@ -60,8 +60,8 @@ th {
   background-image: url(../images/unfold_more_white_24dp.svg);
 }
 
-.table-collapsed tr:not(tr:first-of-type, tr:last-of-type) {
-  display: none;
+.table-collapsed > tr:not(tr:first-of-type, tr:last-of-type) {
+  visibility: collapse;
 }
 
 @media (max-width: 500px) {

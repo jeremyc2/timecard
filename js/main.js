@@ -217,7 +217,6 @@ function showTimesheet() {
         timecard.innerHTML = '';
         buildTables();
         document.body.classList.add('display-table');
-        timecard.style.minWidth = `${timecard.getBoundingClientRect().width}px`;
     });
 }
 
