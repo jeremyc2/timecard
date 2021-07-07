@@ -69,25 +69,4 @@ th {
     width: min-content;
     min-width: 100%;
   }
-
-  .toggle-expand {
-    width: 27px;
-    height: 27px;
-  }
-
-  td, th {
-    padding: 2px;
-  }
-
-  td, td * {
-    font-size: .75rem;
-  }
-
-  td sup {
-    font-size: .65rem;
-  }
-
-  tr:first-of-type th {
-    height: 20px;
-  }
 }

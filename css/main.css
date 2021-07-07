@@ -91,12 +91,8 @@ body .form > * {
 }
 
 @media (max-width: 500px) {
-    * {
-        font-size: 1rem;
-    }
-
     body.display-table .table {
-        gap: 10px;
+        gap: 12px;
     }
 
     body .form > * {
