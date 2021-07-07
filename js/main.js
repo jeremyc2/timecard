@@ -1,12 +1,13 @@
 async function confirm(message) {
     const modalContent = document.querySelector('#modal-1-content'),
-        continueButton = document.querySelector('#modal-1-continue-btn');
+        continueButton = document.querySelector('#modal-1-continue-btn'),
+        cancelButton = document.querySelector('#modal-1-cancel-btn');
 
     modalContent.innerHTML = message;
 
     var proceed;
 
-    MicroModal.show('modal-1', {onClose: modal => {
+    MicroModal.show('modal-1', {onClose: () => {
             if(typeof proceed === 'undefined') {
                 proceed = false;
             }
@@ -15,6 +16,11 @@ async function confirm(message) {
 
     continueButton.addEventListener('click', () => {
         proceed = true;
+        MicroModal.close('modal-1');
+    });
+
+    cancelButton.addEventListener('click', () => {
+        proceed = false;
         MicroModal.close('modal-1');
     });
 
