@@ -69,4 +69,25 @@ th {
     width: min-content;
     min-width: 100%;
   }
+
+  .toggle-expand {
+    width: 47px;
+    height: 47px;
+  }
+
+  td, th {
+    padding: 3px;
+  }
+
+  th {
+    font-size: 1.1rem;
+  }
+
+  td, td * {
+    font-size: .85rem;
+  }
+
+  td sup {
+    font-size: .65rem;
+  }
 }
