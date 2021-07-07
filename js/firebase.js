@@ -1,4 +1,4 @@
-  // Your web app's Firebase configuration
+  // TODO https://firebase.google.com/docs/auth/web/password-auth
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
     apiKey: "AIzaSyBJg2I8xb16QiLu4S-twXm5o1L3cWf2oVQ",
