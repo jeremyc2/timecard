@@ -1,7 +1,7 @@
 {
     "author": "Jeremy Chandler",
     "short_name": "Timecard",
-    "name": "Time",
+    "name": "Timecard",
     "description": "Clock-in and Clock-out, see your hours and wages",
     "version": "0.1",
     "orientation": "portrait",
