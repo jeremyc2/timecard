@@ -39,11 +39,11 @@
         dispatcher = new SwipeEventDispatcher(window);
         
         dispatcher.on('SWIPE_LEFT', () => {
-            mainTab.click();
+            timesheetTab.click();
         });
 
         dispatcher.on('SWIPE_RIGHT', () => {
-            timesheetTab.click();
+            mainTab.click();
         });
     }
     </script>
