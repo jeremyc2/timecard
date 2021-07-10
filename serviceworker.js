@@ -3,20 +3,22 @@ const path = (new URL(self.registration.scope)).pathname;
 const version = "4.0",
       cacheName = `Timecard-V${version}`;
 
-// TODO Fill in the rest of the cache files
 const cachefiles = [
     path,
+    path + "images/icons/192.png",
+    path + "images/icons/512.png",
+    path + "images/qrcode.png",
+    path + "images/unfold_less_white_24dp.svg",
+    path + "images/unfold_more_white_24dp.svg",
+    path + "js/dateUtils.js",
+    path + "js/firebase.js",
+    path + "js/googleSheet.js",
+    path + "js/main.js",
+    path + "js/timesheet.js",
     path + "index.html",
     path + "qrcode.html",
     path + "manifest.webmanifest"
 ]
-
-const broadcast = new BroadcastChannel('retro-channel');
-broadcast.onmessage = (event) => {
-    if(event.data.type == 'REQUEST-VERSION') {
-        broadcast.postMessage({type: 'APP-VERSION', payload: version});
-    }
-}
 
 self.addEventListener("install", event => {
     self.skipWaiting();
@@ -61,7 +63,7 @@ self.addEventListener("fetch", event => {
             })
         );
     } else {
-        return;
+        return fetch(event.request);
     }
 
 });
