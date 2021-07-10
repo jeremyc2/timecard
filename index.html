@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="black"/>  
-    <!-- <link rel="manifest" href="manifest.webmanifest"> -->
+    <link rel="manifest" href="manifest.webmanifest">
     <link rel="shortcut icon" href="images/icons/512.png" type="image/png">
     <title>Timecard</title>
     <link rel="stylesheet" href="css/main.css">
@@ -25,14 +25,14 @@
 </head>
 <body>
     <script>
-    // if('serviceWorker' in navigator) {
-    //     navigator.serviceWorker
-    //             .register('serviceworker.js', {
-    //                 scope: '/timecard/'
-    //             })
-    //             .then(() => console.log("Service Worker Registered"))
-    //             .catch((error) => console.log("Service Worker Not Registered", error));
-    // }
+    if('serviceWorker' in navigator) {
+        navigator.serviceWorker
+                .register('serviceworker.js', {
+                    scope: '/timecard/'
+                })
+                .then(() => console.log("Service Worker Registered"))
+                .catch((error) => console.log("Service Worker Not Registered", error));
+    }
     if("ontouchstart" in document.documentElement) {
     window.addEventListener("load", function(event) {
             const dispatcher = new SwipeEventDispatcher(document.body);

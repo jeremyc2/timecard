@@ -14,6 +14,7 @@ const cachefiles = [
     path + "js/firebase.js",
     path + "js/googleSheet.js",
     path + "js/main.js",
+    path + "js/swipe.js",
     path + "js/timesheet.js",
     path + "index.html",
     path + "qrcode.html",
