@@ -34,16 +34,14 @@
                 .catch((error) => console.log("Service Worker Not Registered", error));
     }
     if("ontouchstart" in document.documentElement) {
-    window.addEventListener("load", function(event) {
-            const dispatcher = new SwipeEventDispatcher(document.body);
-            
-            dispatcher.on('SWIPE_LEFT', () => {
-                document.querySelector('#mainTab').click();
-            });
+        const dispatcher = new SwipeEventDispatcher(document.body);
+        
+        dispatcher.on('SWIPE_LEFT', () => {
+            document.querySelector('#mainTab').click();
+        });
 
-            dispatcher.on('SWIPE_RIGHT', () => {
-                document.querySelector('#timesheetTab').click();
-            });
+        dispatcher.on('SWIPE_RIGHT', () => {
+            document.querySelector('#timesheetTab').click();
         });
     }
     </script>
