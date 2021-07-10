@@ -23,6 +23,16 @@
     <script src="js/firebase.js" defer></script>
 </head>
 <body>
+    <script>
+    if('serviceWorker' in navigator) {
+        navigator.serviceWorker
+                .register('serviceworker.js', {
+                    scope: '/timecard/'
+                })
+                .then(() => console.log("Service Worker Registered"))
+                .catch((error) => console.log("Service Worker Not Registered", error));
+    }
+    </script>
     <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
         <div class="modal-overlay" tabindex="-1" data-micromodal-close>
             <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title" >
