@@ -33,8 +33,10 @@
                 .then(() => console.log("Service Worker Registered"))
                 .catch((error) => console.log("Service Worker Not Registered", error));
     }
+
+    var dispatcher;
     if("ontouchstart" in document.documentElement) {
-        const dispatcher = new SwipeEventDispatcher(document.body);
+        dispatcher = new SwipeEventDispatcher(document.body);
         
         dispatcher.on('SWIPE_LEFT', () => {
             document.querySelector('#mainTab').click();
