@@ -28,6 +28,10 @@ body > header > div.selected:hover {
     background-color: black;
 }
 
+body > header > #hamburger-menu {
+    display: none;
+}
+
 body > header > #sign-in {
     float: right;
     border: 1px solid white;
@@ -113,6 +117,25 @@ body .form > * {
     }
 
     body > header > div {
-        margin: 0 3px 3px 3px;
+        display: block;
+        border-radius: 0;
+        margin: 0;
+    }
+
+    body > header:not(.expand) > div:not(#hamburger-menu) {
+        display: none;
+    }
+
+    body > header > #hamburger-menu {
+        display: block;
+        height: 1.25rem;
+        background-image: url(../images/menu_white_24dp.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    body > header > #sign-in {
+        display: inline-block;
+        float: none;
     }
 }
