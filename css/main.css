@@ -28,6 +28,18 @@ body > header > div.selected:hover {
     background-color: black;
 }
 
+body > header > #sign-in {
+    float: right;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 5px;
+}
+
+#sign-in:hover {
+    background-color: #43aa8b;
+}
+
 body {
     min-width: max-content;
     margin: 0;
