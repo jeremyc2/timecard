@@ -1,15 +1,16 @@
-const menuToggle = document.querySelector('#hamburger-menu');
+const menuToggle = document.querySelector('#hamburger-menu'),
+    header = document.querySelector('body > header');
 
 function openMenu() {
-    menuToggle.parentElement.classList.add('expand');
+    header.classList.add('expand');
 }
 
 function closeMenu() {
-    menuToggle.parentElement.classList.remove('expand');
+    header.classList.remove('expand');
 }
 
 function toggleMenu() {
-    menuToggle.parentElement.classList.toggle('expand');
+    header.classList.toggle('expand');
 }
 
 document.addEventListener('wheel', () => {
@@ -17,13 +18,13 @@ document.addEventListener('wheel', () => {
 });
 
 document.addEventListener('mousedown', (e) => {
-    if(!e.path.includes(menuToggle.parentElement)) {
+    if(!e.path.includes(header)) {
         closeMenu();
     }
 });
 
 document.addEventListener('touchstart', (e) => {
-    if(!e.path.includes(menuToggle.parentElement)) {
+    if(!e.path.includes(header)) {
         closeMenu();
     }
 });

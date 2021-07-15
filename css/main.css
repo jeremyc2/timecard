@@ -33,7 +33,7 @@ body > header > div.selected:hover {
     background-color: black;
 }
 
-body > header > #hamburger-menu {
+body > header > #title-bar {
     display: none;
 }
 
@@ -127,17 +127,25 @@ body .form > * {
         margin: 0;
     }
 
-    #hamburger-menu:hover {
+    #title-bar:hover {
         background-color: transparent;
     }
 
-    body > header:not(.expand) > div:not(#hamburger-menu) {
+    body > header:not(.expand) > div:not(#title-bar) {
         display: none;
     }
 
-    body > header > #hamburger-menu {
+    body > header > #title-bar {
         display: block;
-        height: 1.25rem;
+        position: relative;
+        height: calc(1.25rem + 20px);
+        padding: 0;
+    }
+
+    #hamburger-menu {
+        height: 100%;
+        width: calc(1.25rem + 20px);
+        display: inline-block;
         background-image: url(../images/menu_white_24dp.svg);
         background-repeat: no-repeat;
         background-size: contain;
