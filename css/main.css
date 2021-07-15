@@ -139,14 +139,16 @@ body .form > * {
 
     body > header > #title-bar {
         cursor: auto;
-        display: block;
+        display: flex;
+        align-items: center;
         position: relative;
-        height: calc(1.25rem + 20px);
+        height: calc(1.25rem + 30px);
         padding: 0;
         border-bottom: solid rgba(255, 255, 255, 0.5) 1px;
     }
 
     #hamburger-menu {
+        margin-left: 10px;
         cursor: pointer;
         height: 100%;
         width: calc(1.25rem + 20px);
@@ -154,6 +156,7 @@ body .form > * {
         background-image: url(../images/menu_white_24dp.svg);
         background-repeat: no-repeat;
         background-size: contain;
+        background-position: center;
     }
 
     #title {
