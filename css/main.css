@@ -127,6 +127,10 @@ body .form > * {
         margin: 0;
     }
 
+    #hamburger-menu:hover {
+        background-color: transparent;
+    }
+
     body > header:not(.expand) > div:not(#hamburger-menu) {
         display: none;
     }
