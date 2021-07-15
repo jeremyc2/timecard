@@ -9,6 +9,7 @@ body > header {
     z-index: 5;
     background-color: #aa3333;
     border-bottom: 1px solid white;
+    background-color: hsl(357deg, 21%, 17%);
 }
 
 body > header > div {
@@ -26,11 +27,12 @@ body > header > div:hover {
 }
 
 body > header > div.selected {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(255, 255, 255, 0.65);
+    color: black;
 }
 
 body > header > div.selected:hover {
-    background-color: black;
+    background-color: white;
 }
 
 body > header > #title-bar {
@@ -141,6 +143,7 @@ body .form > * {
         position: relative;
         height: calc(1.25rem + 20px);
         padding: 0;
+        border-bottom: solid rgba(255, 255, 255, 0.5) 1px;
     }
 
     #hamburger-menu {
