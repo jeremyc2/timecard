@@ -103,7 +103,7 @@ body .form > * {
 }
 
 #submit {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgb(52, 34, 36);
     color: white;
     cursor: pointer;
     user-select: none;
