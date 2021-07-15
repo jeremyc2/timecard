@@ -153,6 +153,16 @@ body .form > * {
         background-size: contain;
     }
 
+    #title {
+        display: inline;
+        line-height: 1.25rem;
+        padding: 10px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+    }
+
     body > header > #sign-in {
         display: inline-block;
         float: none;
