@@ -21,3 +21,9 @@ document.addEventListener('mousedown', (e) => {
         closeMenu();
     }
 });
+
+document.addEventListener('touchstart', (e) => {
+    if(!e.path.includes(menuToggle.parentElement)) {
+        closeMenu();
+    }
+});
