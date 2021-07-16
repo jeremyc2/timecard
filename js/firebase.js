@@ -13,4 +13,5 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
+  firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
