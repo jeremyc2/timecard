@@ -22,6 +22,12 @@ body > header > div {
     color: white;
 }
 
+body > header > div:not(:first-child, :nth-child(2)) {
+    margin-left: 0;
+    position: relative;
+    left: -2px;
+}
+
 body > header > div:hover {
     background-color: hsla(0, 0%, 100%, 0.15);
 }
