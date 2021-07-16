@@ -199,12 +199,22 @@ function buildTables() {
         }
 
         const footerRow = document.createElement('tr'),
-            tableFooter = document.createElement('th');
+            tableFooterHours = document.createElement('th'),
+            tableFooterPay = document.createElement('th'),
+            totalDurationMinutes = totalDuration % 60,
+            totalDurationHours = Math.floor(totalDuration / 60);
 
-        tableFooter.setAttribute('colspan', 4);
-        tableFooter.innerText = convertHoursToPay(totalDuration / 60);
+        tableFooterPay.setAttribute('colspan', 2);
+        tableFooterPay.innerText = convertHoursToPay(totalDuration / 60);
 
-        footerRow.append(tableFooter);
+        tableFooterHours.setAttribute('colspan', 2);
+        tableFooterHours.innerText = `${
+            totalDurationHours.toString().padStart(2, '0')
+        }:${
+            totalDurationMinutes.toString().padStart(2, '0')
+        }`;
+
+        footerRow.append(tableFooterHours, tableFooterPay);
         weekTable.append(footerRow);
 
     }
