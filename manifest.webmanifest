@@ -21,7 +21,7 @@
     ],
     "start_url": "/timecard/",
     "scope": "/timecard/",
-    "background_color": "black",
-    "theme_color": "black",
+    "background_color": "#aa3333",
+    "theme_color": "hsl(357deg, 21%, 17%)",
     "display": "standalone"
 }
