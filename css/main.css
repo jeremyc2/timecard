@@ -7,7 +7,6 @@ body > header {
     position: sticky;
     top: 0;
     z-index: 5;
-    background-color: #aa3333;
     border-bottom: 1px solid white;
     background-color: hsl(357deg, 21%, 17%);
 }
@@ -41,6 +40,8 @@ body > header > #title-bar {
 
 body > header > #sign-in {
     float: right;
+    color: black;
+    background-color: #43aa8b;
     border: 1px solid white;
     border-radius: 6px;
     padding: 5px;
@@ -48,7 +49,7 @@ body > header > #sign-in {
 }
 
 #sign-in:hover {
-    background-color: #43aa8b;
+    background-color: hsl(162, 43%, 56%);
 }
 
 body {
