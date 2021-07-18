@@ -48,14 +48,32 @@ async function alert(message) {
     await showModal(2, message);
 }
 
-function selectEvent(eventLabel) {
-    var currentlySelected = document.querySelector('.selected-event');
+function clearEvent() {
+    const currentlySelected = document.querySelector('.selected-event'),
+        event = [...document.querySelectorAll('input[name=event]')]
+            .find(radio => radio.checked);
 
-    if(currentlySelected) {
+    if(currentlySelected && event) {
         currentlySelected.classList.remove('selected-event');
+        event.checked = false;
     }
-    
+}
+
+function clearForm() {
+    clearEvent();
+    date.value = "";
+    time.value = "";
+}
+
+function selectEvent(eventLabel) {
+    clearEvent();
     eventLabel.classList.add('selected-event');
+    eventLabel.querySelector('input').checked = true;
+
+    const now = new Date();
+
+    date.value = convertToDateString(now, true);
+    time.value = convertDateTo24HourTime(now);
 }
 
 async function submitForm(event, date, time) {
@@ -81,6 +99,7 @@ async function submitForm(event, date, time) {
         }`);
 
     if(!proceed) return;
+    clearForm();
 
     const id = uuidv4();
 
@@ -281,14 +300,9 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     timecard = document.querySelector('body .table'),
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),
-    now = new Date(),
     wage = 15;
 
 var timesheet;
-
-date.value = convertToDateString(now, true);
-
-time.value = convertDateTo24HourTime(now);
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]
