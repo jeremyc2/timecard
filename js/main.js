@@ -37,6 +37,16 @@ async function confirm(message) {
     });
 }
 
+function selectEvent(eventLabel) {
+    var currentlySelected = document.querySelector('.selected-event');
+
+    if(currentlySelected) {
+        currentlySelected.classList.remove('selected-event');
+    }
+    
+    eventLabel.classList.add('selected-event');
+}
+
 async function submitForm(event, date, time) {
     if(event == "" || event == null) return;
     if(date == "" || date == null) return;

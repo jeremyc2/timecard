@@ -99,6 +99,35 @@ body .form {
     border-radius: 20px;
 }
 
+input[type="radio"]{
+    display: none;
+}
+
+#event-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+    gap: 10px;
+    border: unset;
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+#event-toggle label {
+    cursor: pointer;
+    border: solid rgba(255, 255, 255, 0%) 20px;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, .75);
+}
+
+#event-toggle label.selected-event {
+    background-color: rgba(52, 34, 36);
+    color: white;
+}
+
 body .table {
     display: none;
 }

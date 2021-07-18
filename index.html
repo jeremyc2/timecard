@@ -70,11 +70,15 @@
     </header>
     <div class="app">
         <div class="form">
-            <div>
-                <input type="radio" id="in" name="event" value="Clock-In">
-                <label for="in">Clock-In</label><br>
-                <input type="radio" id="out" name="event" value="Clock-Out">
-                <label for="out">Clock-Out</label><br>
+            <div id="event-toggle">
+                <label for="in" onclick="selectEvent(this)">
+                    <input type="radio" id="in" name="event" value="Clock-In">
+                    <span>Clock-In</span>
+                </label>
+                <label for="out" onclick="selectEvent(this)">
+                    <input type="radio" id="out" name="event" value="Clock-Out">
+                    <span>Clock-Out</span>
+                </label>
             </div>
             <input type="date">
             <input type="time">
