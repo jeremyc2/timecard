@@ -66,14 +66,19 @@ function clearForm() {
 }
 
 function selectEvent(eventLabel) {
+
+    if(date.value == "" && time.value == "") {
+        const now = new Date();
+
+        date.value = convertToDateString(now, true);
+        time.value = convertDateTo24HourTime(now);
+
+        timeEntry.classList.add('open');
+    }
+
     clearEvent();
     eventLabel.classList.add('selected-event');
     eventLabel.querySelector('input').checked = true;
-
-    const now = new Date();
-
-    date.value = convertToDateString(now, true);
-    time.value = convertDateTo24HourTime(now);
 }
 
 async function submitForm(event, date, time) {
@@ -297,6 +302,7 @@ function hideTimesheet() {
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
+    timeEntry = document.querySelector('body .form'),
     timecard = document.querySelector('body .table'),
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),

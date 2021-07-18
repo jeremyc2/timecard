@@ -156,6 +156,14 @@ body .form > * {
     width: -webkit-fill-available;
 }
 
+body .form:not(.open) .date-input {
+    display: none;
+}
+
+body .form:not(.open) .time-input {
+    display: none;
+}
+
 body .section-title {
     font-size: 1.75rem;
     font-weight: bold;
