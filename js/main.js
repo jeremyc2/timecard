@@ -63,6 +63,8 @@ function clearForm() {
     clearEvent();
     date.value = "";
     time.value = "";
+
+    timeEntry.classList.remove('open');
 }
 
 function selectEvent(eventLabel) {
