@@ -85,7 +85,7 @@ function selectEvent(eventLabel) {
 
 async function submitForm(event, date, time) {
     if(event == "" || event == null) {
-        alert('You must select either <b>Check-In</b> or <b>Check-Out</b>.');
+        alert('You must select either <b>Clock-In</b> or <b>Clock-Out</b>.');
         return;
     };
     if(date == "" || date == null)  {
@@ -317,7 +317,7 @@ document.querySelector('#submit').addEventListener('click', function() {
         .find(radio => radio.checked);
 
     if(event == null) {
-        alert('You must select either<br /><b>Check-In</b> or <b>Check-Out</b>.');
+        alert('You must select either<br /><b>Clock-In</b> or <b>Clock-Out</b>.');
         return;
     }
 
