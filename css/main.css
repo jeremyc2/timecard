@@ -116,8 +116,8 @@ input[type="radio"]{
 
 #event-toggle label {
     cursor: pointer;
-    border: solid rgba(255, 255, 255, 0%) 20px;
     text-align: center;
+    border: solid rgba(255, 255, 255, 0%) 20px;
     border-radius: 20px;
     padding: 10px;
     background-color: rgba(255, 255, 255, .75);
@@ -173,7 +173,10 @@ body .form > * {
 
     body .form > * {
         border: solid rgba(255, 255, 255, 0%) 7px;
-        padding: 10px;
+    }
+
+    #event-toggle label {
+        border: solid rgba(255, 255, 255, 0%) 7px;
     }
 
     body > header > div {
