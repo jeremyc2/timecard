@@ -1,27 +1,29 @@
-async function confirm(message) {
-    const modalContent = document.querySelector('#modal-1-content'),
-        continueButton = document.querySelector('#modal-1-continue-btn'),
-        cancelButton = document.querySelector('#modal-1-cancel-btn');
+async function showModal(id, message) {
+    const modalContent = document.querySelector(`#modal-${id}-content`),
+        continueButton = document.querySelector(`#modal-${id}-continue-btn`),
+        cancelButton = document.querySelector(`#modal-${id}-cancel-btn`);
 
     modalContent.innerHTML = message;
 
     var proceed;
 
-    MicroModal.show('modal-1', {onClose: () => {
+    MicroModal.show(`modal-${id}`, {onClose: () => {
             if(typeof proceed === 'undefined') {
                 proceed = false;
             }
         }
     });
 
-    continueButton.addEventListener('click', () => {
-        proceed = true;
-        MicroModal.close('modal-1');
-    });
+    if(continueButton) {
+        continueButton.addEventListener('click', () => {
+            proceed = true;
+            MicroModal.close(`modal-${id}`);
+        });
+    }
 
     cancelButton.addEventListener('click', () => {
         proceed = false;
-        MicroModal.close('modal-1');
+        MicroModal.close(`modal-${id}`);
     });
 
     return new Promise((resolve) => {
@@ -37,6 +39,15 @@ async function confirm(message) {
     });
 }
 
+async function confirm(message) {
+    var response = await showModal(1, message);
+    return response;
+}
+
+async function alert(message) {
+    await showModal(2, message);
+}
+
 function selectEvent(eventLabel) {
     var currentlySelected = document.querySelector('.selected-event');
 
@@ -49,12 +60,15 @@ function selectEvent(eventLabel) {
 
 async function submitForm(event, date, time) {
     if(event == "" || event == null) {
+        alert('You must select either <b>Check-In</b> or <b>Check-Out</b>.');
         return;
     };
     if(date == "" || date == null)  {
+        alert(`You must select a date.`);
         return;
     };
     if(time == "" || time == null)  {
+        alert(`You must select a time.`);
         return;
     };
     
@@ -280,7 +294,10 @@ document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]
         .find(radio => radio.checked);
 
-    if(event == null) return;
+    if(event == null) {
+        alert('You must select either<br /><b>Check-In</b> or <b>Check-Out</b>.');
+        return;
+    }
 
     submitForm(event.value, date.value, time.value);
 });

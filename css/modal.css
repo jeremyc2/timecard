@@ -99,6 +99,10 @@
     text-align: center;
 }
 
+#modal-2-content{
+    text-align: center;
+}
+
 @keyframes mmfadeIn {
     from { opacity: 0; }
       to { opacity: 1; }
