@@ -1,6 +1,6 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "5.9",
+const version = "6.0",
       cacheName = `Timecard-V${version}`;
 
 const cachefiles = [

@@ -48,9 +48,15 @@ function selectEvent(eventLabel) {
 }
 
 async function submitForm(event, date, time) {
-    if(event == "" || event == null) return;
-    if(date == "" || date == null) return;
-    if(time == "" || time == null) return;
+    if(event == "" || event == null) {
+        return;
+    };
+    if(date == "" || date == null)  {
+        return;
+    };
+    if(time == "" || time == null)  {
+        return;
+    };
     
     var proceed = await confirm(`${
             event == 'Clock-In'? 'Clock in': 'Clock out'
@@ -240,7 +246,7 @@ function showTimesheet() {
             return {id: entry.id, ...entry.data()};
         });
         timesheet = new Timesheet(events);
-        timecard.innerHTML = '';
+        timecard.innerHTML = "<div class=\"section-title\">Timecard</div>";
         buildTables();
         document.body.classList.add('display-table');
     });
@@ -251,7 +257,7 @@ function hideTimesheet() {
     timesheetTab.classList.remove('selected');
     mainTab.classList.add('selected');
 
-    timecard.innerHTML = '';
+    timecard.innerHTML = "<div class=\"section-title\">Timecard</div>";
     document.body.classList.remove('display-table');
 }
 

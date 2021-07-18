@@ -84,7 +84,7 @@ body {
 
 .app {
     padding: 10px;
-    margin-top: calc(1.25rem + 30px);
+    margin-top: calc(1.25rem + 50px);
 }
 
 body .form {
@@ -95,7 +95,7 @@ body .form {
     margin: 0 auto;
     justify-content: center;
     padding: 20px;
-    background: rgb(255 255 255 / 40%);
+    background: rgba(255, 255, 255, .5);
     border-radius: 20px;
 }
 
@@ -117,9 +117,9 @@ input[type="radio"]{
 #event-toggle label {
     cursor: pointer;
     text-align: center;
-    border: solid rgba(255, 255, 255, 0%) 20px;
+    border: solid rgba(255, 255, 255, 0%) 7px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 13px 10px;
     background-color: rgba(255, 255, 255, .75);
 }
 
@@ -141,19 +141,29 @@ body.display-table .table {
     max-width: fit-content;
     flex-direction: column;
     justify-content: center;
-    gap: 35px;
-    background: rgba(255, 255, 255, .40);
+    gap: 20px;
+    background: rgba(255, 255, 255, .5);
     border-radius: 20px;
     margin: 0 auto;
-    padding: 40px 10px;
+    padding: 20px;
 }
 
 body .form > * {
-    border: solid rgba(255, 255, 255, 0%) 20px;
+    border: solid rgba(255, 255, 255, 0%) 7px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 13px 10px;
     background-color: rgba(255, 255, 255, .75);
     width: -webkit-fill-available;
+}
+
+body .section-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: transparent;
+    padding: 0;
+    border-width: 0;
+    text-decoration: underline;
 }
 
 #submit {
@@ -169,15 +179,7 @@ body .form > * {
 
 @media (max-width: 800px) {
     body.display-table .table {
-        gap: 12px;
-    }
-
-    body .form > * {
-        border: solid rgba(255, 255, 255, 0%) 7px;
-    }
-
-    #event-toggle label {
-        border: solid rgba(255, 255, 255, 0%) 7px;
+        gap: 10px;
     }
 
     body > header > div {
