@@ -147,11 +147,33 @@ body.display-table .table {
 }
 
 body.display-table .table > div.content {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
+}
+
+#table-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+#expand-all, #collapse-all {
+    border: 1px solid white;
+    cursor: pointer;
+    margin: 10px 0;
+    display: inline-block;
+    position: relative;
+    background: #43aa8b;
+    padding: 5px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+#expand-all:hover, #collapse-all:hover {
+    background-color: hsl(162, 43%, 56%);
 }
 
 body .form > * {
