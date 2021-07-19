@@ -161,6 +161,7 @@ body.display-table .table > div.content {
 }
 
 #expand-all, #collapse-all {
+    color: white;
     border: 1px solid white;
     cursor: pointer;
     margin: 10px 0;
