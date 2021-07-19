@@ -276,6 +276,18 @@ function buildTables() {
     }
 }
 
+function expandAllTimesheet() {
+    document.querySelectorAll('.table-collapsed .toggle-expand').forEach(
+        button => button.click()
+    );
+}
+
+function collapseAllTimesheet() {
+    document.querySelectorAll('.table-expanded .toggle-expand').forEach(
+        button => button.click()
+    );
+}
+
 function showTimesheet() {
 
     mainTab.classList.remove('selected');
@@ -286,7 +298,7 @@ function showTimesheet() {
             return {id: entry.id, ...entry.data()};
         });
         timesheet = new Timesheet(events);
-        timecard.innerHTML = "<div class=\"section-title\">Timecard</div>";
+        timecard.innerHTML = "";
         buildTables();
         document.body.classList.add('display-table');
     });
@@ -297,7 +309,7 @@ function hideTimesheet() {
     timesheetTab.classList.remove('selected');
     mainTab.classList.add('selected');
 
-    timecard.innerHTML = "<div class=\"section-title\">Timecard</div>";
+    timecard.innerHTML = "";
     document.body.classList.remove('display-table');
 }
 
@@ -305,7 +317,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
     timeEntry = document.querySelector('body .form'),
-    timecard = document.querySelector('body .table'),
+    timecard = document.querySelector('body .table > div.content'),
     mainTab = document.querySelector('#mainTab'),
     timesheetTab = document.querySelector('#timesheetTab'),
     wage = 15;

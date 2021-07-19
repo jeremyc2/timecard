@@ -13,6 +13,7 @@ body > header {
 }
 
 #title {
+    white-space: nowrap;
     display: inline;
     line-height: 1.25rem;
     position: absolute;
@@ -137,15 +138,20 @@ body.display-table .form {
 }
 
 body.display-table .table {
-    display: flex;
+    display: block;
     max-width: fit-content;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
     background: rgba(255, 255, 255, .5);
     border-radius: 20px;
     margin: 0 auto;
     padding: 20px;
+}
+
+body.display-table .table > div.content {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
 }
 
 body .form > * {
@@ -186,7 +192,7 @@ body .section-title {
 }
 
 @media (max-width: 800px) {
-    body.display-table .table {
+    body.display-table .table > div.content {
         gap: 10px;
     }
 
