@@ -200,7 +200,7 @@ body .section-title {
     background-color: transparent;
     padding: 0;
     border-width: 0;
-    text-decoration: underline;
+    text-shadow: 1.5px 1.5px #aa3333
 }
 
 #submit {
