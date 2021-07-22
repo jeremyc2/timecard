@@ -88,16 +88,20 @@ body {
     margin-top: calc(1.25rem + 50px);
 }
 
+body .section {
+    background: rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: 0.4s forwards fade-in;
+}
+
 body .form {
     display: flex;
     gap: 20px;
     flex-direction: column;
     width: fit-content;
-    margin: 0 auto;
     justify-content: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, .5);
-    border-radius: 20px;
 }
 
 input[type="radio"]{
@@ -140,10 +144,6 @@ body.display-table .form {
 body.display-table .table {
     display: block;
     max-width: fit-content;
-    background: rgba(255, 255, 255, .5);
-    border-radius: 20px;
-    margin: 0 auto;
-    padding: 20px;
 }
 
 body.display-table .table > div.content {
@@ -262,5 +262,23 @@ body .section-title {
         float: none;
         padding: 10px;
         margin: 5px 15px;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
