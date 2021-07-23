@@ -16,7 +16,7 @@ const cachefiles = [
     path + "js/main.js",
     path + "js/micromodal.min.js",
     path + "js/swipe.js",
-    path + "js/timesheet.js",
+    path + "js/timecard.js",
     path + "index.html",
     path + "qrcode.html",
     path + "manifest.webmanifest"

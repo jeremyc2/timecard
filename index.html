@@ -7,7 +7,7 @@
     <meta name="theme-color" content="black"/>  
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="shortcut icon" href="images/icons/favicon.png" type="image/png">
-    <title>Timecard</title>
+    <title>My Time</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/table.css">
@@ -15,7 +15,7 @@
     <script src="js/swipe.js"></script>
     <script src="js/menu.js" defer></script>
     <script src="js/dateUtils.js" defer></script>
-    <script src="js/timesheet.js" defer></script>
+    <script src="js/timecard.js" defer></script>
     <script src="js/googleSheet.js" defer></script>
     <script src="js/main.js" defer></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -40,11 +40,11 @@
         dispatcher = new SwipeEventDispatcher(window);
         
         dispatcher.on('SWIPE_LEFT', () => {
-            timesheetTab.click();
+            timecardTab.click();
         });
 
         dispatcher.on('SWIPE_RIGHT', () => {
-            mainTab.click();
+            timeEntryTab.click();
         });
     }
     </script>
@@ -74,18 +74,18 @@
         <div id="title-bar">
             <div id="hamburger-menu" onclick="toggleMenu()"></div>
         </div>
-        <div id="mainTab" data-section="main" data-section-id="main-section" 
+        <div id="timeEntryTab" data-section="Time Entry" data-section-id="timeentry-section" 
             onclick="selectTab(this);closeMenu()">Time Entry</div>
-        <div id="timesheetTab" data-section="timesheet" data-section-id="timesheet-section" 
-            onclick="loadTimesheet();selectTab(this);closeMenu()">Timecard</div>
-        <div id="sign-in" data-section="signin" data-section-id="login-section" 
+        <div id="timecardTab" data-section="Timecard" data-section-id="timecard-section" 
+            onclick="loadTimecard();selectTab(this);closeMenu()">Timecard</div>
+        <div id="sign-in" data-section="Sign In" data-section-id="login-section" 
             onclick="selectTab(this);closeMenu()">Sign in</div>
     </header>
     <div class="app">
         <div id="login-section" class="section">
 
         </div>
-        <div id="main-section" class="form section">
+        <div id="timeentry-section" class="form section">
             <div class="section-title">Time Entry</div>
             <div id="event-toggle">
                 <label for="in" onclick="selectEvent(this)">
@@ -101,11 +101,11 @@
             <input class="time-input" type="time">
             <button id="submit">Submit</button>
         </div>
-        <div id="timesheet-section" class="table section">
+        <div id="timecard-section" class="table section">
             <div class="section-title">Timecard</div>
             <div id="table-controls">
-                <div id="expand-all" onclick="expandAllTimesheet()">Expand All</div>
-                <div id="collapse-all" onclick="collapseAllTimesheet()">Collapse All</div>
+                <div id="expand-all" onclick="expandAllTimecard()">Expand All</div>
+                <div id="collapse-all" onclick="collapseAllTimecard()">Collapse All</div>
             </div>
             <div class="content"></div>
         </div>

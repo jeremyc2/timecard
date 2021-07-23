@@ -64,7 +64,7 @@ function clearForm() {
     date.value = "";
     time.value = "";
 
-    timeEntry.classList.remove('open');
+    timeEntrySection.classList.remove('open');
 }
 
 function selectEvent(eventLabel) {
@@ -75,7 +75,7 @@ function selectEvent(eventLabel) {
         date.value = convertToDateString(now, true);
         time.value = convertDateTo24HourTime(now);
 
-        timeEntry.classList.add('open');
+        timeEntrySection.classList.add('open');
     }
 
     clearEvent();
@@ -141,7 +141,7 @@ function convertHoursToPay(hours) {
 
 function buildTables() {
     var isFirst = true;
-    for (let [week, days] of [...timesheet.weeks].reverse()) {
+    for (let [week, days] of [...timecard.weeks].reverse()) {
         const weekTable = document.createElement('table'),
             titleRow = document.createElement('tr'),
             tableTitle = document.createElement('th'),
@@ -186,7 +186,7 @@ function buildTables() {
 
         headerRow.append(headerDay, headerClockIn, headerClockOut, headerDuration);
         weekTable.append(headerRow);
-        timecard.append(weekTable);
+        timecardDiv.append(weekTable);
 
         var row, tdDay, tdClockIn, tdClockOut, tdDuration, clockIn, clockOut;
 
@@ -276,13 +276,13 @@ function buildTables() {
     }
 }
 
-function expandAllTimesheet() {
+function expandAllTimecard() {
     document.querySelectorAll('.table-collapsed .toggle-expand').forEach(
         button => button.click()
     );
 }
 
-function collapseAllTimesheet() {
+function collapseAllTimecard() {
     document.querySelectorAll('.table-expanded .toggle-expand').forEach(
         button => button.click()
     );
@@ -302,26 +302,20 @@ function selectTab(tab) {
     }
     document.querySelector(`#${sectionID}`).classList.add('selected');
 
-    history.pushState(null, null, `?page=${tab.getAttribute('data-section')}`);
+    const sectionName = tab.getAttribute('data-section');
+
+    document.title = `My Time - ${sectionName}`;
+    history.pushState(null, null, `?page=${sectionName}`);
 }
 
-function loadTimesheet() {
-    timecard.innerHTML = "";
-    const dbSetup = new Promise((resolve) => {
-        var interval = setInterval(() => {
-            if(typeof db !== "undefined") {
-                clearInterval(interval);
-                resolve();
-            }
-        }, 10);
-    });
-
+function loadTimecard() {
+    timecardDiv.innerHTML = "";
     dbSetup.then(() => {
         db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
             let events = querySnapshot.docs.map(entry => {
                 return {id: entry.id, ...entry.data()};
             });
-            timesheet = new Timesheet(events);
+            timecard = new Timecard(events);
             buildTables();
         });
     });
@@ -330,13 +324,22 @@ function loadTimesheet() {
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
-    timeEntry = document.querySelector('#main-section'),
-    timecard = document.querySelector('#timesheet-section > div.content'),
+    timeEntrySection = document.querySelector('#timeentry-section'),
+    timecardDiv = document.querySelector('#timecard-section > div.content'),
     wage = 15;
 
-var timesheet,
+const dbSetup = new Promise((resolve) => {
+    var interval = setInterval(() => {
+        if(typeof db !== "undefined") {
+            clearInterval(interval);
+            resolve();
+        }
+    }, 10);
+});
+
+var timecard,
     queryParams = new URLSearchParams(window.location.search),
-    section = queryParams.get('page') || 'signin';
+    section = queryParams.get('page') || 'Sign In';
 
 document.querySelector(`header [data-section="${section}"]`).click();
 

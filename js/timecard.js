@@ -1,4 +1,4 @@
-class Timesheet {
+class Timecard {
 
     weeks;
 
