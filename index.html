@@ -74,12 +74,17 @@
         <div id="title-bar">
             <div id="hamburger-menu" onclick="toggleMenu()"></div>
         </div>
-        <div id="mainTab" class="selected" onclick="hideTimesheet();closeMenu()">Time Entry</div>
-        <div id="timesheetTab" onclick="showTimesheet();closeMenu()">Timecard</div>
+        <div id="mainTab" data-section-id="main-section" class="selected" 
+            onclick="selectTab(this);closeMenu()">Time Entry</div>
+        <div id="timesheetTab" data-section-id="timesheet-section" 
+            onclick="loadTimesheet();selectTab(this);closeMenu()">Timecard</div>
         <div id="sign-in" onclick="closeMenu()">Sign in</div>
     </header>
     <div class="app">
-        <div class="form section">
+        <div id="login-section" class="section">
+
+        </div>
+        <div id="main-section" class="selected form section">
             <div class="section-title">Time Entry</div>
             <div id="event-toggle">
                 <label for="in" onclick="selectEvent(this)">
@@ -95,7 +100,7 @@
             <input class="time-input" type="time">
             <button id="submit">Submit</button>
         </div>
-        <div class="table section">
+        <div id="timesheet-section" class="table section">
             <div class="section-title">Timecard</div>
             <div id="table-controls">
                 <div id="expand-all" onclick="expandAllTimesheet()">Expand All</div>

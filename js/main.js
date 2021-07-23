@@ -288,29 +288,30 @@ function collapseAllTimesheet() {
     );
 }
 
-function showTimesheet() {
+function selectTab(tab) {
+    const selectedTab = document.querySelector('header div.selected');
+    if(selectedTab) {
+        selectedTab.classList.remove('selected');
+    }
+    tab.classList.add('selected');
 
-    mainTab.classList.remove('selected');
-    timesheetTab.classList.add('selected');
+    const sectionID = tab.getAttribute('data-section-id'),
+        selectedSection = document.querySelector('body div.section.selected');
+    if(selectedSection) {
+        selectedSection.classList.remove('selected');
+    }
+    document.querySelector(`#${sectionID}`).classList.add('selected');
+}
 
+function loadTimesheet() {
+    timecard.innerHTML = "";
     db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
         let events = querySnapshot.docs.map(entry => {
             return {id: entry.id, ...entry.data()};
         });
         timesheet = new Timesheet(events);
-        timecard.innerHTML = "";
         buildTables();
-        document.body.classList.add('display-table');
     });
-}
-
-function hideTimesheet() {
-
-    timesheetTab.classList.remove('selected');
-    mainTab.classList.add('selected');
-
-    timecard.innerHTML = "";
-    document.body.classList.remove('display-table');
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
@@ -318,8 +319,6 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     time = document.querySelector('input[type=time]'),
     timeEntry = document.querySelector('body .form'),
     timecard = document.querySelector('body .table > div.content'),
-    mainTab = document.querySelector('#mainTab'),
-    timesheetTab = document.querySelector('#timesheetTab'),
     wage = 15;
 
 var timesheet;
