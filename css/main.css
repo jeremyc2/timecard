@@ -94,7 +94,7 @@ body .section {
     border-radius: 20px;
     margin: 0 auto;
     padding: 20px;
-    animation: 0.4s forwards fade-in;
+    animation: 0.4s fade-in;
 }
 
 body .form {
@@ -103,6 +103,10 @@ body .form {
     flex-direction: column;
     width: fit-content;
     justify-content: center;
+}
+
+body .form.open {
+    animation: 0s fade-in, 0.4s fade-in;
 }
 
 input[type="radio"]{
@@ -186,11 +190,7 @@ body .form > * {
     width: -webkit-fill-available;
 }
 
-body .form:not(.open) .date-input {
-    display: none;
-}
-
-body .form:not(.open) .time-input {
+body .form:not(.open) :is(.date-input, .time-input) {
     display: none;
 }
 
@@ -263,15 +263,6 @@ body .section-title {
         float: none;
         padding: 10px;
         margin: 5px 15px;
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
     }
 }
 
