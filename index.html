@@ -78,7 +78,8 @@
             onclick="selectTab(this);closeMenu()">Time Entry</div>
         <div id="timesheetTab" data-section-id="timesheet-section" 
             onclick="loadTimesheet();selectTab(this);closeMenu()">Timecard</div>
-        <div id="sign-in" onclick="closeMenu()">Sign in</div>
+        <div id="sign-in" data-section-id="login-section" 
+            onclick="selectTab(this);closeMenu()">Sign in</div>
     </header>
     <div class="app">
         <div id="login-section" class="section">
