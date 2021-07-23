@@ -301,11 +301,6 @@ function selectTab(tab) {
         selectedSection.classList.remove('selected');
     }
     document.querySelector(`#${sectionID}`).classList.add('selected');
-
-    const sectionName = tab.getAttribute('data-section');
-
-    document.title = `My Time - ${sectionName}`;
-    history.pushState(null, null, `?page=${sectionName}`);
 }
 
 function loadTimecard() {
@@ -338,10 +333,15 @@ const dbSetup = new Promise((resolve) => {
 });
 
 var timecard,
-    queryParams = new URLSearchParams(window.location.search),
-    section = queryParams.get('page') || 'Sign In';
+    params = decodeURI(window.location.search) || '?page=Sign In',
+    tab = document.querySelector(`header a[href="${params}"]`);
 
-document.querySelector(`header [data-section="${section}"]`).click();
+if(tab.id === 'timecardTab') {
+    loadTimecard();
+}
+
+closeMenu();
+selectTab(tab);
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]

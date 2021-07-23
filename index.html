@@ -74,16 +74,19 @@
         <div id="title-bar">
             <div id="hamburger-menu" onclick="toggleMenu()"></div>
         </div>
-        <div id="timeEntryTab" data-section="Time Entry" data-section-id="timeentry-section" 
-            onclick="selectTab(this);closeMenu()">Time Entry</div>
-        <div id="timecardTab" data-section="Timecard" data-section-id="timecard-section" 
-            onclick="loadTimecard();selectTab(this);closeMenu()">Timecard</div>
-        <div id="sign-in" data-section="Sign In" data-section-id="login-section" 
-            onclick="selectTab(this);closeMenu()">Sign in</div>
+        <a href="?page=Time Entry" id="timeEntryTab" data-section-id="timeentry-section" >
+            Time Entry
+        </a>
+        <a href="?page=Timecard" id="timecardTab" data-section-id="timecard-section">
+            Timecard
+        </a>
+        <a href="?page=Sign In" id="sign-in" data-section-id="login-section">
+            Sign in
+        </a>
     </header>
     <div class="app">
         <div id="login-section" class="section">
-
+            <div class="section-title">Sign In</div>
         </div>
         <div id="timeentry-section" class="form section">
             <div class="section-title">Time Entry</div>
