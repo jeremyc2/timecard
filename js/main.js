@@ -301,27 +301,44 @@ function selectTab(tab) {
         selectedSection.classList.remove('selected');
     }
     document.querySelector(`#${sectionID}`).classList.add('selected');
+
+    history.pushState(null, null, `?page=${tab.getAttribute('data-section')}`);
 }
 
 function loadTimesheet() {
     timecard.innerHTML = "";
-    db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
-        let events = querySnapshot.docs.map(entry => {
-            return {id: entry.id, ...entry.data()};
+    const dbSetup = new Promise((resolve) => {
+        var interval = setInterval(() => {
+            if(typeof db !== "undefined") {
+                clearInterval(interval);
+                resolve();
+            }
+        }, 10);
+    });
+
+    dbSetup.then(() => {
+        db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
+            let events = querySnapshot.docs.map(entry => {
+                return {id: entry.id, ...entry.data()};
+            });
+            timesheet = new Timesheet(events);
+            buildTables();
         });
-        timesheet = new Timesheet(events);
-        buildTables();
     });
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
-    timeEntry = document.querySelector('body .form'),
-    timecard = document.querySelector('body .table > div.content'),
+    timeEntry = document.querySelector('#main-section'),
+    timecard = document.querySelector('#timesheet-section > div.content'),
     wage = 15;
 
-var timesheet;
+var timesheet,
+    queryParams = new URLSearchParams(window.location.search),
+    section = queryParams.get('page') || 'signin';
+
+document.querySelector(`header [data-section="${section}"]`).click();
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]

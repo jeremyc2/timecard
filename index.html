@@ -74,18 +74,18 @@
         <div id="title-bar">
             <div id="hamburger-menu" onclick="toggleMenu()"></div>
         </div>
-        <div id="mainTab" data-section-id="main-section" class="selected" 
+        <div id="mainTab" data-section="main" data-section-id="main-section" 
             onclick="selectTab(this);closeMenu()">Time Entry</div>
-        <div id="timesheetTab" data-section-id="timesheet-section" 
+        <div id="timesheetTab" data-section="timesheet" data-section-id="timesheet-section" 
             onclick="loadTimesheet();selectTab(this);closeMenu()">Timecard</div>
-        <div id="sign-in" data-section-id="login-section" 
+        <div id="sign-in" data-section="signin" data-section-id="login-section" 
             onclick="selectTab(this);closeMenu()">Sign in</div>
     </header>
     <div class="app">
         <div id="login-section" class="section">
 
         </div>
-        <div id="main-section" class="selected form section">
+        <div id="main-section" class="form section">
             <div class="section-title">Time Entry</div>
             <div id="event-toggle">
                 <label for="in" onclick="selectEvent(this)">
