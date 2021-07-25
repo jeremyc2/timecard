@@ -336,6 +336,8 @@ var timecard,
     params = decodeURI(window.location.search) || '?page=Sign In',
     tab = document.querySelector(`header a[href="${params}"]`);
 
+document.title = `My Time - ${tab.getAttribute('data-section')}`;
+
 if(tab.id === 'timecardTab') {
     loadTimecard();
 }
