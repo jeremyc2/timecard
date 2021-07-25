@@ -29,7 +29,7 @@
     if('serviceWorker' in navigator) {
         navigator.serviceWorker
                 .register('serviceworker.js', {
-                    scope: '/timecard/'
+                    scope: location.pathname
                 })
                 .then(() => console.log("Service Worker Registered"))
                 .catch((error) => console.log("Service Worker Not Registered", error));
