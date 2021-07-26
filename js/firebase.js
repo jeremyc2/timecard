@@ -18,14 +18,23 @@
   firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
 
+  var currentUser;
+  firebase.auth().onAuthStateChanged(user => {
+    if(user && user.uid != currentUser?.uid) {
+      currentUser = user;
+      console.log(`${currentUser.displayName} is signed in.`);
+    } else {
+      currentUser = null;
+      console.log('No user signed in');
+    }
+  });
+
   var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
   var uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-        // User successfully signed in.
-
-        console.log(authResult.user.displayName);
+        console.log(`${authResult.user.displayName} successfully signed in.`);
 
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
