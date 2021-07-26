@@ -22,6 +22,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js" defer></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="js/firebase.js" defer></script>
 </head>
 <body>
@@ -29,7 +32,7 @@
     if('serviceWorker' in navigator) {
         navigator.serviceWorker
                 .register('serviceworker.js', {
-                    scope: location.pathname
+                    scope: location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1)
                 })
                 .then(() => console.log("Service Worker Registered"))
                 .catch((error) => console.log("Service Worker Not Registered", error));
@@ -87,6 +90,9 @@
     <div class="app">
         <div id="login-section" class="section">
             <div class="section-title">Sign In</div>
+            <div id="firebaseui-auth-container">
+
+            </div>
         </div>
         <div id="timeentry-section" class="form section">
             <div class="section-title">Time Entry</div>
