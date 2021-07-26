@@ -323,6 +323,8 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     timecardDiv = document.querySelector('#timecard-section > div.content'),
     wage = 15;
 
+var timecard;
+
 const dbSetup = new Promise((resolve) => {
     var interval = setInterval(() => {
         if(typeof db !== "undefined") {
@@ -332,27 +334,35 @@ const dbSetup = new Promise((resolve) => {
     }, 10);
 });
 
-var timecard,
-    params = decodeURI(window.location.search) || '?page=Sign In',
-    tab = document.querySelector(`header a[href="${params}"]`);
+document.addEventListener('unauthenticated', () => {
+    var tab = document.querySelector('#sign-in');
+    document.title = `My Time - ${tab.getAttribute('data-section')}`;
+    closeMenu();
+    selectTab(tab);
+});
 
-document.title = `My Time - ${tab.getAttribute('data-section')}`;
-
-if(tab.id === 'timecardTab') {
-    loadTimecard();
-}
-
-closeMenu();
-selectTab(tab);
-
-document.querySelector('#submit').addEventListener('click', function() {
-    const event = [...document.querySelectorAll('input[name=event]')]
-        .find(radio => radio.checked);
-
-    if(event == null) {
-        alert('You must select either<br /><b>Clock-In</b> or <b>Clock-Out</b>.');
-        return;
+document.addEventListener('authenticated', () => {
+    var params = decodeURI(window.location.search) || '?page=Time Entry',
+        tab = document.querySelector(`header a[href="${params}"]`);
+    
+    document.title = `My Time - ${tab.getAttribute('data-section')}`;
+    
+    if(tab.id === 'timecardTab') {
+        loadTimecard();
     }
-
-    submitForm(event.value, date.value, time.value);
+    
+    closeMenu();
+    selectTab(tab);
+    
+    document.querySelector('#submit').addEventListener('click', function() {
+        const event = [...document.querySelectorAll('input[name=event]')]
+            .find(radio => radio.checked);
+    
+        if(event == null) {
+            alert('You must select either<br /><b>Clock-In</b> or <b>Clock-Out</b>.');
+            return;
+        }
+    
+        submitForm(event.value, date.value, time.value);
+    });
 });

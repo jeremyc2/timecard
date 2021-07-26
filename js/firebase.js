@@ -1,4 +1,3 @@
-  // TODO https://firebase.google.com/docs/auth/web/firebaseui
   // TODO https://medium.com/firebase-developers/patterns-for-security-with-firebase-per-user-permissions-for-cloud-firestore-be67ee8edc4a
   // TODO https://medium.com/firebase-developers/patterns-for-security-with-firebase-group-based-permissions-for-cloud-firestore-72859cdec8f6
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -23,11 +22,21 @@
     if(user && user.uid != currentUser?.uid) {
       currentUser = user;
       console.log(`${currentUser.displayName} is signed in.`);
+      document.dispatchEvent(new Event('authenticated'));
     } else {
       currentUser = null;
+      document.dispatchEvent(new Event('unauthenticated'));
       console.log('No user signed in');
     }
   });
+
+  function signout() {
+    firebase.auth().signOut().then(() => {
+      console.log('Sign-out successful.')
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
 
   var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
