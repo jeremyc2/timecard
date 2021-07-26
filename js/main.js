@@ -289,7 +289,9 @@ function collapseAllTimecard() {
 }
 
 function selectTab(tab) {
-    const selectedTab = document.querySelector('header div.selected');
+    document.title = `My Time - ${tab.getAttribute('data-section')}`;
+
+    const selectedTab = document.querySelector('header *.selected');
     if(selectedTab) {
         selectedTab.classList.remove('selected');
     }
@@ -316,6 +318,18 @@ function loadTimecard() {
     });
 }
 
+function loadPage() {
+    var params = decodeURI(window.location.search) || '?page=Time Entry',
+        tab = document.querySelector(`header a[href="${params}"]`);
+        
+    if(tab.id === 'timecardTab') {
+        loadTimecard();
+    }
+    
+    closeMenu();
+    selectTab(tab);
+}
+
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
@@ -324,6 +338,18 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     wage = 15;
 
 var timecard;
+
+document.querySelector('#submit').addEventListener('click', function() {
+    const event = [...document.querySelectorAll('input[name=event]')]
+        .find(radio => radio.checked);
+
+    if(event == null) {
+        alert('You must select either<br /><b>Clock-In</b> or <b>Clock-Out</b>.');
+        return;
+    }
+
+    submitForm(event.value, date.value, time.value);
+});
 
 const dbSetup = new Promise((resolve) => {
     var interval = setInterval(() => {
@@ -336,33 +362,10 @@ const dbSetup = new Promise((resolve) => {
 
 document.addEventListener('unauthenticated', () => {
     var tab = document.querySelector('#sign-in');
-    document.title = `My Time - ${tab.getAttribute('data-section')}`;
     closeMenu();
     selectTab(tab);
 });
 
 document.addEventListener('authenticated', () => {
-    var params = decodeURI(window.location.search) || '?page=Time Entry',
-        tab = document.querySelector(`header a[href="${params}"]`);
-    
-    document.title = `My Time - ${tab.getAttribute('data-section')}`;
-    
-    if(tab.id === 'timecardTab') {
-        loadTimecard();
-    }
-    
-    closeMenu();
-    selectTab(tab);
-    
-    document.querySelector('#submit').addEventListener('click', function() {
-        const event = [...document.querySelectorAll('input[name=event]')]
-            .find(radio => radio.checked);
-    
-        if(event == null) {
-            alert('You must select either<br /><b>Clock-In</b> or <b>Clock-Out</b>.');
-            return;
-        }
-    
-        submitForm(event.value, date.value, time.value);
-    });
+    loadPage();
 });

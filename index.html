@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="shortcut icon" href="images/icons/favicon.png" type="image/png">
     <title>My Time</title>
-    
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/table.css">
@@ -88,9 +88,9 @@
         <a href="?page=Timecard" id="timecardTab" data-section="Timecard" data-section-id="timecard-section">
             Timecard
         </a>
-        <a href="?page=Sign In" id="sign-in" data-section="Sign In" data-section-id="login-section">
+        <div id="sign-in" onclick="closeMenu();showSigninWidget();selectTab(this);" data-section="Sign In" data-section-id="login-section">
             Sign in
-        </a>
+        </div>
     </header>
     <div class="app">
         <div id="login-section" class="section">

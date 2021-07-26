@@ -1,6 +1,10 @@
   // TODO https://medium.com/firebase-developers/patterns-for-security-with-firebase-per-user-permissions-for-cloud-firestore-be67ee8edc4a
   // TODO https://medium.com/firebase-developers/patterns-for-security-with-firebase-group-based-permissions-for-cloud-firestore-72859cdec8f6
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  function showSigninWidget() {
+    ui.start('#firebaseui-auth-container', uiConfig);
+  }
+  
   var firebaseConfig = {
     apiKey: "AIzaSyBJg2I8xb16QiLu4S-twXm5o1L3cWf2oVQ",
     authDomain: "timecard-95463.firebaseapp.com",
@@ -26,7 +30,9 @@
     } else {
       currentUser = null;
       document.dispatchEvent(new Event('unauthenticated'));
-      console.log('No user signed in');
+      console.log('No user signed in.');
+
+      showSigninWidget()
     }
   });
 
@@ -44,10 +50,10 @@
     callbacks: {
       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
         console.log(`${authResult.user.displayName} successfully signed in.`);
-
+        document.dispatchEvent(new Event('authenticated'));
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
-        return true;
+        return false;
       },
       uiShown: function() {
         // The widget is rendered.
@@ -69,5 +75,3 @@
     // Privacy policy url.
     // privacyPolicyUrl: '<your-privacy-policy-url>'
   };
-
-  ui.start('#firebaseui-auth-container', uiConfig);
