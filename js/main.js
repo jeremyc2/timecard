@@ -84,6 +84,11 @@ function selectEvent(eventLabel) {
 }
 
 function getSubcollectionRef(uid) {
+
+    if(uid == null) {
+        throw "Invalid UID";
+    }
+
     return db.collection("users").doc(uid).collection("events");
 }
 
@@ -115,7 +120,7 @@ async function submitForm(event, date, time) {
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
-    getSubcollectionRef(/* uid */).doc(id).set({
+    getSubcollectionRef(currentUser.uid).doc(id).set({
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         event,
         date, 
@@ -312,7 +317,7 @@ function selectTab(tab) {
 function loadTimecard() {
     timecardDiv.innerHTML = "";
     dbSetup.then(() => {
-        getSubcollectionRef(/* uid */).orderBy("date").orderBy("time").get().then(querySnapshot => {
+        getSubcollectionRef(currentUser.uid).orderBy("date").orderBy("time").get().then(querySnapshot => {
             let events = querySnapshot.docs.map(entry => {
                 return {id: entry.id, ...entry.data()};
             });
