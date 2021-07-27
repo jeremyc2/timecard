@@ -1,5 +1,5 @@
-  // TODO https://medium.com/firebase-developers/patterns-for-security-with-firebase-per-user-permissions-for-cloud-firestore-be67ee8edc4a
-  // TODO https://medium.com/firebase-developers/patterns-for-security-with-firebase-group-based-permissions-for-cloud-firestore-72859cdec8f6
+  // https://medium.com/firebase-developers/patterns-for-security-with-firebase-per-user-permissions-for-cloud-firestore-be67ee8edc4a
+  // https://medium.com/firebase-developers/patterns-for-security-with-firebase-group-based-permissions-for-cloud-firestore-72859cdec8f6
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   function showSigninWidget() {
     ui.start('#firebaseui-auth-container', uiConfig);
