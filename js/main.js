@@ -83,6 +83,10 @@ function selectEvent(eventLabel) {
     eventLabel.querySelector('input').checked = true;
 }
 
+function getSubcollectionRef(uid) {
+    return db.collection("users").doc(uid).collection("events");
+}
+
 async function submitForm(event, date, time) {
     if(event == "" || event == null) {
         alert('You must select either <b>Clock-In</b> or <b>Clock-Out</b>.');
@@ -111,7 +115,7 @@ async function submitForm(event, date, time) {
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
-    db.collection("timecard").doc(id).set({
+    getSubcollectionRef(/* uid */).doc(id).set({
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         event,
         date, 
@@ -308,7 +312,7 @@ function selectTab(tab) {
 function loadTimecard() {
     timecardDiv.innerHTML = "";
     dbSetup.then(() => {
-        db.collection("timecard").orderBy("date").orderBy("time").get().then(querySnapshot => {
+        getSubcollectionRef(/* uid */).orderBy("date").orderBy("time").get().then(querySnapshot => {
             let events = querySnapshot.docs.map(entry => {
                 return {id: entry.id, ...entry.data()};
             });
