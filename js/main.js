@@ -346,7 +346,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     timecardDiv = document.querySelector('#timecard-section > div.content'),
     wage = 15;
 
-var timecard, isAdmin = false;
+var timecard, isAdmin;
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]

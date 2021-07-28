@@ -5,12 +5,12 @@
   }
 
   function setActiveUid(uid) {
-    isAdmin = true;
-
-    if(!uid) {
-      localStorage.removeItem('activeUid');
-    } else {
-      localStorage.setItem('activeUid', uid);
+    if(isAdmin) {
+      if(!uid) {
+        localStorage.removeItem('activeUid');
+      } else {
+        localStorage.setItem('activeUid', uid);
+      }
     }
   }
 
@@ -37,10 +37,12 @@
   var currentUser;
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user;
-    isAdmin = false;
     if(user) {
+      // TODO Change isAdmin to what it is from the database and dispatch event in callback
+      isAdmin = true;
       document.dispatchEvent(new Event('authenticated'));
     } else {
+      isAdmin = false;
       document.dispatchEvent(new Event('unauthenticated'));
     }
   });
