@@ -38,11 +38,15 @@
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user;
     if(user) {
-      // TODO Change isAdmin to what it is from the database and dispatch event in callback
-      getUsersCollectionRef().get().then(() => {
-        isAdmin = true;
-        console.log("Admin Access Granted");
-      });
+      try {
+        getUsersCollectionRef().get().then(() => {
+          isAdmin = true;
+          console.log("Admin Access Granted");
+        });    
+      } catch (error) {
+        console.log("No Admin Access for this user");
+      }
+
       document.dispatchEvent(new Event('authenticated'));
     } else {
       isAdmin = false;
