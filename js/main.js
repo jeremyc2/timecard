@@ -83,6 +83,10 @@ function selectEvent(eventLabel) {
     eventLabel.querySelector('input').checked = true;
 }
 
+function getUsersCollectionRef() {
+    return db.collection("users");
+}
+
 function getSubcollectionRef(uid) {
 
     if(uid == null) {

@@ -39,6 +39,9 @@
     currentUser = user;
     if(user) {
       // TODO Change isAdmin to what it is from the database and dispatch event in callback
+      getUsersCollectionRef().get().then(querySnapshot => {
+        debugger
+      });
       isAdmin = true;
       document.dispatchEvent(new Event('authenticated'));
     } else {
