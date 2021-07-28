@@ -48,7 +48,7 @@
 
   var uiConfig = {
     callbacks: {
-      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      signInSuccessWithAuthResult: function() {
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
         return false;
