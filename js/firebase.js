@@ -35,6 +35,7 @@
     if(user) {
       document.dispatchEvent(new Event('authenticated'));
     } else {
+      isAdmin = false;
       document.dispatchEvent(new Event('unauthenticated'));
     }
   });
