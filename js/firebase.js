@@ -6,6 +6,10 @@
     
   }
 
+  function getAuthenticatedUser() {
+    return firebase.auth().currentUser;
+  }
+
   function showSigninWidget() {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
@@ -26,17 +30,12 @@
   firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
 
-  var authenticatedUser;
   firebase.auth().onAuthStateChanged(user => {
-    if(user && user.uid != authenticatedUser?.uid) {
-      authenticatedUser = user;
-      console.log(`${authenticatedUser.displayName} is signed in.`);
+    if(user && user.uid != getAuthenticatedUser()?.uid) {
       document.dispatchEvent(new Event('authenticated'));
     } else {
-      authenticatedUser = null;
       document.dispatchEvent(new Event('unauthenticated'));
       console.log('No user signed in.');
-
       showSigninWidget()
     }
   });
