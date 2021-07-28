@@ -120,7 +120,7 @@ async function submitForm(event, date, time) {
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
-    getSubcollectionRef((getActiveUser() || currentUser).uid).doc(id).set({
+    getSubcollectionRef(getActiveUid() || currentUser.uid).doc(id).set({
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         event,
         date, 
@@ -317,7 +317,7 @@ function selectTab(tab) {
 function loadTimecard() {
     timecardDiv.innerHTML = "";
     dbSetup.then(() => {
-        getSubcollectionRef((getActiveUser() || currentUser).uid).orderBy("date").orderBy("time").get().then(querySnapshot => {
+        getSubcollectionRef(getActiveUid() || currentUser.uid).orderBy("date").orderBy("time").get().then(querySnapshot => {
             let events = querySnapshot.docs.map(entry => {
                 return {id: entry.id, ...entry.data()};
             });
@@ -346,7 +346,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     timecardDiv = document.querySelector('#timecard-section > div.content'),
     wage = 15;
 
-var timecard;
+var timecard, isAdmin = false;
 
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]

@@ -1,9 +1,11 @@
-  function getActiveUser() {
-
+  function getActiveUid() {
+    if(isAdmin) {
+      return localStorage.getItem('activeUid');
+    }
   }
 
-  function setActiveUser(user) {
-    
+  function setActiveUid(uid) {
+    localStorage.setItem('activeUid', uid);
   }
 
   function showSigninWidget() {
