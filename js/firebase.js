@@ -6,7 +6,12 @@
 
   function setActiveUid(uid) {
     isAdmin = true;
-    localStorage.setItem('activeUid', uid);
+
+    if(!uid) {
+      localStorage.removeItem('activeUid');
+    } else {
+      localStorage.setItem('activeUid', uid);
+    }
   }
 
   function showSigninWidget() {
