@@ -5,6 +5,7 @@
   }
 
   function setActiveUid(uid) {
+    isAdmin = true;
     localStorage.setItem('activeUid', uid);
   }
 
