@@ -37,10 +37,10 @@
   var currentUser;
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user;
+    isAdmin = false;
     if(user) {
       document.dispatchEvent(new Event('authenticated'));
     } else {
-      isAdmin = false;
       document.dispatchEvent(new Event('unauthenticated'));
     }
   });
