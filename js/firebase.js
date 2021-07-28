@@ -1,4 +1,11 @@
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  function getActiveUser() {
+
+  }
+
+  function setActiveUser(user) {
+    
+  }
+
   function showSigninWidget() {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
@@ -19,14 +26,14 @@
   firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
 
-  var currentUser;
+  var authenticatedUser;
   firebase.auth().onAuthStateChanged(user => {
-    if(user && user.uid != currentUser?.uid) {
-      currentUser = user;
-      console.log(`${currentUser.displayName} is signed in.`);
+    if(user && user.uid != authenticatedUser?.uid) {
+      authenticatedUser = user;
+      console.log(`${authenticatedUser.displayName} is signed in.`);
       document.dispatchEvent(new Event('authenticated'));
     } else {
-      currentUser = null;
+      authenticatedUser = null;
       document.dispatchEvent(new Event('unauthenticated'));
       console.log('No user signed in.');
 

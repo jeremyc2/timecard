@@ -120,7 +120,7 @@ async function submitForm(event, date, time) {
     const id = uuidv4();
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data#web-v8
-    getSubcollectionRef(currentUser.uid).doc(id).set({
+    getSubcollectionRef((getActiveUser() || authenticatedUser).uid).doc(id).set({
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         event,
         date, 
@@ -317,7 +317,7 @@ function selectTab(tab) {
 function loadTimecard() {
     timecardDiv.innerHTML = "";
     dbSetup.then(() => {
-        getSubcollectionRef(currentUser.uid).orderBy("date").orderBy("time").get().then(querySnapshot => {
+        getSubcollectionRef((getActiveUser() || authenticatedUser).uid).orderBy("date").orderBy("time").get().then(querySnapshot => {
             let events = querySnapshot.docs.map(entry => {
                 return {id: entry.id, ...entry.data()};
             });
