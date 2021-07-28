@@ -6,10 +6,6 @@
     
   }
 
-  function getAuthenticatedUser() {
-    return firebase.auth().currentUser;
-  }
-
   function showSigninWidget() {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
@@ -30,13 +26,13 @@
   firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
 
+  var currentUser;
   firebase.auth().onAuthStateChanged(user => {
-    if(user && user.uid != getAuthenticatedUser()?.uid) {
+    currentUser = user;
+    if(user) {
       document.dispatchEvent(new Event('authenticated'));
     } else {
       document.dispatchEvent(new Event('unauthenticated'));
-      console.log('No user signed in.');
-      showSigninWidget()
     }
   });
 
@@ -53,8 +49,6 @@
   var uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-        console.log(`${authResult.user.displayName} successfully signed in.`);
-        document.dispatchEvent(new Event('authenticated'));
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
         return false;
