@@ -88,16 +88,12 @@
         <a href="?page=Timecard" id="timecardTab" data-section="Timecard" data-section-id="timecard-section">
             Timecard
         </a>
-        <div id="sign-in" onclick="closeMenu();showSigninWidget();selectTab(this);" data-section="Sign In" data-section-id="login-section">
-            Sign in
-        </div>
+        <div id="sign-in" onclick="signInButtonClickHandler()" data-section="Sign In" data-section-id="login-section"></div>
     </header>
     <div class="app">
         <div id="login-section" class="section">
             <div class="section-title">Sign In</div>
-            <div id="firebaseui-auth-container">
-
-            </div>
+            <div id="firebaseui-auth-container"></div>
         </div>
         <div id="timeentry-section" class="form section">
             <div class="section-title">Time Entry</div>

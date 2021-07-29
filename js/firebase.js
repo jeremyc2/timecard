@@ -40,6 +40,8 @@
     isAdmin = undefined;
     if(user) {
 
+      signInButton.classList.add('sign-out');
+
       const displayName = user.displayName,
             email = user.email,
             photoURL = user.photoURL;
@@ -71,11 +73,11 @@
 
       document.dispatchEvent(new Event('authenticated'));
     } else {
+      signInButton.classList.remove('sign-out');
       document.dispatchEvent(new Event('unauthenticated'));
     }
   });
 
-  // TODO Add signout button
   function signout() {
     firebase.auth().signOut().then(() => {
       console.log('Sign-out successful.')

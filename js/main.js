@@ -333,11 +333,22 @@ function loadPage() {
     selectTab(tab);
 }
 
+function signInButtonClickHandler() {
+    if(signInButton.classList.contains('sign-out')) {
+        signout();
+    } else {
+        closeMenu();
+        showSigninWidget();
+        selectTab(signInButton);
+    }
+}
+
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
     timeEntrySection = document.querySelector('#timeentry-section'),
     timecardDiv = document.querySelector('#timecard-section > div.content'),
+    signInButton = document.querySelector('#sign-in'),
     wage = 15;
 
 var timecard, isAdmin;
@@ -365,9 +376,8 @@ const dbSetup = new Promise((resolve) => {
 
 document.addEventListener('unauthenticated', () => {
     showSigninWidget();
-    var tab = document.querySelector('#sign-in');
     closeMenu();
-    selectTab(tab);
+    selectTab(signInButton);
 });
 
 document.addEventListener('authenticated', () => {

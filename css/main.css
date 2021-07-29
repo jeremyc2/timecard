@@ -63,13 +63,24 @@ body > header > #title-bar {
     display: none;
 }
 
+body > header > #sign-in::before {
+    content: 'Sign in'
+}
+
+body > header > #sign-in.sign-out::before {
+    content: 'Sign out'
+}
+
 body > header > #sign-in {
     float: right;
-    color: black;
     background-color: #43aa8b;
     border-radius: 6px;
     padding: 5px;
     margin: 10px;
+}
+
+body > header > #sign-in.sign-out {
+    background-color: hsl(0deg 100% 44%);
 }
 
 #sign-in:hover {
