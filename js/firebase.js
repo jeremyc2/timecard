@@ -39,6 +39,9 @@
     currentUser = user;
     isAdmin = false;
     if(user) {
+
+      // TODO Write to user profile
+
       try {
         getUsersCollectionRef().get().then(querySnapshot => {
           isAdmin = true;
