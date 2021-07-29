@@ -34,13 +34,17 @@
   firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
 
-  var currentUser;
+  var currentUser, usersList;
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user;
+    isAdmin = false;
     if(user) {
       try {
-        getUsersCollectionRef().get().then(() => {
+        getUsersCollectionRef().get().then(querySnapshot => {
           isAdmin = true;
+          usersList = querySnapshot.docs.map(entry => {
+              return {id: entry.id, ...entry.data()};
+          });
           console.log("Admin Access Granted");
         });    
       } catch (error) {
@@ -49,7 +53,6 @@
 
       document.dispatchEvent(new Event('authenticated'));
     } else {
-      isAdmin = false;
       document.dispatchEvent(new Event('unauthenticated'));
     }
   });
