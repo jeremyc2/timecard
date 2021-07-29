@@ -37,14 +37,14 @@
   var currentUser;
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user;
-    isAdmin = false;
+    isAdmin = undefined;
     if(user) {
 
       const displayName = user.displayName,
             email = user.email,
             photoURL = user.photoURL;
 
-      getUsersCollectionRef().doc(user.uid).set({
+      getUsersCollectionRef().doc(user.uid).update({
           displayName,
           email,
           photoURL
@@ -56,17 +56,16 @@
           console.error("Error updating profile: ", error);
       });
 
-      try {
-        getUsersCollectionRef().get().then(querySnapshot => {
-          isAdmin = true;
-          let users = querySnapshot.docs.map(entry => {
-              return {id: entry.id, ...entry.data()};
-          });
-          console.log("Admin Access Granted", users);
-        });    
-      } catch (error) {
+      getUsersCollectionRef().get().then(querySnapshot => {
+        isAdmin = true;
+        let users = querySnapshot.docs.map(entry => {
+            return {id: entry.id, ...entry.data()};
+        });
+        console.log("Admin Access Granted", users);
+      }).catch(() => {
+        isAdmin = false;
         console.log("No Admin Access for this user");
-      }
+      });
 
       document.dispatchEvent(new Event('authenticated'));
     } else {

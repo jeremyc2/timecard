@@ -356,7 +356,7 @@ document.querySelector('#submit').addEventListener('click', function() {
 
 const dbSetup = new Promise((resolve) => {
     var interval = setInterval(() => {
-        if(typeof db !== "undefined") {
+        if(typeof db !== "undefined" && typeof isAdmin !== "undefined") {
             clearInterval(interval);
             resolve();
         }
