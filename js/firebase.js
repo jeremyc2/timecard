@@ -62,9 +62,11 @@
             return {id: entry.id, ...entry.data()};
         });
         console.log("Admin Access Granted", users);
+        // TODO Build Admin UI for selecting user as active uid
       }).catch(() => {
         isAdmin = false;
         console.log("No Admin Access for this user");
+        // TODO Remove Admin UI
       });
 
       document.dispatchEvent(new Event('authenticated'));
@@ -73,6 +75,7 @@
     }
   });
 
+  // TODO Add signout button
   function signout() {
     firebase.auth().signOut().then(() => {
       console.log('Sign-out successful.')
