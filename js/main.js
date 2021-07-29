@@ -134,17 +134,7 @@ async function submitForm(event, date, time) {
         console.log("Document successfully written!");
     })
     .catch((error) => {
-
         console.error("Error writing document: ", error);
-
-        var data = {
-            'entry.1767489953': id,
-            'entry.173797170': event,
-            'entry.1820923996': date,
-            'entry.1826000596': time,
-        };
-
-        sendToGoogleSheets(formURL, data);
     });
 }
 

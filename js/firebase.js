@@ -40,7 +40,21 @@
     isAdmin = false;
     if(user) {
 
-      // TODO Write to user profile
+      const displayName = user.displayName,
+            email = user.email,
+            photoURL = user.photoURL;
+
+      getUsersCollectionRef().doc(user.uid).set({
+          displayName,
+          email,
+          photoURL
+      })
+      .then(() => {
+          console.log("Profile successfully updated!");
+      })
+      .catch((error) => {
+          console.error("Error updating profile: ", error);
+      });
 
       try {
         getUsersCollectionRef().get().then(querySnapshot => {
