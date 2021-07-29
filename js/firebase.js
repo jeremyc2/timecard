@@ -34,7 +34,7 @@
   firebase.firestore().settings({ experimentalForceLongPolling: true });
   var db = firebase.firestore();
 
-  var currentUser, usersList;
+  var currentUser;
   firebase.auth().onAuthStateChanged(user => {
     currentUser = user;
     isAdmin = false;
@@ -42,10 +42,10 @@
       try {
         getUsersCollectionRef().get().then(querySnapshot => {
           isAdmin = true;
-          usersList = querySnapshot.docs.map(entry => {
+          let users = querySnapshot.docs.map(entry => {
               return {id: entry.id, ...entry.data()};
           });
-          console.log("Admin Access Granted");
+          console.log("Admin Access Granted", users);
         });    
       } catch (error) {
         console.log("No Admin Access for this user");
