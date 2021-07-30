@@ -13,10 +13,6 @@
       }
     }
   }
-
-  function showSigninWidget() {
-    ui.start('#firebaseui-auth-container', uiConfig);
-  }
   
   var firebaseConfig = {
     apiKey: "AIzaSyBJg2I8xb16QiLu4S-twXm5o1L3cWf2oVQ",
@@ -86,36 +82,18 @@
     });
   }
 
-  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  var provider = new firebase.auth.GoogleAuthProvider();
 
-  var uiConfig = {
-    callbacks: {
-      signInSuccessWithAuthResult: function() {
-        // Return type determines whether we continue the redirect automatically
-        // or whether we leave that to developer to handle.
-        return false;
-      },
-      signInFailure: function(error) {
-        console.log("Auth Error:", error);
-        alert("Sign-In Error");
-      },
-      uiShown: function() {
-        // The widget is rendered.
-      }
-    },
-    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-    signInFlow: 'popup',
-    signInOptions: [
-      // Leave the lines as is for the providers you want to offer your users.
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-      // firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      // firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      // firebase.auth.PhoneAuthProvider.PROVIDER_ID
-    ],
-    // Terms of service url.
-    // tosUrl: '<your-tos-url>',
-    // Privacy policy url.
-    // privacyPolicyUrl: '<your-privacy-policy-url>'
-  };
+  function signInWithPopup() {
+    firebase.auth()
+    .signInWithPopup(provider)
+    .then((/*result*/) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // var token = result.credential.accessToken;
+      // The signed-in user info.
+      // var user = result.user;
+    }).catch((error) => {
+      // Handle Errors here.
+      console.error(error);
+    });
+  }

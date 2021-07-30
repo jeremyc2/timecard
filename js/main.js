@@ -338,7 +338,7 @@ function signInButtonClickHandler() {
         signout();
     } else {
         closeMenu();
-        showSigninWidget();
+        signInWithPopup();
         selectTab(signInButton);
     }
 }
@@ -375,7 +375,6 @@ const dbSetup = new Promise((resolve) => {
 });
 
 document.addEventListener('unauthenticated', () => {
-    showSigninWidget();
     closeMenu();
     selectTab(signInButton);
 });
