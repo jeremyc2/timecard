@@ -45,12 +45,12 @@
       const displayName = user.displayName,
             email = user.email,
             photoURL = user.photoURL;
-
-      getUsersCollectionRef().doc(user.uid).update({
+            
+      getUsersCollectionRef().doc(user.uid).set({
           displayName,
           email,
           photoURL
-      })
+      }, {merge: true})
       .then(() => {
           console.log("Profile successfully updated!");
       })
