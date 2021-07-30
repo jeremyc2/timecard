@@ -15,7 +15,6 @@
   }
 
   function showSigninWidget() {
-    ui.reset();
     ui.start('#firebaseui-auth-container', uiConfig);
   }
   
