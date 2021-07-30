@@ -97,6 +97,7 @@
       },
       signInFailure: function(error) {
         console.log("Auth Error:", error);
+        alert("Sign-In Error");
       },
       uiShown: function() {
         // The widget is rendered.
