@@ -95,6 +95,9 @@
         // or whether we leave that to developer to handle.
         return false;
       },
+      signInFailure: function(error) {
+        console.log("Auth Error:", error);
+      },
       uiShown: function() {
         // The widget is rendered.
       }
