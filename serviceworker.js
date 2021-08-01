@@ -1,6 +1,6 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "10.6",
+const version = "11.0",
       cacheName = `Timecard-V${version}`;
 
 const cachefiles = [
@@ -13,6 +13,7 @@ const cachefiles = [
     path + "images/unfold_more_white_24dp.svg",
     path + "js/dateUtils.js",
     path + "js/firebase.js",
+    path + "js/firebaseui.js",
     path + "js/googleSheet.js",
     path + "js/main.js",
     path + "js/micromodal.min.js",
