@@ -31,8 +31,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-firebase.firestore().settings({ experimentalForceLongPolling: true });
 var db = firebase.firestore();
+db.settings({ experimentalForceLongPolling: true });
 
 var currentUser;
 firebase.auth().onAuthStateChanged(user => {
