@@ -279,7 +279,7 @@ body .section-title {
         background-position: center;
     }
 
-    body > header > #sign-in {
+    body > header > :is(#admin-controls, #sign-in) {
         display: inline-block;
         float: none;
         padding: 10px;
