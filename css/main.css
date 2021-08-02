@@ -63,6 +63,14 @@ body > header > #title-bar {
     display: none;
 }
 
+body > header > #admin-controls {
+    background-color: hsl(14deg, 100%, 57%);
+}
+
+body > header > #sign-in {
+    background-color: #43aa8b;
+}
+
 body > header > #sign-in::before {
     content: 'Sign in'
 }
@@ -71,9 +79,8 @@ body > header > #sign-in.sign-out::before {
     content: 'Sign out'
 }
 
-body > header > #sign-in {
+body > header > :is(#admin-controls, #sign-in) {
     float: right;
-    background-color: #43aa8b;
     border-radius: 6px;
     padding: 5px;
     margin: 10px;
@@ -85,6 +92,10 @@ body > header > #sign-in.sign-out {
 
 #sign-in:hover {
     background-color: hsl(162, 43%, 56%);
+}
+
+#admin-controls:hover {
+    background-color: hsl(14deg, 100%, 65%);
 }
 
 body {
