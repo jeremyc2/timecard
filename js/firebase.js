@@ -64,10 +64,12 @@ firebase.auth().onAuthStateChanged(user => {
           return {id: entry.id, ...entry.data()};
       });
       console.log("Admin Access Granted", users);
+      document.body.classList.add('admin');
       // TODO Build Admin UI for selecting user as active uid
     }).catch(() => {
       isAdmin = false;
       console.log("No Admin Access for this user");
+      document.body.classList.remove('admin');
       // TODO Remove Admin UI
     });
 
