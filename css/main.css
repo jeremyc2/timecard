@@ -63,30 +63,39 @@ body > header > #title-bar {
     display: none;
 }
 
-body > header > #admin-controls {
+body > header .header-buttons {
+    position: absolute;
+    right: 0;
+}
+
+body > header #admin-controls {
     background-color: hsl(14deg, 100%, 57%);
 }
 
-body > header > #sign-in {
+body > header #sign-in {
     background-color: #43aa8b;
 }
 
-body > header > #sign-in::before {
+body > header #sign-in::before {
     content: 'Sign in'
 }
 
-body > header > #sign-in.sign-out::before {
+body > header #sign-in.sign-out::before {
     content: 'Sign out'
 }
 
-body > header > :is(#admin-controls, #sign-in) {
-    float: right;
+body > header :is(#admin-controls, #sign-in) {
+
+    display: inline;
     border-radius: 6px;
     padding: 5px;
-    margin: 10px;
 }
 
-body > header > #sign-in.sign-out {
+body:not(.admin) > header #admin-controls {
+    display: none !important;
+}
+
+body > header #sign-in.sign-out {
     background-color: hsl(0deg 100% 44%);
 }
 
@@ -279,11 +288,13 @@ body .section-title {
         background-position: center;
     }
 
-    body > header > :is(#admin-controls, #sign-in) {
+    body > header .header-buttons {
+        position: unset;
+    }
+
+    body > header :is(#admin-controls, #sign-in) {
         display: inline-block;
-        float: none;
         padding: 10px;
-        margin: 5px 15px;
     }
 }
 
