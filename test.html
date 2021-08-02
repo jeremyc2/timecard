@@ -8,20 +8,34 @@
     <style>
         body {
             margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .content {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
         }
 
         .user-card {
             display: grid;
+            cursor: pointer;
             grid-template-columns: 100px 1fr;
             grid-template-rows: repeat(2, 50px);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+              0 2px 2px rgba(0,0,0,0.11), 
+              0 4px 4px rgba(0,0,0,0.11), 
+              0 6px 8px rgba(0,0,0,0.11),
+              0 8px 16px rgba(0,0,0,0.11);
+        }
+
+        .user-card:hover {
+            background-color: #D8D8D8;
         }
 
         .user-card > div {
             display: flex;
-            align-self: center;
-        }
-
-        .user-card img {
             height: 100%;
         }
 
@@ -29,11 +43,20 @@
             grid-area: 1 / 1 / 3 / 2;
         }
 
+        .user-card > div:nth-child(1) > img {
+            border-radius: 50%;
+            margin: 10px 5px;
+        }
+
         .user-card > div:nth-child(2) {
+            padding-right: 10px;
+            align-items: flex-end;
             grid-area: 1 / 2 / 2 / 3;
         }
 
         .user-card > div:nth-child(3) {
+            padding-right: 10px;
+            align-items: flex-start;
             grid-area: 2 / 2 / 3 / 3;
         }
     </style>
@@ -48,7 +71,18 @@
                 Jeremy Chandler
             </div>
             <div>
-                goldenmeso@gmail.com
+                thisisasuperlongemailandalsoabadexample@gmail.com
+            </div>
+        </div>
+        <div class="user-card">
+            <div>
+                <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+            </div>
+            <div>
+                Jeremy Chandler
+            </div>
+            <div>
+                jeremychandler94@gmail.com
             </div>
         </div>
         <div class="user-card">
@@ -70,7 +104,7 @@
                 Jeremy Chandler
             </div>
             <div>
-                goldenmeso@gmail.com
+                goldenmeso1@gmail.com
             </div>
         </div>
         <div class="user-card">
@@ -81,7 +115,7 @@
                 Jeremy Chandler
             </div>
             <div>
-                goldenmeso@gmail.com
+                goldenmeso2@gmail.com
             </div>
         </div>
         <div class="user-card">
@@ -92,18 +126,7 @@
                 Jeremy Chandler
             </div>
             <div>
-                goldenmeso@gmail.com
-            </div>
-        </div>
-        <div class="user-card">
-            <div>
-                <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
-            </div>
-            <div>
-                Jeremy Chandler
-            </div>
-            <div>
-                goldenmeso@gmail.com
+                goldenmeso3@gmail.com
             </div>
         </div>
     </div>
