@@ -348,6 +348,7 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
     time = document.querySelector('input[type=time]'),
     timeEntrySection = document.querySelector('#timeentry-section'),
     timecardDiv = document.querySelector('#timecard-section > div.content'),
+    adminButton = document.querySelector('#admin-controls'),
     signInButton = document.querySelector('#sign-in'),
     wage = 15;
 

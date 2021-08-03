@@ -1,10 +1,14 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "11.1",
+const version = "11.5",
       cacheName = `Timecard-V${version}`;
 
 const cachefiles = [
     path,
+    path + "css/admin.css",
+    path + "css/main.css",
+    path + "css/modal.css",
+    path + "css/table.css",
     path + "images/icons/192.png",
     path + "images/icons/512.png",
     path + "images/qrcode.png",

@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="images/icons/favicon.png" type="image/png">
     <title>My Time</title>
 
+    <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/table.css">
@@ -90,7 +91,7 @@
             Timecard
         </a>
         <div class="header-buttons">
-            <div id="admin-controls" onclick="adminControlsClickHandler()">Admin</div>
+            <div id="admin-controls" onclick="adminControlsClickHandler()" data-section="Admin" data-section-id="admin-section">Admin</div>
             <div id="sign-in" onclick="signInButtonClickHandler()" data-section="Sign In" data-section-id="login-section"></div>
         </div>
     </header>
@@ -98,6 +99,77 @@
         <div id="login-section" class="section">
             <div class="section-title">Sign In</div>
             <div id="firebaseui-auth-container"></div>
+        </div>
+        <div id="admin-section" class="section">
+            <div class="section-title">Application Users</div>
+            <div class="users">
+                <div class="user-card">
+                    <div>
+                        <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+                    </div>
+                    <div>
+                        Jeremy Chandler
+                    </div>
+                    <div>
+                        thisisasuperlongemailandalsoabadexample@gmail.com
+                    </div>
+                </div>
+                <div class="user-card">
+                    <div>
+                        <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+                    </div>
+                    <div>
+                        Jeremy Chandler
+                    </div>
+                    <div>
+                        jeremychandler94@gmail.com
+                    </div>
+                </div>
+                <div class="user-card">
+                    <div>
+                        <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+                    </div>
+                    <div>
+                        Jeremy Chandler
+                    </div>
+                    <div>
+                        goldenmeso@gmail.com
+                    </div>
+                </div>
+                <div class="user-card">
+                    <div>
+                        <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+                    </div>
+                    <div>
+                        Jeremy Chandler
+                    </div>
+                    <div>
+                        goldenmeso1@gmail.com
+                    </div>
+                </div>
+                <div class="user-card">
+                    <div>
+                        <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+                    </div>
+                    <div>
+                        Jeremy Chandler
+                    </div>
+                    <div>
+                        goldenmeso2@gmail.com
+                    </div>
+                </div>
+                <div class="user-card">
+                    <div>
+                        <img src="https://lh3.googleusercontent.com/a-/AOh14GgN_nF3DLf15Q47JC5NZKUbJDD4pRIAEE8NnsDE5Ik=s96-c" alt="Profile Pic">
+                    </div>
+                    <div>
+                        Jeremy Chandler
+                    </div>
+                    <div>
+                        goldenmeso3@gmail.com
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="timeentry-section" class="form section">
             <div class="section-title">Time Entry</div>
