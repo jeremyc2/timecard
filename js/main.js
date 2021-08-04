@@ -366,6 +366,17 @@ const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuV
 
 var timecard, isAdmin;
 
+document.querySelectorAll('.header-section-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (!(e.metaKey || e.ctrlKey)){
+            var page = this.getAttribute('data-section');
+            history.pushState(null, page, `?page=${page}`);
+            loadPage();
+            e.preventDefault(); 
+        }
+    });
+});
+
 document.querySelector('#submit').addEventListener('click', function() {
     const event = [...document.querySelectorAll('input[name=event]')]
         .find(radio => radio.checked);
