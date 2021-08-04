@@ -9,6 +9,12 @@ function clearUsersDiv() {
     usersDiv.innerHTML = '';
 }
 
+function selectUser(id, displayName) {
+    setActiveUid(id);
+    alert(`${displayName} selected`);
+    loadPage();
+}
+
 function appendUserView(id, isAdmin, photoURL, displayName, email) {
 
     const userCard = document.createElement('div'),
@@ -18,6 +24,7 @@ function appendUserView(id, isAdmin, photoURL, displayName, email) {
         profileImg = document.createElement('img');
 
     userCard.setAttribute('data-id', id);
+    userCard.addEventListener('click', () => selectUser(id, displayName));
 
     userCard.classList.add('user-card');
     profileImg.src = photoURL;

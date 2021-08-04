@@ -392,6 +392,4 @@ document.addEventListener('unauthenticated', () => {
     selectTab(signInButton);
 });
 
-document.addEventListener('authenticated', () => {
-    loadPage();
-});
+document.addEventListener('authenticated', loadPage);
