@@ -11,7 +11,7 @@ function clearUsersDiv() {
 
 function selectUser(id, displayName) {
     setActiveUid(id);
-    alert(`${displayName} selected`);
+    alert(`${displayName} Selected`);
     loadPage();
 }
 
