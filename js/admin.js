@@ -1,23 +1,36 @@
+const usersDiv = document.querySelector('#admin-section > div.users');
+
 function adminControlsClickHandler() {
     closeMenu();
     selectTab(adminButton);
 }
 
-function buildUserView(imgUrl, screenName, email) {
+function clearUsersDiv() {
+    usersDiv.innerHTML = '';
+}
+
+function appendUserView(id, isAdmin, photoURL, displayName, email) {
+
     const userCard = document.createElement('div'),
         profileImgDiv = document.createElement('div'),
-        screenNameDiv = document.createElement('div'),
+        displayNameDiv = document.createElement('div'),
         emailDiv = document.createElement('div'),
         profileImg = document.createElement('img');
 
+    userCard.setAttribute('data-id', id);
+
     userCard.classList.add('user-card');
-    profileImg.setAttribute('src', imgUrl);
-    profileImg.setAttribute('alt', 'Profile Pic');
-    screenNameDiv.innerText = screenName;
+    profileImg.src = photoURL;
+    profileImg.alt = 'Profile Pic';
+    displayNameDiv.innerText = displayName;
     emailDiv.innerText = email;
 
-    profileImgDiv.appendChild(profileImg);
-    userCard.append(profileImgDiv, screenNameDiv, emailDiv);
+    if(isAdmin) {
+        userCard.classList.add('admin-user');
+    }
 
-    return userCard;
+    profileImgDiv.appendChild(profileImg);
+    userCard.append(profileImgDiv, displayNameDiv, emailDiv);
+
+    usersDiv.appendChild(userCard);
 }

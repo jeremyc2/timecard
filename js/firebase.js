@@ -59,18 +59,22 @@ firebase.auth().onAuthStateChanged(user => {
     });
 
     getUsersCollectionRef().get().then(querySnapshot => {
+
       isAdmin = true;
       let users = querySnapshot.docs.map(entry => {
           return {id: entry.id, ...entry.data()};
       });
       console.log("Admin Access Granted", users);
       document.body.classList.add('admin');
-      // TODO Build Admin UI for selecting user as active uid
+      clearUsersDiv();
+      user.forEach(({id, isAdmin, photoURL, displayName, email}) => 
+          appendUserView(id, isAdmin, photoURL, displayName, email));
+
     }).catch(() => {
       isAdmin = false;
       console.log("No Admin Access for this user");
       document.body.classList.remove('admin');
-      // TODO Remove Admin UI
+      clearUsersDiv();
     });
 
     document.dispatchEvent(new Event('authenticated'));
