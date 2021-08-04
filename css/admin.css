@@ -32,7 +32,7 @@
     right: 0;
     font-size: 0.8rem;
     padding: 5px;
-    border-radius: 0 0 0 10px;
+    border-radius: 0 5px 0 5px;
 }
 
 .user-card:hover {
@@ -63,4 +63,14 @@
     padding-right: 10px;
     align-items: flex-start;
     grid-area: 2 / 2 / 3 / 3;
+}
+
+@media (max-width: 500px) {
+    .user-card * {
+        font-size: 0.8rem;
+    }
+
+    .user-card.admin-user::after {
+        font-size: 0.65rem;
+    }
 }
