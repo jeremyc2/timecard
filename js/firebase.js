@@ -24,7 +24,7 @@ function showSigninWidget() {
 }
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBJg2I8xb16QiLu4S-twXm5o1L3cWf2oVQ",
+  apiKey: "AIzaSyC2e0G6bgedPnYibqN5lntzqvWHEMevja4",
   authDomain: "timecard-95463.firebaseapp.com",
   projectId: "timecard-95463",
   storageBucket: "timecard-95463.appspot.com",
