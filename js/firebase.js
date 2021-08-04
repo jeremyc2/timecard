@@ -66,13 +66,11 @@ firebase.auth().onAuthStateChanged(user => {
       });
       console.log("Admin Access Granted", users);
       document.body.classList.add('admin');
-      user.forEach(({id, isAdmin, photoURL, displayName, email}) => 
+      users.forEach(({id, isAdmin, photoURL, displayName, email}) => 
           appendUserView(id, isAdmin, photoURL, displayName, email));
 
     }).catch(() => {
-      isAdmin = false;
       console.log("No Admin Access for this user");
-      document.body.classList.remove('admin');
     });
 
     document.dispatchEvent(new Event('authenticated'));

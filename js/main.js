@@ -348,6 +348,8 @@ function signInButtonClickHandler() {
 }
 
 function resetApp() {
+    document.body.classList.remove('admin');
+    isAdmin = false;
     clearForm();
     clearTimecardDiv();
     clearUsersDiv();
