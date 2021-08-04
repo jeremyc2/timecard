@@ -20,6 +20,21 @@
       0 8px 16px rgba(0,0,0,0.11);
 }
 
+.user-card.admin-user {
+    border: solid gold;
+    position: relative;
+}
+
+.user-card.admin-user::after {
+    content: "Admin";
+    background-color: gold;
+    position: absolute;
+    right: 0;
+    font-size: 0.8rem;
+    padding: 5px;
+    border-radius: 0 0 0 10px;
+}
+
 .user-card:hover {
     background-color: #D8D8D8;
 }
