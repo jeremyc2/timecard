@@ -308,8 +308,12 @@ function selectTab(tab) {
     document.querySelector(`#${sectionID}`).classList.add('selected');
 }
 
+function clearTimecardDiv() {
+    timecardDiv.innerHTML = '';
+}
+
 function loadTimecard() {
-    timecardDiv.innerHTML = "";
+    clearTimecardDiv();
     dbSetup.then(() => {
         getSubcollectionRef(getActiveUid() || currentUser.uid).orderBy("date").orderBy("time").get().then(querySnapshot => {
             let events = querySnapshot.docs.map(entry => {
@@ -341,6 +345,12 @@ function signInButtonClickHandler() {
         showSigninWidget();
         selectTab(signInButton);
     }
+}
+
+function resetApp() {
+    clearForm();
+    clearTimecardDiv();
+    clearUsersDiv();
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
@@ -376,6 +386,7 @@ const dbSetup = new Promise((resolve) => {
 });
 
 document.addEventListener('unauthenticated', () => {
+    resetApp();
     showSigninWidget();
     closeMenu();
     selectTab(signInButton);

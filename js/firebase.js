@@ -66,7 +66,6 @@ firebase.auth().onAuthStateChanged(user => {
       });
       console.log("Admin Access Granted", users);
       document.body.classList.add('admin');
-      clearUsersDiv();
       user.forEach(({id, isAdmin, photoURL, displayName, email}) => 
           appendUserView(id, isAdmin, photoURL, displayName, email));
 
@@ -74,7 +73,6 @@ firebase.auth().onAuthStateChanged(user => {
       isAdmin = false;
       console.log("No Admin Access for this user");
       document.body.classList.remove('admin');
-      clearUsersDiv();
     });
 
     document.dispatchEvent(new Event('authenticated'));
