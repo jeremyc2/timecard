@@ -347,15 +347,26 @@ function signInButtonClickHandler() {
     }
 }
 
+function setDisplayName(displayName) {
+    pageTitle.innerText = `${displayName}'s Time`;
+}
+
+function resetDisplayName() {
+    pageTitle.innerText = defaultTitleText;
+}
+
 function resetApp() {
     document.body.classList.remove('admin');
     isAdmin = false;
+    resetDisplayName();
     clearForm();
     clearTimecardDiv();
     clearUsersDiv();
 }
 
 const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
+    defaultTitleText = document.title,
+    pageTitle = document.querySelector('#title'),
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
     timeEntrySection = document.querySelector('#timeentry-section'),

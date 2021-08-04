@@ -4,11 +4,16 @@ function getActiveUid() {
   }
 }
 
-function setActiveUid(uid) {
+function setActiveUid(uid, displayName) {
   if(isAdmin) {
     if(!uid) {
       localStorage.removeItem('activeUid');
     } else {
+      if(uid == currentUser.uid) {
+        resetDisplayName();
+      } else {
+        setDisplayName(displayName.split(' ')[0]);
+      }
       localStorage.setItem('activeUid', uid);
     }
   }
