@@ -410,10 +410,14 @@ const dbSetup = new Promise((resolve) => {
 });
 
 document.addEventListener('unauthenticated', () => {
+    console.log('Unauthenticated');
     resetApp();
     showSigninWidget();
     closeMenu();
     selectTab(signInButton);
 });
 
-document.addEventListener('authenticated', loadPage);
+document.addEventListener('authenticated', () => {
+    console.log('Authenticated');
+    loadPage();
+});
