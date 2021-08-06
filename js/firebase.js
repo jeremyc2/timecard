@@ -24,13 +24,13 @@ function showSigninWidget() {
 }
 
 var firebaseConfig = {
-  apiKey: "AIzaSyC2e0G6bgedPnYibqN5lntzqvWHEMevja4",
-  authDomain: "timecard-95463.firebaseapp.com",
-  projectId: "timecard-95463",
-  storageBucket: "timecard-95463.appspot.com",
-  messagingSenderId: "560667499267",
-  appId: "1:560667499267:web:af89e3449c4a51ecca2736",
-  measurementId: "G-1FZ61815QR"
+  apiKey: "AIzaSyCqFEKqAFjnBX8PYWhfu4yftE5yT6qJieI",
+  authDomain: "timecard-1304f.firebaseapp.com",
+  projectId: "timecard-1304f",
+  storageBucket: "timecard-1304f.appspot.com",
+  messagingSenderId: "11197150944",
+  appId: "1:11197150944:web:9d344bcd4400f6380b8285",
+  measurementId: "G-FHKR76JRPX"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -116,7 +116,7 @@ var uiConfig = {
     // Leave the lines as is for the providers you want to offer your users.
     {
       provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      clientId: "560667499267-rkmhj9j7nd0bni7rqrdtvoootq6vad0b.apps.googleusercontent.com"
+      clientId: "11197150944-cscamua8ea2g53q6dbbpopfmiqe332ok.apps.googleusercontent.com"
     }
     // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
