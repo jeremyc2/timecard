@@ -292,7 +292,7 @@ function collapseAllTimecard() {
 }
 
 function selectTab(tab) {
-    document.title = `My Time - ${tab.getAttribute('data-section')}`;
+    document.title = `Replace with My TIme - ${tab.getAttribute('data-section')}`;
 
     const selectedTab = document.querySelector('header *.selected');
     if(selectedTab) {
