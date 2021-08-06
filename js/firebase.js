@@ -20,7 +20,6 @@ function setActiveUid(uid, displayName) {
 }
 
 function showSigninWidget() {
-  deleteAllCookies();
   ui.start('#firebaseui-auth-container', uiConfig);
 }
 
