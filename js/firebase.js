@@ -117,7 +117,12 @@ var uiConfig = {
     // Leave the lines as is for the providers you want to offer your users.
     {
       provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      clientId: "11197150944-cscamua8ea2g53q6dbbpopfmiqe332ok.apps.googleusercontent.com"
+      clientId: "11197150944-cscamua8ea2g53q6dbbpopfmiqe332ok.apps.googleusercontent.com",
+      customParameters: {
+        // Forces account selection even when one account
+        // is available.
+        prompt: 'select_account'
+      }
     }
     // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
