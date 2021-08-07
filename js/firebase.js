@@ -75,6 +75,7 @@ firebase.auth().onAuthStateChanged(user => {
           appendUserView(id, isAdmin, photoURL, displayName, email));
 
     }).catch(() => {
+      isAdmin = false;
       console.log("No Admin Access for this user");
     });
 

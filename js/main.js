@@ -380,7 +380,7 @@ var timecard, isAdmin;
 document.querySelectorAll('.header-section-link').forEach(link => {
     link.addEventListener('click', function(e) {
         if (!(e.metaKey || e.ctrlKey)){
-            if(typeof user === 'undefined' || user == null) {
+            if(typeof currentUser === 'undefined' || currentUser == null) {
                 e.preventDefault();
                 return;
             };
