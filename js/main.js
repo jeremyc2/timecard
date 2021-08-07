@@ -380,6 +380,11 @@ var timecard, isAdmin;
 document.querySelectorAll('.header-section-link').forEach(link => {
     link.addEventListener('click', function(e) {
         if (!(e.metaKey || e.ctrlKey)){
+            if(typeof user === 'undefined' || user == null) {
+                e.preventDefault();
+                return;
+            };
+
             var page = this.getAttribute('data-section');
             history.pushState(null, page, `?page=${page}`);
             loadPage();
