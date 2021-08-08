@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="css/table.css">
 
     <script src="js/micromodal.min.js"></script>
-    <script src="js/swipe.js"></script>
-    
+
     <script src="js/menu.js" defer></script>
     <script src="js/admin.js" defer></script>
     <script src="js/dateUtils.js" defer></script>
@@ -30,7 +29,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
     
     <script src="js/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <link type="text/css" rel="stylesheet" href="css/firebaseui.css" />
 
     <script src="js/main.js" defer></script>
     <script src="js/firebase.js" defer></script>
@@ -44,19 +43,6 @@
                 })
                 .then(() => console.log("Service Worker Registered"))
                 .catch((error) => console.log("Service Worker Not Registered", error));
-    }
-
-    var dispatcher;
-    if("ontouchstart" in document.documentElement) {
-        dispatcher = new SwipeEventDispatcher(window);
-        
-        dispatcher.on('SWIPE_LEFT', () => {
-            timecardTab.click();
-        });
-
-        dispatcher.on('SWIPE_RIGHT', () => {
-            timeEntryTab.click();
-        });
     }
     </script>
     <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">

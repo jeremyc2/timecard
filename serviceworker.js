@@ -1,11 +1,12 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "14.5",
+const version = "14.6",
       cacheName = `Timecard-V${version}`;
 
 const cachefiles = [
     path,
     path + "css/admin.css",
+    path + "css/firebaseui.css",
     path + "css/main.css",
     path + "css/modal.css",
     path + "css/table.css",
