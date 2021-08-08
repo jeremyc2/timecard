@@ -12,7 +12,7 @@ function setActiveUid(uid, displayName) {
       if(uid == currentUser.uid) {
         resetDisplayName();
       } else {
-        setDisplayName(displayName.split(' ')[0]);
+        setDisplayName(displayName);
       }
       localStorage.setItem('activeUid', uid);
     }
@@ -71,8 +71,12 @@ firebase.auth().onAuthStateChanged(user => {
       });
       console.log("Admin Access Granted", users);
       document.body.classList.add('admin');
-      users.forEach(({id, isAdmin, photoURL, displayName, email}) => 
-          appendUserView(id, isAdmin, photoURL, displayName, email));
+      users.forEach(({id, isAdmin, photoURL, displayName, email}) => {
+        if(id == getActiveUid()) {
+          setDisplayName(displayName);
+        }
+        appendUserView(id, isAdmin, photoURL, displayName, email);
+      });
 
     }).catch(() => {
       isAdmin = false;

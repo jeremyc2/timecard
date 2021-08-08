@@ -348,7 +348,7 @@ function signInButtonClickHandler() {
 }
 
 function setDisplayName(displayName) {
-    pageTitle.innerText = `${displayName}'s Time`;
+    pageTitle.innerText = `${displayName.split(' ')[0]}'s Time`;
 }
 
 function resetDisplayName() {
