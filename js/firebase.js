@@ -72,7 +72,7 @@ firebase.auth().onAuthStateChanged(user => {
       console.log("Admin Access Granted", users);
       document.body.classList.add('admin');
       users.forEach(({id, isAdmin, photoURL, displayName, email}) => {
-        if(id == getActiveUid()) {
+        if(id == getActiveUid() && id != currentUser.uid) {
           setDisplayName(displayName);
         }
         appendUserView(id, isAdmin, photoURL, displayName, email);
