@@ -1,3 +1,9 @@
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
+
 async function showModal(id, message) {
     const modalContent = document.querySelector(`#modal-${id}-content`),
         continueButton = document.querySelector(`#modal-${id}-continue-btn`),
@@ -364,8 +370,7 @@ function resetApp() {
     clearUsersDiv();
 }
 
-const formURL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdJGyMq--4-WRQ7vuVM9soMf86vXiB2O8LK4m_oa38-_weefA/formResponse',
-    defaultTitleText = document.title,
+const defaultTitleText = document.title,
     pageTitle = document.querySelector('#title'),
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
