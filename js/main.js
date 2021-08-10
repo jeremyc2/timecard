@@ -339,15 +339,14 @@ function loadPage() {
         loadTimecard();
     }
     
-    closeMenu();
     selectTab(tab);
 }
 
 function signInButtonClickHandler() {
+    closeMenu();
     if(signInButton.classList.contains('sign-out')) {
         signout();
     } else {
-        closeMenu();
         showSigninWidget();
         selectTab(signInButton);
     }
@@ -384,16 +383,16 @@ var timecard, isAdmin;
 
 document.querySelectorAll('.header-section-link').forEach(link => {
     link.addEventListener('click', function(e) {
+        closeMenu();
         if (!(e.metaKey || e.ctrlKey)){
-            if(typeof currentUser === 'undefined' || currentUser == null) {
-                e.preventDefault();
-                return;
-            };
 
+            e.preventDefault();
             var page = this.getAttribute('data-section');
             history.pushState(null, page, `?page=${page}`);
-            loadPage();
-            e.preventDefault(); 
+
+            if(currentUser) {
+                loadPage();
+            };
         }
     });
 });
@@ -423,7 +422,6 @@ document.addEventListener('unauthenticated', () => {
     console.log('Unauthenticated');
     resetApp();
     showSigninWidget();
-    closeMenu();
     selectTab(signInButton);
 });
 
