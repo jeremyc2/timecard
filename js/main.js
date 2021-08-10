@@ -363,7 +363,7 @@ function resetDisplayName() {
 function resetApp() {
     document.body.classList.remove('admin');
     isAdmin = false;
-    resetDisplayName();
+    setActiveUid(null);
     clearForm();
     clearTimecardDiv();
     clearUsersDiv();
