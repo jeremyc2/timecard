@@ -2,6 +2,10 @@ function getActiveUid() {
   return getActiveUser?.uid;
 }
 
+function getActiveDisplayName() {
+  return getActiveUser()?.displayName;
+}
+
 function getActiveUser() {
   if(isAdmin) {
     return JSON.parse(localStorage.getItem('activeUser'));

@@ -301,7 +301,7 @@ function selectTab(tab) {
     if(!tab) return;
 
     currentTab = tab;
-    setTitle(getActiveUser()?.displayName);
+    setTitle(getActiveDisplayName());
 
     const selectedTab = document.querySelector('header *.selected');
     if(selectedTab) {
