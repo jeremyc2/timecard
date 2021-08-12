@@ -301,7 +301,7 @@ function selectTab(tab) {
     if(!tab) return;
 
     currentTab = tab;
-    setTitle(getActiveUid());
+    setTitle(getActiveUser()?.displayName);
 
     const selectedTab = document.querySelector('header *.selected');
     if(selectedTab) {
@@ -368,7 +368,7 @@ function setTitle(displayName) {
 function resetApp() {
     document.body.classList.remove('admin');
     isAdmin = false;
-    setActiveUid(null);
+    setActiveUser();
     clearForm();
     clearTimecardDiv();
     clearUsersDiv();

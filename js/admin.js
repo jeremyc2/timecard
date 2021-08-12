@@ -10,7 +10,7 @@ function clearUsersDiv() {
 }
 
 function selectUser(id, displayName) {
-    setActiveUid(id, displayName);
+    setActiveUser(id, displayName);
     loadPage();
 }
 

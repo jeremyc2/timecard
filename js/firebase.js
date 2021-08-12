@@ -1,14 +1,18 @@
 function getActiveUid() {
+  return getActiveUser?.uid;
+}
+
+function getActiveUser() {
   if(isAdmin) {
-    return localStorage.getItem('activeUid');
+    return JSON.parse(localStorage.getItem('activeUser'));
   }
 }
 
-function setActiveUid(uid) {
+function setActiveUser(uid, displayName) {
   if(isAdmin && uid && uid != currentUser?.uid) {
-    localStorage.setItem('activeUid', uid);
+    localStorage.setItem('activeUser', JSON.stringify({uid, displayName}));
   } else {
-    localStorage.removeItem('activeUid');
+    localStorage.removeItem('activeUser');
   }
 }
 
