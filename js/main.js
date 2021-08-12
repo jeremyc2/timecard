@@ -298,7 +298,10 @@ function collapseAllTimecard() {
 }
 
 function selectTab(tab) {
-    document.title = `My Time - ${tab.getAttribute('data-section')}`;
+    if(!tab) return;
+
+    currentTab = tab;
+    setTitle(getActiveUid());
 
     const selectedTab = document.querySelector('header *.selected');
     if(selectedTab) {
@@ -352,12 +355,14 @@ function signInButtonClickHandler() {
     }
 }
 
-function setDisplayName(displayName) {
-    pageTitle.innerText = `${displayName.split(' ')[0]}'s Time`;
-}
-
-function resetDisplayName() {
-    pageTitle.innerText = defaultTitleText;
+function setTitle(displayName) {
+    if(displayName) {
+        pageTitle.innerText = `${displayName.split(' ')[0]}'s Time`;
+        document.title = `${pageTitle.innerText} - ${currentTab.getAttribute('data-section')}`;
+    } else {
+        pageTitle.innerText = defaultTitleText;
+        document.title = `${defaultTitleText} - ${currentTab.getAttribute('data-section')}`;
+    }
 }
 
 function resetApp() {
@@ -377,6 +382,7 @@ const defaultTitleText = document.title,
     timecardDiv = document.querySelector('#timecard-section > div.content'),
     adminButton = document.querySelector('#admin-controls'),
     signInButton = document.querySelector('#sign-in'),
+    currentTab,
     wage = 15;
 
 var timecard, isAdmin;
