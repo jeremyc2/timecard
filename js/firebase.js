@@ -1,5 +1,5 @@
 function getActiveUid() {
-  return getActiveUser?.uid;
+  return getActiveUser()?.uid;
 }
 
 function getActiveDisplayName() {
