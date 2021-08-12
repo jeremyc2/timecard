@@ -27,7 +27,8 @@ const cachefiles = [
     path + "js/timecard.js",
     path + "index.html",
     path + "qrcode.html",
-    path + "manifest.webmanifest"
+    path + "manifest.webmanifest",
+    path + "bogusness"
 ]
 
 self.addEventListener("install", event => {
