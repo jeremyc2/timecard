@@ -79,9 +79,9 @@ firebase.auth().onAuthStateChanged(user => {
     }).catch(() => {
       isAdmin = false;
       console.log("No Admin Access for this user");
-    });
-
-    document.dispatchEvent(new Event('authenticated'));
+    }).then(() => {
+      document.dispatchEvent(new Event('authenticated'));
+    })
   } else {
     signInButton.classList.remove('sign-out');
     document.dispatchEvent(new Event('unauthenticated'));
