@@ -382,10 +382,9 @@ const defaultTitleText = document.title,
     timecardDiv = document.querySelector('#timecard-section > div.content'),
     adminButton = document.querySelector('#admin-controls'),
     signInButton = document.querySelector('#sign-in'),
-    currentTab,
     wage = 15;
 
-var timecard, isAdmin;
+var timecard, isAdmin, currentTab;
 
 document.querySelectorAll('.header-section-link').forEach(link => {
     link.addEventListener('click', function(e) {
