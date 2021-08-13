@@ -37,8 +37,13 @@ function setActiveUser(uid, displayName) {
     });
         
     var page = getSearchParam('page');
-    history.pushState(null, document.title, 
-      page && `?page=${page}`);
+    if(page) {
+      history.pushState(null, document.title, 
+        `?page=${page}`);
+    } else {
+      history.pushState(null, document.title,
+        '?');
+    }
 
   }
 }
