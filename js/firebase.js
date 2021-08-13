@@ -6,12 +6,14 @@ function getActiveDisplayName() {
   return getActiveUser()?.displayName;
 }
 
+// TODO Get query params instead
 function getActiveUser() {
   if(isAdmin) {
     return JSON.parse(localStorage.getItem('activeUser'));
   }
 }
 
+// TODO Set query params instead
 function setActiveUser(uid, displayName) {
   if(isAdmin && uid && uid != currentUser?.uid) {
     localStorage.setItem('activeUser', JSON.stringify({uid, displayName}));
