@@ -42,7 +42,7 @@ function setActiveUser(uid, displayName) {
         `?page=${page}`);
     } else {
       history.pushState(null, document.title,
-        '?');
+        document.location.pathname);
     }
 
   }
