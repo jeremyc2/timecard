@@ -15,14 +15,20 @@ function getActiveDisplayName() {
 
 function setActiveUser(uid, displayName) {
   if(isAdmin && uid && uid != currentUser?.uid) {
-    const userQueryString = `&activeUid=${uid}&activeDisplayName=${encodeURIComponent(displayName)}`;
+    const userQueryString = `activeUid=${uid}&activeDisplayName=${encodeURIComponent(displayName)}`;
     links.forEach(link => {
       var page = link.getAttribute('data-section');
-      link.href = `?page=${page}${userQueryString}`;
+      link.href = `?page=${page}&${userQueryString}`;
     });
 
-    history.pushState(null, document.title, 
-      `?page=${getSearchParam('page')}${userQueryString}`);
+    var page = getSearchParam('page');
+    if(page) {
+      history.pushState(null, document.title, 
+        `?page=${page}&${userQueryString}`);
+    } else {
+      history.pushState(null, document.title, 
+        `?${userQueryString}`);
+    }
 
   } else {
     links.forEach(link => {
