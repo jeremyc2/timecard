@@ -1,24 +1,38 @@
 function getActiveUid() {
-  return getActiveUser()?.uid;
-}
-
-function getActiveDisplayName() {
-  return getActiveUser()?.displayName;
-}
-
-// TODO Get query params instead
-function getActiveUser() {
   if(isAdmin) {
-    return JSON.parse(localStorage.getItem('activeUser'));
+    return getSearchParam('activeUid');
   }
 }
 
-// TODO Set query params instead
+function getActiveDisplayName() {
+  if(isAdmin) {
+    var activeDisplayName = getSearchParam('activeDisplayName');
+    if(activeDisplayName) {
+      return decodeURIComponent(activeDisplayName);
+    }
+  }
+}
+
 function setActiveUser(uid, displayName) {
   if(isAdmin && uid && uid != currentUser?.uid) {
-    localStorage.setItem('activeUser', JSON.stringify({uid, displayName}));
+    const userQueryString = `&activeUid=${uid}&activeDisplayName=${encodeURIComponent(displayName)}`;
+    links.forEach(link => {
+      var page = link.getAttribute('data-section');
+      link.href = `?page=${page}${userQueryString}`;
+    });
+
+    history.pushState(null, document.title, 
+      `?page=${getSearchParam('page')}${userQueryString}`);
+
   } else {
-    localStorage.removeItem('activeUser');
+    links.forEach(link => {
+      var page = link.getAttribute('data-section');
+      link.href = `?page=${page}`;
+    });
+        
+    history.pushState(null, document.title, 
+      `?page=${getSearchParam('page')}`);
+
   }
 }
 

@@ -4,6 +4,10 @@ function uuidv4() {
     );
 }
 
+function getSearchParam(key) {
+    return (new URLSearchParams(window.location.search)).get(key);
+}
+
 async function showModal(id, message) {
     const modalContent = document.querySelector(`#modal-${id}-content`),
         continueButton = document.querySelector(`#modal-${id}-continue-btn`),
@@ -335,8 +339,8 @@ function loadTimecard() {
 }
 
 function loadPage() {
-    var params = decodeURI(window.location.search) || '?page=Time Entry',
-        tab = document.querySelector(`header a[href="${params}"]`);
+    var pageName = getSearchParam('page') || 'Time Entry',
+        tab = document.querySelector(`header a[data-section="${pageName}"]`);
         
     if(tab.id === 'timecardTab') {
         loadTimecard();
@@ -375,6 +379,7 @@ function resetApp() {
 }
 
 const defaultTitleText = document.title,
+    links = document.querySelectorAll('.header-section-link'),
     pageTitle = document.querySelector('#title'),
     date = document.querySelector('input[type=date]'),
     time = document.querySelector('input[type=time]'),
@@ -386,14 +391,14 @@ const defaultTitleText = document.title,
 
 var timecard, isAdmin, currentTab;
 
-document.querySelectorAll('.header-section-link').forEach(link => {
+links.forEach(link => {
     link.addEventListener('click', function(e) {
         closeMenu();
         if (!(e.metaKey || e.ctrlKey)){
 
             e.preventDefault();
             var page = this.getAttribute('data-section');
-            history.pushState(null, page, `?page=${page}`);
+            history.pushState(null, page, this.href);
 
             if(currentUser) {
                 loadPage();
