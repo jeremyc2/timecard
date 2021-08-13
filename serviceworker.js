@@ -1,6 +1,6 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "16.2",
+const version = "16.4",
       cacheName = `Timecard-V${version}`;
 
 const cachefiles = [
@@ -17,16 +17,17 @@ const cachefiles = [
     path + "images/menu_white_24dp.svg",
     path + "images/unfold_less_white_24dp.svg",
     path + "images/unfold_more_white_24dp.svg",
-    // path + "js/admin.js",
+    path + "js/admin.js",
     path + "js/dateUtils.js",
-    // path + "js/firebase.js",
-    // path + "js/firebaseui.js",
-    // path + "js/main.js",
+    path + "js/firebase.js",
+    path + "js/firebaseui.js",
+    path + "js/main.js",
     path + "js/menu.js",
     path + "js/micromodal.min.js",
     path + "js/timecard.js",
     path + "index.html",
     path + "qrcode.html",
+    "bugfix"
 ]
 
 self.addEventListener("install", event => {
