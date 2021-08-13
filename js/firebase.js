@@ -118,6 +118,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 function signout() {
   firebase.auth().signOut().then(() => {
+    setActiveUser(null);
     console.log('Sign-out successful.')
   }).catch((error) => {
     console.error(error);

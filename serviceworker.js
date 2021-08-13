@@ -1,6 +1,6 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "16.0",
+const version = "16.2",
       cacheName = `Timecard-V${version}`;
 
 const cachefiles = [
@@ -17,18 +17,16 @@ const cachefiles = [
     path + "images/menu_white_24dp.svg",
     path + "images/unfold_less_white_24dp.svg",
     path + "images/unfold_more_white_24dp.svg",
-    path + "js/admin.js",
+    // path + "js/admin.js",
     path + "js/dateUtils.js",
-    path + "js/firebase.js",
-    path + "js/firebaseui.js",
-    path + "js/main.js",
+    // path + "js/firebase.js",
+    // path + "js/firebaseui.js",
+    // path + "js/main.js",
     path + "js/menu.js",
     path + "js/micromodal.min.js",
     path + "js/timecard.js",
     path + "index.html",
     path + "qrcode.html",
-    path + "manifest.webmanifest",
-    path + "bogusness"
 ]
 
 self.addEventListener("install", event => {
@@ -65,7 +63,44 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
     const parsedUrl = new URL(event.request.url);
 
-    // might have to clone request and response
+    if(event.request.url.endsWith("manifest.webmanifest")) {
+
+        const manifest = {
+            author: "Jeremy Chandler",
+            short_name: "Timecard",
+            name: "Timecard",
+            description: "Clock-in and Clock-out, see your hours and wages",
+            version: "0.1",
+            orientation: "portrait",
+            icons: [
+              {
+                src: path + "images/icons/192.png",
+                type: "image/png",
+                sizes: "192x192",
+                purpose: "any maskable"
+              },
+              {
+                src: path + "images/icons/512.png",
+                type: "image/png",
+                sizes: "512x512",
+                purpose: "any maskable"
+              }
+            ],
+            start_url: path,
+            scope: path,
+            background_color: "#aa3333",
+            theme_color: "hsl(357deg, 21%, 17%)",
+            display: "standalone"
+        };
+
+        event.respondWith(
+            new Response(JSON.stringify(manifest), {
+              headers: {'Content-Type': 'text/html'}
+            })
+        );
+
+        return;
+    }
 
     if(parsedUrl.host == self.location.host) {
         event.respondWith(
