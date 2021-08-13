@@ -30,8 +30,9 @@ function setActiveUser(uid, displayName) {
       link.href = `?page=${page}`;
     });
         
+    var page = getSearchParam('page');
     history.pushState(null, document.title, 
-      `?page=${getSearchParam('page')}`);
+      page && `?page=${page}`);
 
   }
 }
