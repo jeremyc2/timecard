@@ -1,36 +1,6 @@
-const path = (new URL(self.registration.scope)).pathname;
-
-const version = "16.5",
-      cacheName = `Timecard-V${version}`;
-
-// TODO The cache breaks firebaseui
-// const cachefiles = [
-//     path,
-//     path + "css/admin.css",
-//     path + "css/firebaseui.css",
-//     path + "css/main.css",
-//     path + "css/modal.css",
-//     path + "css/table.css",
-//     path + "images/icons/192.png",
-//     path + "images/icons/512.png",
-//     path + "images/qrcode.png",
-//     path + "images/background.svg",
-//     path + "images/menu_white_24dp.svg",
-//     path + "images/unfold_less_white_24dp.svg",
-//     path + "images/unfold_more_white_24dp.svg",
-//     path + "js/admin.js",
-//     path + "js/dateUtils.js",
-//     path + "js/firebase.js",
-//     path + "js/firebaseui.js",
-//     path + "js/main.js",
-//     path + "js/menu.js",
-//     path + "js/micromodal.min.js",
-//     path + "js/timecard.js",
-//     path + "index.html",
-//     path + "qrcode.html",
-// ];
-
-const broadcastChannel = new BroadcastChannel('channel1');
+const version = "16.6",
+    broadcastChannel = new BroadcastChannel('channel1'),
+    path = (new URL(self.registration.scope)).pathname;
 
 self.addEventListener("install", () => {
     self.skipWaiting();
@@ -41,8 +11,6 @@ self.addEventListener("activate", () => {
 });
 
 self.addEventListener("fetch", event => {
-    const parsedUrl = new URL(event.request.url);
-
     if(event.request.url.endsWith("manifest.webmanifest")) {
 
         const manifest = {
@@ -96,18 +64,5 @@ self.addEventListener("fetch", event => {
                 }
             })
         );
-
-        return;
     }
-
-    if(parsedUrl.host == self.location.host) {
-        event.respondWith(
-            caches.match(event.request).then(function(response) {
-                return response || fetch(event.request);
-            })
-        );
-    } else {
-        return fetch(event.request);
-    }
-
 });
