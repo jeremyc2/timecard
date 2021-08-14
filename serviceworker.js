@@ -1,6 +1,6 @@
 const path = (new URL(self.registration.scope)).pathname;
 
-const version = "16.4",
+const version = "16.5",
       cacheName = `Timecard-V${version}`;
 
 // TODO The cache breaks firebaseui
