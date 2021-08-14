@@ -50,7 +50,7 @@ self.addEventListener("fetch", event => {
                         manifest.shortcuts = event.data.body.map(user => {
                             return {
                                 name: user.displayName,
-                                url: `?page=Timecard&activeUid=${
+                                url: path + `?page=Timecard&activeUid=${
                                     user.id
                                 }&activeDisplayName=${
                                     encodeURIComponent(user.displayName)
