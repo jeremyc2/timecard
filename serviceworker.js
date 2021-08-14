@@ -1,4 +1,4 @@
-const version = "16.6",
+const version = "16.7",
     broadcastChannel = new BroadcastChannel('channel1'),
     path = (new URL(self.registration.scope)).pathname;
 
