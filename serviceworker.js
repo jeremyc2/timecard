@@ -3,62 +3,41 @@ const path = (new URL(self.registration.scope)).pathname;
 const version = "16.4",
       cacheName = `Timecard-V${version}`;
 
-const cachefiles = [
-    path,
-    path + "css/admin.css",
-    path + "css/firebaseui.css",
-    path + "css/main.css",
-    path + "css/modal.css",
-    path + "css/table.css",
-    path + "images/icons/192.png",
-    path + "images/icons/512.png",
-    path + "images/qrcode.png",
-    path + "images/background.svg",
-    path + "images/menu_white_24dp.svg",
-    path + "images/unfold_less_white_24dp.svg",
-    path + "images/unfold_more_white_24dp.svg",
-    path + "js/admin.js",
-    path + "js/dateUtils.js",
-    path + "js/firebase.js",
-    path + "js/firebaseui.js",
-    path + "js/main.js",
-    path + "js/menu.js",
-    path + "js/micromodal.min.js",
-    path + "js/timecard.js",
-    path + "index.html",
-    path + "qrcode.html",
-    "bugfix"
-]
+// TODO The cache breaks firebaseui
+// const cachefiles = [
+//     path,
+//     path + "css/admin.css",
+//     path + "css/firebaseui.css",
+//     path + "css/main.css",
+//     path + "css/modal.css",
+//     path + "css/table.css",
+//     path + "images/icons/192.png",
+//     path + "images/icons/512.png",
+//     path + "images/qrcode.png",
+//     path + "images/background.svg",
+//     path + "images/menu_white_24dp.svg",
+//     path + "images/unfold_less_white_24dp.svg",
+//     path + "images/unfold_more_white_24dp.svg",
+//     path + "js/admin.js",
+//     path + "js/dateUtils.js",
+//     path + "js/firebase.js",
+//     path + "js/firebaseui.js",
+//     path + "js/main.js",
+//     path + "js/menu.js",
+//     path + "js/micromodal.min.js",
+//     path + "js/timecard.js",
+//     path + "index.html",
+//     path + "qrcode.html",
+// ];
 
-self.addEventListener("install", event => {
+const broadcastChannel = new BroadcastChannel('channel1');
+
+self.addEventListener("install", () => {
     self.skipWaiting();
-    
-    event.waitUntil(
-        caches.open(cacheName).then(function(cache) {
-            return cache.addAll(cachefiles);
-        })
-    );
-
 });
  
-self.addEventListener("activate", event => {
+self.addEventListener("activate", () => {
     clients.claim();
-    
-    event.waitUntil(
-        caches.keys().then(function(cacheNames) {
-            return Promise.all(
-                cacheNames.filter(function(name) {
-                    // Return true if you want to remove this cache,
-                    // but remember that caches are shared across
-                    // the whole origin
-                    return name != cacheName;
-                }).map(function(name) {
-                    return caches.delete(name);
-                })
-            );
-        })
-    );
-
 });
 
 self.addEventListener("fetch", event => {
@@ -87,6 +66,7 @@ self.addEventListener("fetch", event => {
                 purpose: "any maskable"
               }
             ],
+            shortcuts: [],
             start_url: path,
             scope: path,
             background_color: "#aa3333",
@@ -94,9 +74,26 @@ self.addEventListener("fetch", event => {
             display: "standalone"
         };
 
+        broadcastChannel.postMessage({type: 'getRecents'});
         event.respondWith(
-            new Response(JSON.stringify(manifest), {
-              headers: {'Content-Type': 'text/html'}
+            new Promise((resolve) => {
+                broadcastChannel.onmessage = event => {
+                    if(event.data.type == 'recents') {
+                        manifest.shortcuts = event.data.body.map(user => {
+                            return {
+                                name: user.displayName,
+                                url: `?page=Timecard&activeUid=${
+                                    user.id
+                                }&activeDisplayName=${
+                                    encodeURIComponent(user.displayName)
+                                }`
+                            };
+                        });
+                        resolve(new Response(JSON.stringify(manifest), {
+                            headers: {'Content-Type': 'text/html'}
+                        }));
+                    }
+                }
             })
         );
 
