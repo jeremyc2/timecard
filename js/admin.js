@@ -15,17 +15,6 @@ function selectUser(id, displayName) {
     loadPage();
 }
 
-function getRecentsList() {
-    return JSON.parse(localStorage.getItem('recents')) || [];
-}
-
-function appendUserToRecentsList(id, displayName) {
-    var currRecentsList = getRecentsList();
-    currRecentsList = currRecentsList.filter(user => user.id != id);
-    currRecentsList.push({id, displayName});
-    localStorage.setItem('recents', JSON.stringify(currRecentsList));
-}
-
 function appendUserView(id, isAdmin, photoURL, displayName, email) {
 
     const userCard = document.createElement('div'),
@@ -52,10 +41,3 @@ function appendUserView(id, isAdmin, photoURL, displayName, email) {
 
     usersDiv.appendChild(userCard);
 }
-
-const broadcastChannel = new BroadcastChannel('channel1');
-broadcastChannel.addEventListener('message', event => {
-    if(event.data.type == 'getRecents') {
-        broadcastChannel.postMessage({type: 'recents', body: getRecentsList()});
-    }
-});

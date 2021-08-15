@@ -1,8 +1,7 @@
 const version = "16.7",
-    broadcastChannel = new BroadcastChannel('channel1'),
     path = (new URL(self.registration.scope)).pathname;
 
-self.importScripts('js/localforage.min.js');
+self.importScripts('js/localforage.min.js', 'js/recents.js');
 
 self.addEventListener("install", () => {
     self.skipWaiting();
@@ -44,26 +43,22 @@ self.addEventListener("fetch", event => {
             display: "standalone"
         };
 
-        broadcastChannel.postMessage({type: 'getRecents'});
         event.respondWith(
-            new Promise((resolve) => {
-                broadcastChannel.onmessage = event => {
-                    if(event.data.type == 'recents') {
-                        manifest.shortcuts = event.data.body.map(user => {
-                            return {
-                                name: user.displayName,
-                                url: path + `?page=Timecard&activeUid=${
-                                    user.id
-                                }&activeDisplayName=${
-                                    encodeURIComponent(user.displayName)
-                                }`
-                            };
-                        });
-                        resolve(new Response(JSON.stringify(manifest), {
-                            headers: {'Content-Type': 'text/html'}
-                        }));
-                    }
-                }
+            getRecentsList().then(recents => {
+                manifest.shortcuts = recents.map(user => {
+                    return {
+                        name: user.displayName,
+                        url: path + `?page=Timecard&activeUid=${
+                            user.id
+                        }&activeDisplayName=${
+                            encodeURIComponent(user.displayName)
+                        }`
+                    };
+                });
+
+                return new Response(JSON.stringify(manifest), {
+                    headers: {'Content-Type': 'text/html'}
+                });
             })
         );
     }
