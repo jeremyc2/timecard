@@ -9,9 +9,9 @@ function clearUsersDiv() {
     usersDiv.innerHTML = '';
 }
 
-function selectUser(id, displayName, profileImg) {
+function selectUser(id, displayName, photoURL) {
     setActiveUser(id, displayName);
-    appendUserToRecentsList(id, displayName, profileImg);
+    appendUserToRecentsList(id, displayName, photoURL);
     loadPage();
 }
 
@@ -24,7 +24,7 @@ function appendUserView(id, isAdmin, photoURL, displayName, email) {
         profileImg = document.createElement('img');
 
     userCard.setAttribute('data-id', id);
-    userCard.addEventListener('click', () => selectUser(id, displayName, profileImg));
+    userCard.addEventListener('click', () => selectUser(id, displayName, photoURL));
 
     userCard.classList.add('user-card');
     profileImg.src = photoURL;

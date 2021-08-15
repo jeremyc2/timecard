@@ -3,9 +3,9 @@ async function getRecentsList() {
     return recents || [];
 }
 
-async function appendUserToRecentsList(id, displayName, profileImg) {
+async function appendUserToRecentsList(id, displayName, photoURL) {
     var recents = await getRecentsList();
     recents = recents.filter(user => user.id != id);
-    recents.push({id, displayName, profileImg});
+    recents.push({id, displayName, photoURL});
     return localforage.setItem('recents', recents);
 }

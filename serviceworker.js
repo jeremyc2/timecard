@@ -1,4 +1,4 @@
-const version = "16.9",
+const version = "17.0",
     path = (new URL(self.registration.scope)).pathname;
 
 self.importScripts('js/localforage.min.js', 'js/recents.js');
@@ -55,7 +55,7 @@ self.addEventListener("fetch", event => {
                         }`,
                         icons: [
                             {
-                                src: user.profileImg,
+                                src: user.photoURL,
                                 sizes: "192x192"
                             }
                         ]
