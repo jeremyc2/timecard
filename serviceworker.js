@@ -2,6 +2,8 @@ const version = "16.7",
     broadcastChannel = new BroadcastChannel('channel1'),
     path = (new URL(self.registration.scope)).pathname;
 
+self.importScripts('js/localforage.min.js');
+
 self.addEventListener("install", () => {
     self.skipWaiting();
 });
