@@ -39,7 +39,7 @@ class Timecard {
         });
     }
 
-    #clockEvent(id, event, date, time) {
+    clockEvent(id, event, date, time) {
         const parsedDate = date.split('-').map(x => parseInt(x)),
             clockIn = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]),
             weekStart = new Date(clockIn.getTime() - (clockIn.getDay() * 86400000)),
@@ -63,11 +63,11 @@ class Timecard {
     }
 
     clockIn(id = '', date = '', time = '') {
-        this.#clockEvent(id, 'Clock-In', date, time);
+        this.clockEvent(id, 'Clock-In', date, time);
     }
 
     clockOut(id = '', date = '', time = '') {
-        this.#clockEvent(id, 'Clock-Out', date, time);
+        this.clockEvent(id, 'Clock-Out', date, time);
     }
 
 }
