@@ -61,7 +61,7 @@ th {
 }
 
 .table-collapsed > tr:not(tr:first-of-type, tr:last-of-type) {
-  visibility: collapse;
+  display: none;
 }
 
 @media (max-width: 500px) {
