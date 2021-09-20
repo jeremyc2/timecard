@@ -122,11 +122,16 @@ body {
 }
 
 body .section {
+    position: relative;
     background: rgba(255, 255, 255, .5);
     border-radius: 20px;
     margin: 0 auto;
     padding: 20px;
     animation: 0.4s fade-in;
+}
+
+body .section#admin-section {
+    width: fit-content;
 }
 
 body .form {
