@@ -1,4 +1,4 @@
-const version = "17.2",
+const version = "17.3",
     path = (new URL(self.registration.scope)).pathname;
 
 self.importScripts('js/localforage.min.js', 'js/recents.js');
