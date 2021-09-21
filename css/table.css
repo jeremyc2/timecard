@@ -29,6 +29,8 @@ tr:first-of-type th {
   height: 40px;
   color: white;
   cursor: pointer;
+  padding-right: 57px;
+  padding-left: 57px;
 }
 
 tr:last-of-type th {
